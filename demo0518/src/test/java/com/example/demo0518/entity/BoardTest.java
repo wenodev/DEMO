@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BoardTest {
 
+
     @Test
     public void boardEntityTest(){
 
@@ -23,7 +24,6 @@ public class BoardTest {
         //then
         assertThat(board.getTitle()).isEqualTo(title);
         assertThat(board.getContent()).isEqualTo(content);
-
 
     }
 }
