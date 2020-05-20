@@ -75,7 +75,7 @@ public class UserControllerTest {
         //when
         mvc.perform(post(url)
             .contentType(MediaType.APPLICATION_JSON_UTF8)
-            .content(new ObjectMapper().writeValueAsString(mockUser)))
+                .content("{\"name\" : \"juwon\", \"email\" : \"dsf@sdf.com\", \"mobileNumber\" : \"010-2222-3333\"}"))
             .andExpect(status().isOk());
 
         //then

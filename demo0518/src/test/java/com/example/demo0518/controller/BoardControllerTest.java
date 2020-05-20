@@ -2,13 +2,16 @@ package com.example.demo0518.controller;
 
 import com.example.demo0518.entity.Board;
 import com.example.demo0518.entity.BoardRepository;
+import com.example.demo0518.service.BoardService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -19,6 +22,8 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -36,8 +41,8 @@ public class BoardControllerTest {
 
     private MockMvc mvc;
 
-    @Autowired
-    private BoardRepository boardRepository;
+    @MockBean
+    private BoardService boardService;
 
     @Before
     public void setup(){
@@ -46,10 +51,6 @@ public class BoardControllerTest {
                 .build();
     }
 
-    @After
-    public void cleanup(){
-        boardRepository.deleteAll();
-    }
 
     @Test
     public void findAll() throws Exception {
@@ -72,19 +73,19 @@ public class BoardControllerTest {
                 .content(content)
                 .build();
 
-        boardRepository.save(mockBoard);
+        given(boardService.save("title","content"))
+                .willReturn(mockBoard);
 
         String url = "http://localhost:" + port + "/board/add";
 
         //when
         mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(new ObjectMapper().writeValueAsString(mockBoard)))
-                .andExpect(status().isOk());
+                .content("{\"title\":\"title\"," +
+                        "\"content\":\"content\"}"))
+                .andExpect(status().isCreated());
 
         //then
-        List<Board> boards = boardRepository.findAll();
-        assertThat(boards.get(0).getTitle()).isEqualTo(mockBoard.getTitle());
-
+        verify(boardService).save("title","content");
     }
 }
