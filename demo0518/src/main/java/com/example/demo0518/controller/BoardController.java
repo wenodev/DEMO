@@ -17,9 +17,14 @@ public class BoardController {
     private BoardService boardService;
 
 
-    @PostMapping("/addBoard")
-    public void AddBoard(@RequestBody Board board){
-        boardService.create(board);
+//    @PostMapping("/add")
+//    public void AddBoard(@RequestBody Board board){
+//        boardService.create(board);
+//    }
+
+    @PostMapping("/add")
+    public void AddBoard(){
+
     }
 
 

@@ -1,10 +1,7 @@
 package com.example.demo0518.entity;
 
-
 import org.junit.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
-
 
 public class UserTest {
 

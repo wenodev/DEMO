@@ -1,32 +1,62 @@
 package com.example.demo0518.controller;
 
 import com.example.demo0518.entity.Board;
+import com.example.demo0518.entity.BoardRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(BoardController.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class BoardControllerTest {
 
+    @LocalServerPort
+    private int port;
+
     @Autowired
+    private WebApplicationContext context;
+
     private MockMvc mvc;
+
+    @Autowired
+    private BoardRepository boardRepository;
+
+    @Before
+    public void setup(){
+        mvc = MockMvcBuilders
+                .webAppContextSetup(context)
+                .build();
+    }
+
+    @After
+    public void cleanup(){
+        boardRepository.deleteAll();
+    }
 
     @Test
     public void findAll() throws Exception {
-        mvc.perform(get("/list"))
-                .andDo(print())
+
+        String url = "http://localhost:" + port + "/board/list";
+
+        mvc.perform(get(url))
                 .andExpect(status().isOk());
     }
 
@@ -37,15 +67,24 @@ public class BoardControllerTest {
         String title = "title";
         String content = "content";
 
-        Board board = Board.builder()
+        Board mockBoard = Board.builder()
                 .title(title)
                 .content(content)
                 .build();
 
+        boardRepository.save(mockBoard);
+
+        String url = "http://localhost:" + port + "/board/add";
+
         //when
-        mvc.perform(post("/addBoard")
+        mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(new ObjectMapper().writeValueAsString(board)))
+                .content(new ObjectMapper().writeValueAsString(mockBoard)))
                 .andExpect(status().isOk());
+
+        //then
+        List<Board> boards = boardRepository.findAll();
+        assertThat(boards.get(0).getTitle()).isEqualTo(mockBoard.getTitle());
+
     }
 }

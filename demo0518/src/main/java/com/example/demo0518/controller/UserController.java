@@ -10,7 +10,7 @@ public class UserController {
 
     @PostMapping("/add")
     public void cretae(){
-        return;
+
     }
 
 }
