@@ -11,7 +11,6 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-
     public User save(String name, String email, String mobileNumber) {
 
 
