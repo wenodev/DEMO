@@ -27,13 +27,13 @@ public class BoardService {
 
     }
 
-    public List<Board> findAll(){
+    public List<Board> getBoards(){
         return boardRepository.findAll();
     }
-
-    public Optional<Board> findById(Long id){
-        Optional<Board> board = boardRepository.findById(id);
-        return board;
-    }
+//
+//    public Optional<Board> findById(Long id){
+//        Optional<Board> board = boardRepository.findById(id);
+//        return board;
+//    }
 
 }

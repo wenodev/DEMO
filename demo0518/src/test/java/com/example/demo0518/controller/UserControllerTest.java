@@ -16,9 +16,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -51,7 +53,6 @@ public class UserControllerTest {
     }
 
 
-
     @Test
     public void createUser() throws Exception {
 
@@ -81,6 +82,18 @@ public class UserControllerTest {
         //then
         List<User> users = userRepository.findAll();
         assertThat(users.get(0).getName()).isEqualTo(mockUser.getName());
+    }
+
+
+
+    @Test
+    public void getUsers() throws Exception {
+
+
+        String url = "http://localhost:" + port + "/user/list";
+
+        mvc.perform(get("/user/list"))
+                .andExpect(status().isOk());
 
     }
 

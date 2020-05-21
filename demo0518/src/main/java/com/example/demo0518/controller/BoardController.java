@@ -4,13 +4,11 @@ import com.example.demo0518.entity.Board;
 import com.example.demo0518.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Optional;
 
 @RequestMapping("/board")
 @RestController
@@ -28,22 +26,20 @@ public class BoardController {
         Board board = boardService.save(title, content);
 
         String url = "/board/add" + board.getId();
-        return ResponseEntity.created(new URI(url)).body("{}");
+        return ResponseEntity.created(new URI(url)).body(board);
     }
 
 
     @GetMapping("/list")
-    public List<Board> findAll(Model model){
-
-        List<Board> boards = boardService.findAll();
-        model.addAttribute("boards", boards);
-
+    public List<Board> getBoards(){
+        List<Board> boards = boardService.getBoards();
         return boards;
     }
 
-    @GetMapping("/list/{id}")
-    public Optional<Board> findById(@PathVariable Long id){
-        return boardService.findById(id);
-    }
+
+//    @GetMapping("/list/{id}")
+//    public Optional<Board> findById(@PathVariable Long id){
+//        return boardService.findById(id);
+//    }
 
 }
