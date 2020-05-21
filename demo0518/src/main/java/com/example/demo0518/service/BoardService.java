@@ -34,7 +34,6 @@ public class BoardService {
     public Optional<Board> findById(Long id){
         Optional<Board> board = boardRepository.findById(id);
         return board;
-
     }
 
 }

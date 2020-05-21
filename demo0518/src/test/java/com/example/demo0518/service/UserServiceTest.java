@@ -8,7 +8,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Optional;
+
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 
@@ -39,10 +42,11 @@ public class UserServiceTest {
                 .mobileNumber(mobileNumber)
                 .build();
 
+        given(userRepository.findById(1L)).willReturn(Optional.of(user));
         userService.save(name, email, mobileNumber);
-//        verify(userRepository).save(any());
 
+        //then
+        verify(userRepository).save(any());
     }
-
 
 }
