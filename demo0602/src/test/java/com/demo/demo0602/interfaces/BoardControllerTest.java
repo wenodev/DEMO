@@ -1,7 +1,7 @@
 package com.demo.demo0602.interfaces;
 
+import com.demo.demo0602.application.BoardService;
 import com.demo.demo0602.domain.Board;
-import com.demo.demo0602.domain.BoardRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +25,7 @@ public class BoardControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private BoardRepository boardRepository;
+    private BoardService boardService;
 
     @MockBean
     private Board board;
@@ -34,7 +34,6 @@ public class BoardControllerTest {
     public void saveBoard() throws Exception {
 
         Board board = Board.builder()
-                .id(1L)
                 .title("t1")
                 .content("c1")
                 .build();
@@ -44,7 +43,7 @@ public class BoardControllerTest {
                 .content(new ObjectMapper().writeValueAsString(board)))
                 .andExpect(status().isOk());
 
-        verify(boardRepository).save(any());
+        verify(boardService).save(any());
 
     }
 
@@ -54,30 +53,35 @@ public class BoardControllerTest {
         mvc.perform(get("/api/boards"))
                 .andExpect(status().isOk());
 
-        verify(boardRepository).findAll();
+        verify(boardService).get();
     }
 
 
-    //error 발생 - service 작성하면서 변경 예정
+    //service 작성 후 변경 필요
     @Test
     public void updateBoard() throws Exception {
+
         Board board = Board.builder()
                 .id(1L)
                 .title("t1")
                 .content("c1")
                 .build();
 
-        mvc.perform(patch("/api/boards")
+
+        mvc.perform(patch("/api/boards/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(board)))
                 .andExpect(status().isOk());
-
     }
-
 
     @Test
-    public void delete() {
+    public void deleteBoard() throws Exception {
 
+        mvc.perform(delete("/api/boards/1"))
+                .andExpect(status().isOk());
 
+        verify(boardService).delete(any());
     }
+
+
 }

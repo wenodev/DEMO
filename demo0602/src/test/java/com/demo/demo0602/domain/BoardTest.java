@@ -26,17 +26,16 @@ public class BoardTest {
     @Test
     public void initBoard(){
 
-        Long id = 1L;
         String title = "t1";
         String content = "c1";
 
         Board board = Board.builder()
-                .id(id)
+
                 .title(title)
                 .content(content)
                 .build();
 
-        assertThat(board.getId()).isEqualTo(id);
+
         assertThat(board.getTitle()).isEqualTo(title);
         assertThat(board.getContent()).isEqualTo(content);
 
@@ -45,12 +44,10 @@ public class BoardTest {
     @Test
     public void saveAndGetBoards(){
 
-        Long id = 1L;
         String title = "t1";
         String content = "c1";
 
         Board board = Board.builder()
-                .id(id)
                 .title(title)
                 .content(content)
                 .build();
@@ -66,12 +63,10 @@ public class BoardTest {
     @Test
     public void getBoardById(){
 
-        Long id = 1L;
         String title = "t1";
         String content = "c1";
 
         Board board = Board.builder()
-                .id(id)
                 .title(title)
                 .content(content)
                 .build();
@@ -88,12 +83,10 @@ public class BoardTest {
     @Test
     public void updateBoard(){
 
-        Long id = 1L;
         String title = "t1";
         String content = "c1";
 
         Board board = Board.builder()
-                .id(id)
                 .title(title)
                 .content(content)
                 .build();
