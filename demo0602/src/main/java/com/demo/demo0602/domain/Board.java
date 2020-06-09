@@ -25,7 +25,6 @@ public class Board {
     @Column(length = 1024)
     private String content;
 
-
     public Board(String title, String content){
         this.title = title;
         this.content = content;
@@ -35,6 +34,5 @@ public class Board {
         this.title = title;
         this.content = content;
     }
-
 
 }

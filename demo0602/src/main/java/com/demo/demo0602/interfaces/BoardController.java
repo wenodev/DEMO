@@ -5,8 +5,6 @@ import com.demo.demo0602.domain.Board;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @AllArgsConstructor
 @RequestMapping("/api")
 @RestController
@@ -17,11 +15,6 @@ public class BoardController {
     @PostMapping("/boards")
     public Board save(@RequestBody Board board){
         return boardService.save(board);
-    }
-
-    @GetMapping("/boards")
-    public List<Board> get(){
-        return  boardService.get();
     }
 
     @PatchMapping("/boards/{id}")
