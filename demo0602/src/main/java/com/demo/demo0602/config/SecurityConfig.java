@@ -16,7 +16,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -32,8 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf() .ignoringAntMatchers() .ignoringRequestMatchers()
-                .and()
+                .csrf().disable()
                 .authorizeRequests()
                 // 페이지 권한 설정
                 .antMatchers("/admin/**").hasRole("ADMIN")
@@ -42,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and() // 로그인 설정
                 .formLogin()
                 .loginPage("/user/login")
-                .defaultSuccessUrl("/user/login/result")
+                .defaultSuccessUrl("/borads")
                 .permitAll()
                 .and() // 로그아웃 설정
                 .logout()
@@ -53,6 +51,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 403 예외처리 핸들링
                 .exceptionHandling().accessDeniedPage("/user/denied");
     }
-
-
 }

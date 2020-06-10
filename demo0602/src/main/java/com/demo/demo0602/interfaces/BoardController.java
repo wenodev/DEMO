@@ -3,13 +3,14 @@ package com.demo.demo0602.interfaces;
 import com.demo.demo0602.application.BoardService;
 import com.demo.demo0602.domain.Board;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @AllArgsConstructor
-@RestController
+@Controller
 public class BoardController {
 
     private BoardService boardService;
@@ -20,7 +21,7 @@ public class BoardController {
         List<Board> boards = boardService.get();
         model.addAttribute("boardList", boards);
 
-        return "list";
+        return "/user/list";
     }
 
     @PostMapping("/api/boards")
