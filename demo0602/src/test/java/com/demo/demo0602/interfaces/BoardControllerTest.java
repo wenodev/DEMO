@@ -19,6 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(BoardController.class)
+
 public class BoardControllerTest {
 
     @Autowired
@@ -50,7 +51,7 @@ public class BoardControllerTest {
     @Test
     public void getBoards() throws Exception {
 
-        mvc.perform(get("/api/boards"))
+        mvc.perform(get("/boards"))
                 .andExpect(status().isOk());
 
         verify(boardService).get();

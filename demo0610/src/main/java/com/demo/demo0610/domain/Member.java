@@ -1,21 +1,18 @@
-package com.demo.demo0602.domain;
+package com.demo.demo0610.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Entity
 public class Member {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(length = 20, nullable = false)
@@ -23,4 +20,13 @@ public class Member {
 
     @Column(length = 100, nullable = false)
     private String password;
+
+    @Builder
+    public Member(Long id, String email, String password){
+        this.id = id;
+        this.email = email;
+        this.password = password;
+    }
+
+
 }

@@ -1,10 +1,15 @@
 package com.demo.demo0602.interfaces.dto;
 
 import com.demo.demo0602.domain.Member;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
+@Builder
 public class MemberDto {
 
     private Long id;
@@ -17,13 +22,6 @@ public class MemberDto {
                 .email(email)
                 .password(password)
                 .build();
-    }
-
-    @Builder
-    public MemberDto(Long id, String email, String password){
-        this.id = id;
-        this.email = email;
-        this.password = password;
     }
 
 }
