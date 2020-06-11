@@ -1,10 +1,7 @@
 package com.demo.demo0602.interfaces.dto;
 
 import com.demo.demo0602.domain.Member;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 @Builder
@@ -14,6 +11,8 @@ public class MemberDto {
 
     private Long id;
     private String email;
+
+    @Setter
     private String password;
 
     public Member toEntity(){
