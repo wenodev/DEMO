@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -13,12 +14,17 @@ public class BoardService {
 
     private BoardRepository boardRepository;
 
-    public Board save(Board board) {
-        return boardRepository.save(board);
+    public Optional<Board> getById(Long id) {
+        return boardRepository.findById(id);
     }
+
 
     public List<Board> get(){
         return boardRepository.findAll();
+    }
+
+    public Board save(Board board) {
+        return boardRepository.save(board);
     }
 
     public Board update(Board resources, Long id){

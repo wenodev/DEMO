@@ -1,8 +1,11 @@
 {{>user/common/header}}
 
+<br>
+
 {{#boardList}}
-<div>Board Title : {{title}} </div>
+<div>Board Title : <a href="/boards/{{id}}"> {{title}} </a> </div>
 <div>Board Content : {{content}}  </div>
+<br>
 {{/boardList}}
 
 {{>user/common/footer}}

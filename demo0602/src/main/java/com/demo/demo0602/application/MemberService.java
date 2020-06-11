@@ -46,4 +46,13 @@ public class MemberService implements UserDetailsService {
 
         return new User(userEntity.getEmail(), userEntity.getPassword(), authorities);
     }
+
+    public Optional<Member> findById(Long id){
+        return memberRepository.findById(id);
+    }
+
+    public Optional<Member> findByEmail(String email){
+        return memberRepository.findByEmail(email);
+    }
+
 }
