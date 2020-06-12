@@ -4,7 +4,6 @@ import com.demo.demo0602.application.BoardService;
 import com.demo.demo0602.application.MemberService;
 import com.demo.demo0602.domain.Board;
 import com.demo.demo0602.domain.Member;
-import com.demo.demo0602.interfaces.dto.MemberDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +19,12 @@ public class BoardController {
 
     private BoardService boardService;
     private MemberService memberService;
+
+    @GetMapping("/")
+    public String index(){
+        return "redirect:/boards";
+    }
+
 
     @GetMapping("/boards/save")
     public String boardsSave(Principal principal, Model model){
