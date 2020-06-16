@@ -4,6 +4,7 @@ package com.demo.demo0612.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -19,6 +20,7 @@ public class User {
     @Column(length = 128, nullable = false)
     private String email;
 
+    @Setter
     @Column(length = 128, nullable = false)
     private String password;
 

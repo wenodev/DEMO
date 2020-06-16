@@ -20,6 +20,7 @@
         },
 
         save: function () {
+
             var data = {
                 email: $('#email').val(),
                 password: $('#password').val(),
@@ -34,13 +35,19 @@
                 data: JSON.stringify(data)
             }).done(function () {
                 alert('글이 등록되었습니다.');
-                window.location.href = '/login';
             }).fail(function (error) {
                 alert(JSON.stringify(error));
+            }).always(function () {
+                window.location.href = '/';
+                alert("요청완료");
             });
         }
+
+
     };
+    // window.location.href = '/login';
     index.init();
+
 </script>
 
 
