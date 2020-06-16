@@ -15,8 +15,8 @@ public class UserController {
 
 
     @PostMapping("/user")
-    public void signUp(@RequestBody User user) {
-        userService.saveUser(user);
+    public Long signUp(@RequestBody User user) {
+        return userService.saveUser(user).getId();
     }
 
 
