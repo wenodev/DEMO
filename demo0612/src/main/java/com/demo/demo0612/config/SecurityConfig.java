@@ -45,8 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").permitAll()
                 .and() // 로그인 설정
                 .formLogin()
-                .loginPage("/user/login")
-                .defaultSuccessUrl("/user/login/result")
+                .loginPage("/login")
+                .defaultSuccessUrl("/")
                 .permitAll()
                 .and() // 로그아웃 설정
                 .logout()

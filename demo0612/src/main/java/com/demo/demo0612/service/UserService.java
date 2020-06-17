@@ -22,16 +22,6 @@ public class UserService implements UserDetailsService {
 
     private UserRepository userRepository;
 
-
-    @Transactional
-    public User saveUser(User user) {
-
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        return userRepository.save(user);
-    }
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
@@ -43,4 +33,39 @@ public class UserService implements UserDetailsService {
 
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
     }
+
+    @Transactional
+    public User saveUser(User user) {
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        return userRepository.save(user);
+    }
+
+    public User findByEmail(String email){
+        Optional<User> user = userRepository.findByEmail(email);
+        return user.get();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
