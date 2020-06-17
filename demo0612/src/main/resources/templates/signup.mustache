@@ -1,5 +1,4 @@
 {{>common/header}}
-
 <h2>회원가입</h2>
 <form>
     <input type="text" id="email" placeholder="이메일 입력"/>
@@ -7,9 +6,7 @@
     <input type="text" id="name" placeholder="이름 입력"/>
     <button type="submit" id="btn-register">가입하기</button>
 </form>
-
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
 <script>
     var index = {
         init: function () {
@@ -18,9 +15,7 @@
                 _this.save();
             });
         },
-
         save: function () {
-
             var data = {
                 email: $('#email').val(),
                 password: $('#password').val(),
@@ -29,26 +24,20 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/user',
+                url: '/register',
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(data)
             }).done(function () {
-                alert('글이 등록되었습니다.');
+                alert(data.email);
+                window.location.href="/";
             }).fail(function (error) {
                 alert(JSON.stringify(error));
-            }).always(function () {
-                window.location.href = '/';
-                alert("요청완료");
             });
+
         }
 
-
     };
-    // window.location.href = '/login';
     index.init();
-
 </script>
-
-
 {{>common/footer}}

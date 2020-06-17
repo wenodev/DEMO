@@ -1,6 +1,5 @@
 package com.demo.demo0612.entity;
 
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,14 +20,15 @@ public class User {
     private String email;
 
     @Setter
-    @Column(length = 128, nullable = false)
+    @Column(nullable = false)
     private String password;
 
     @Column(length = 128, nullable = false)
     private String name;
 
     @Builder
-    public User(String email, String password, String name){
+    public User(Long id, String email, String password, String name){
+        this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;

@@ -1,6 +1,6 @@
-package com.demo.demo0612.config;
+package com.demo.demo0617.config;
 
-import com.demo.demo0612.service.UserService;
+import com.demo.demo0617.service.MemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private UserService userService;
+    private MemberService memberService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -34,11 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .headers().frameOptions().disable()
-                .and()
-                .authorizeRequests()
+        http.authorizeRequests()
                 // 페이지 권한 설정
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/myinfo").hasRole("MEMBER")
@@ -60,9 +56,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
     }
-
 
 
 }
