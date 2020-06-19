@@ -21,12 +21,15 @@ public class Member {
     @Column(length = 100, nullable = false)
     private String password;
 
+    @Column(length = 40, nullable = false)
+    private String name;
+
     @Builder
-    public Member(Long id, String email, String password) {
+    public Member(Long id, String email, String password, String name) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.name = name;
     }
-
 
 }
