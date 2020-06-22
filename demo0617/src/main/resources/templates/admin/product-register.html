@@ -8,6 +8,96 @@
 <div th:insert="/admin/nav"></div>
 <div th:insert="/admin/product-nav"></div>
 
+<form th:action="@{/admin/product-register}" method="post">
+    <input type="text" name="code" placeholder="상품코드">
+    <input type="text" name="name" placeholder="상품이름">
+    <input type="text" name="price" placeholder="상품가격">
+    <input type="text" name="quantity" placeholder="재고">
+    <button type="submit">상품등록</button>
+</form>
+
+<!--<form>-->
+<!--    <input type="text" id="productCode" placeholder="상품코드">-->
+<!--    <input type="text" id="productName" placeholder="상품이름">-->
+<!--    <input type="text" id="productPrice" placeholder="상품가격">-->
+<!--    <input type="text" id="quantity" placeholder="재고">-->
+<!--    <button type="submit" id="btn-save">상품등록</button>-->
+<!--</form>-->
+
+
+
+<!--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+<!--<script>-->
+<!--    var productRegister = {-->
+<!--        init : function () {-->
+<!--            var _this = this;-->
+<!--            $('#btn-save').on('click',function(){-->
+<!--                _this.save();-->
+<!--            });-->
+<!--        },-->
+<!--        save : function() {-->
+<!--            var data = {-->
+<!--                productCode : $('#productCode').val(),-->
+<!--                productName : $('#productName').val(),-->
+<!--                productPrice : $('#productPrice').val(),-->
+<!--                quantity : $('#quantity').val()-->
+<!--            };-->
+
+<!--            $.ajax({-->
+<!--                type: 'POST',-->
+<!--                url: '/product-register',-->
+<!--                dataType: 'json',-->
+<!--                contentType: 'application/json; charset=utf-8',-->
+<!--                data: JSON.stringify(data)-->
+<!--            }).done(function() {-->
+<!--                alert('글이 등록되었습니다.');-->
+<!--                window.location.href = '/admin/product-list';-->
+<!--            }).fail(function(error) {-->
+<!--                alert(JSON.stringify(error));-->
+<!--            })-->
+<!--        },-->
+<!--        update : function(){-->
+<!--            var data = {-->
+<!--                title : $('#title').val(),-->
+<!--                content : $('#content').val()-->
+<!--            };-->
+
+<!--            var id = $('#id').val();-->
+
+<!--            $.ajax({-->
+<!--                type : 'PUT',-->
+<!--                url : '/api/v1/posts/' + id,-->
+<!--                dataType : 'json',-->
+<!--                contentType : 'application/json; charset=utf-8',-->
+<!--                data : JSON.stringify(data)-->
+<!--            }).done(function () {-->
+<!--                alert('글이 수정되었습니다.');-->
+<!--                window.location.href='/';-->
+<!--            }).fail(function(error){-->
+<!--                alert(JSON.stringify(error));-->
+<!--            });-->
+<!--        },-->
+<!--        delete : function () {-->
+<!--            var id = $('#id').val();-->
+
+<!--            $.ajax({-->
+<!--                type : 'DELETE',-->
+<!--                url : '/api/v1/posts/' + id,-->
+<!--                dataType : 'json',-->
+<!--                contentType : 'application/json; charset=utf-8'-->
+<!--            }).done(function(){-->
+<!--                alert("글이 삭제되었습니다.");-->
+<!--                window.location.href='/';-->
+<!--            }).fail(function (error) {-->
+<!--                alert(JSON.stringify(error));-->
+<!--            });-->
+<!--        }-->
+<!--    };-->
+<!--    productRegister.init();-->
+
+<!--</script>-->
+
+
 
 </body>
 </html>
