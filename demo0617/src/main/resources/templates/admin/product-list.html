@@ -8,7 +8,7 @@
 <div th:insert="/admin/nav"></div>
 <div th:insert="/admin/product-nav"></div>
 
-<table border="1" th:with="target = 'user03'">
+<table border="1">
     <tr>
         <td>상품번호</td>
         <td>상품코드</td>
@@ -19,9 +19,9 @@
 
     <tr th:each="product : ${productList}">
         <td th:text="${product.id}"></td>
-        <td th:text="${product.code}"></td>
-        <td th:text="${product.name}"></td>
-        <td th:text="${product.price}"></td>
+        <td th:text="${product.productCode}"></td>
+        <td th:text="${product.productName}"></td>
+        <td th:text="${product.productPrice}"></td>
         <td th:text="${product.quantity}"></td>
     </tr>
 </table>

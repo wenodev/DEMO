@@ -4,10 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
@@ -15,23 +12,27 @@ import javax.persistence.Id;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    private String code;
+    @Column(length = 100, nullable = false)
+    private String productCode;
 
-    private String name;
+    @Column(length = 100, nullable = false)
+    private String productName;
 
-    private Double price;
+    @Column(length = 100, nullable = false)
+    private String productPrice;
 
-    private Integer quantity;
+    @Column(length = 100, nullable = false)
+    private String quantity;
 
     @Builder
-    public Product(Long id, String code, String name, Double price, Integer quantity){
+    public Product(Long id, String productCode, String productName, String productPrice, String quantity){
         this.id = id;
-        this.code = code;
-        this.name = name;
-        this.price = price;
+        this.productCode = productCode;
+        this.productName = productName;
+        this.productPrice = productPrice;
         this.quantity = quantity;
     }
 

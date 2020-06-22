@@ -1,7 +1,6 @@
 package com.demo.demo0617.controller;
 
 import com.demo.demo0617.domain.Product;
-import com.demo.demo0617.dto.MemberDto;
 import com.demo.demo0617.dto.ProductDto;
 import com.demo.demo0617.service.ProductService;
 import lombok.AllArgsConstructor;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -40,15 +40,20 @@ public class AdminController {
         return "/admin/product-register";
     }
 
-
     //상품 등록
     @PostMapping("/admin/product-register")
-    public String saveProduct(ProductDto productDto){
+    public String saveProduct(String productCode, String productName, String productPrice, String quantity) {
+
+        ProductDto productDto = ProductDto.builder()
+                .productCode(productCode)
+                .productName(productName)
+                .productPrice(productPrice)
+                .quantity(quantity)
+                .build();
+
+
         productService.saveProduct(productDto);
         return "redirect:/admin/product-list";
     }
-
-
-
 
 }

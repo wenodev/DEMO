@@ -15,7 +15,6 @@ public class ProductService {
 
     private ProductRepository productRepository;
 
-    @Transactional
     public Long saveProduct(ProductDto productDto){
         return productRepository.save(productDto.toEntity()).getId();
     }

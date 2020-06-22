@@ -13,27 +13,27 @@ import lombok.ToString;
 public class ProductDto {
 
     private Long id;
-    private String code;
-    private String name;
-    private Double price;
-    private Integer quantity;
+    private String productCode;
+    private String productName;
+    private String productPrice;
+    private String quantity;
 
     public Product toEntity(){
         return Product.builder()
                 .id(id)
-                .code(code)
-                .name(name)
-                .price(price)
+                .productCode(productCode)
+                .productName(productName)
+                .productPrice(productPrice)
                 .quantity(quantity)
                 .build();
     }
 
     @Builder
-    public ProductDto(Long id, String code, String name, Double price, Integer quantity){
+    public ProductDto(Long id, String productCode, String productName, String productPrice, String quantity){
         this.id = id;
-        this.code = code;
-        this.name = name;
-        this.price = price;
+        this.productCode = productCode;
+        this.productName = productName;
+        this.productPrice = productPrice;
         this.quantity = quantity;
     }
 

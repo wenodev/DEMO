@@ -1,21 +1,31 @@
 package com.demo.demo0617.controller;
 
+import com.demo.demo0617.domain.Product;
 import com.demo.demo0617.dto.MemberDto;
 import com.demo.demo0617.service.MemberService;
+import com.demo.demo0617.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
 public class MemberController {
 
     private MemberService memberService;
+    private ProductService productService;
 
     // 메인 페이지
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+
+        List<Product> productList = productService.findAll();
+        model.addAttribute("productList",productList);
+
         return "/index";
     }
 
