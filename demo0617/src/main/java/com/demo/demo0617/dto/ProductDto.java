@@ -2,10 +2,7 @@ package com.demo.demo0617.dto;
 
 
 import com.demo.demo0617.domain.Product;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @ToString
@@ -17,6 +14,11 @@ public class ProductDto {
     private String productName;
     private String productPrice;
     private String quantity;
+    @Setter
+    private String productFileImg;
+    private String productUrlImg;
+    private String imgType;
+
 
     public Product toEntity(){
         return Product.builder()
@@ -25,16 +27,22 @@ public class ProductDto {
                 .productName(productName)
                 .productPrice(productPrice)
                 .quantity(quantity)
+                .productFileImg(productFileImg)
+                .productUrlImg(productUrlImg)
+                .imgType(imgType)
                 .build();
     }
 
     @Builder
-    public ProductDto(Long id, String productCode, String productName, String productPrice, String quantity){
+    public ProductDto(Long id, String productCode, String productName, String productPrice, String quantity, String productFileImg, String productUrlImg, String imgType){
         this.id = id;
         this.productCode = productCode;
         this.productName = productName;
         this.productPrice = productPrice;
         this.quantity = quantity;
+        this.productFileImg = productFileImg;
+        this.productUrlImg = productUrlImg;
+        this.imgType = imgType;
     }
 
 
