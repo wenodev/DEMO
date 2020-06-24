@@ -70,8 +70,6 @@ public class AdminController {
             productDto.setProductUrlImg(null);
         }
 
-
-
         productService.saveProduct(productDto);
         return "redirect:/admin/product-list";
     }

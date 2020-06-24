@@ -1,7 +1,9 @@
 package com.demo.demo0617.config;
 
 import com.demo.demo0617.dto.MemberDto;
+import com.demo.demo0617.dto.ProductDto;
 import com.demo.demo0617.service.MemberService;
+import com.demo.demo0617.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Component;
 public class adminUser implements CommandLineRunner {
 
     private MemberService memberService;
+    private ProductService productService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -22,6 +25,19 @@ public class adminUser implements CommandLineRunner {
                 .build();
 
         memberService.joinUser(memberDto);
+
+
+        ProductDto productDto = ProductDto.builder()
+                .productCode("Product1-code")
+                .productPrice("100")
+                .productName("Product1")
+                .imgType("url")
+                .productUrlImg("https://i.imgur.com/Vpj0PxO.png")
+                .build();
+
+        for(int i=0; i<10; i++){
+            productService.saveProduct(productDto);
+        }
 
     }
 }
