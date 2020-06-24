@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -24,5 +25,14 @@ public class ProductService {
         List<Product> productList = productRepository.findAll();
         return productList;
     }
+
+    public Optional<Product> findById(Long id) {
+
+        return productRepository.findById(id);
+
+    }
+
+
+
 
 }

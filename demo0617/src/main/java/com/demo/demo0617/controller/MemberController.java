@@ -19,15 +19,7 @@ public class MemberController {
     private MemberService memberService;
     private ProductService productService;
 
-    // 메인 페이지
-    @GetMapping("/")
-    public String index(Model model) {
 
-        List<Product> productList = productService.findAll();
-        model.addAttribute("productList",productList);
-
-        return "/index";
-    }
 
     // 회원가입 페이지
     @GetMapping("/signup")

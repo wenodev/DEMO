@@ -16,9 +16,9 @@ public class ProductDto {
     private String quantity;
     @Setter
     private String productFileImg;
+    @Setter
     private String productUrlImg;
     private String imgType;
-
 
     public Product toEntity(){
         return Product.builder()

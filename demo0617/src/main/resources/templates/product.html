@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>메인</title>
+    <title>Title</title>
 </head>
 <body>
-<h1>메인 페이지</h1>
-<div th:insert="/nav"></div>
 
-<ul th:each="product : ${productList}">
-    <li>
-        <a th:href="@{/product/} + ${product.id}"> <div th:text="${product.productName}" > </div> </a>
+
+<div th:each="product : ${product}">
+    <div>
+        <div th:text="${product.productName}" ></div>
 
         <div th:switch="${product.imgType}">
             <div th:case="'url'"><img style="width:50px; height:50px;" th:src=" @{ ${product.productUrlImg} }"></div>
@@ -18,9 +17,18 @@
         </div>
 
         <div th:text="${product.productPrice}"></div>
+        <div th:text="${product.quantity}"></div>
+    </div>
+</div>
 
-    </li>
-</ul>
+
+
+
+
+
+
+
+
 
 </body>
 </html>

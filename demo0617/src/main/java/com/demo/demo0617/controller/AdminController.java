@@ -64,6 +64,14 @@ public class AdminController {
                 .imgType(imgType)
                 .build();
 
+        if(imgType.equals("url")){
+            productDto.setProductFileImg(null);
+        }else{
+            productDto.setProductUrlImg(null);
+        }
+
+
+
         productService.saveProduct(productDto);
         return "redirect:/admin/product-list";
     }
