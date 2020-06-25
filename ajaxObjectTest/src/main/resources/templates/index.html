@@ -12,6 +12,8 @@
     <button id="btn-save">등록</button>
 </form>
 
+
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
     var index = {
@@ -28,12 +30,12 @@
             };
             $.ajax({
                 type: 'post',
-                url: '/category',
-
+                url: '/product',
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(data)
             }).done(function () {
+                alert(data.categoryCode);
                 alert('등록완료');
                 window.location.href = '/';
             }).fail(function (error) {
@@ -46,6 +48,7 @@
 
 
 </script>
+
 
 
 </body>

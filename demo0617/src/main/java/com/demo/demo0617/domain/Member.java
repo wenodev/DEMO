@@ -21,10 +21,10 @@ public class Member {
     @Column(length = 100, nullable = false)
     private String password;
 
-    @Column(length = 40, nullable = false)
+    @Column(length = 40)
     private String name;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100)
     private String address;
 
     @Builder

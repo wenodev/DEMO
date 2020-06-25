@@ -2,6 +2,7 @@ package com.demo.demo0617.service;
 
 import com.demo.demo0617.domain.Category;
 import com.demo.demo0617.domain.CategoryRepository;
+import com.demo.demo0617.dto.CategoryDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,9 @@ public class CategoryService {
 
     private CategoryRepository categoryRepository;
 
-    public Category saveCategory(Category category) {
-        System.out.println("In Service : "+category.getName());
-        return categoryRepository.save(category);
+    public Category saveCategory(CategoryDto categoryDto) {
+        System.out.println("In Service : "+categoryDto.getCategoryName());
+        return categoryRepository.save(categoryDto.toEntity());
     }
 
 
