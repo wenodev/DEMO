@@ -1,6 +1,5 @@
 package com.demo.ajaxObjectTest;
 
-
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,9 +13,11 @@ public class ProductApiController {
 
     @PostMapping("/product")
     public Product registerProduct(@RequestBody Product product){
+
+        System.out.println("product.getProductCode() : " + product.getProductCode());
+
         productService.save(product);
         return product;
     }
-
 
 }

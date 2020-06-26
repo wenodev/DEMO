@@ -7,8 +7,8 @@
 <body>
 
 <form>
-    <input type="text" id="categoryCode" placeholder="코드"/>
-    <input type="text" id="categoryName" placeholder="코드"/>
+    <input type="text" id="categoryCode" placeholder="카테코드"/>
+    <input type="text" id="categoryName" placeholder="카테이름"/>
     <button id="btn-save">등록</button>
 </form>
 
@@ -29,7 +29,6 @@
             $.ajax({
                 type: 'post',
                 url: '/category',
-
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(data)
@@ -44,9 +43,7 @@
     };
     index.init();
 
-
 </script>
-
 
 </body>
 </html>

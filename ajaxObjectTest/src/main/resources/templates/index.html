@@ -7,8 +7,8 @@
 <body>
 
 <form>
-    <input type="text" id="categoryCode" placeholder="코드"/>
-    <input type="text" id="categoryName" placeholder="코드"/>
+    <input type="text" id="productCode" placeholder="상품코드"/>
+    <input type="text" id="productName" placeholder="상품이름"/>
     <button id="btn-save">등록</button>
 </form>
 
@@ -23,11 +23,15 @@
                 _this.save();
             });
         },
+
         save: function () {
             var data = {
-                categoryCode: $('#categoryCode').val(),
-                categoryName: $('#categoryName').val(),
+                productCode: $('#productCode').val(),
+                productName: $('#productName').val(),
             };
+
+            // alert("save-1");
+
             $.ajax({
                 type: 'post',
                 url: '/product',
@@ -35,20 +39,21 @@
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(data)
             }).done(function () {
-                alert(data.categoryCode);
-                alert('등록완료');
-                window.location.href = '/';
+                alert("done");
+                window.location.href = '/complete';
             }).fail(function (error) {
-                alert(data.categoryCode);
                 alert(JSON.stringify(error));
-            })
+            }).always(function () {
+                alert("always");
+            });
+            console.log(111);
+            // alert("save-2");
         }
+
     };
     index.init();
 
-
 </script>
-
 
 
 </body>

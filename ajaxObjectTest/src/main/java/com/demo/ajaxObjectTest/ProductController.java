@@ -13,4 +13,9 @@ public class ProductController {
         return "index";
     }
 
+    @GetMapping("/complete")
+    public String complete(){
+        return "complete";
+    }
+
 }
