@@ -1,7 +1,6 @@
 package com.demo.demo0617.controller;
 
 import com.demo.demo0617.domain.Product;
-import com.demo.demo0617.dto.ProductDto;
 import com.demo.demo0617.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

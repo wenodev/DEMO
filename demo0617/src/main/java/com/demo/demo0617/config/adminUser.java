@@ -18,13 +18,26 @@ public class adminUser implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        MemberDto memberDto = MemberDto.builder()
+        MemberDto adminDto = MemberDto.builder()
                 .email("admin@example.com")
                 .password("1234")
                 .name("admin")
                 .build();
 
+        memberService.joinUser(adminDto);
+
+        MemberDto memberDto = MemberDto.builder()
+                .email("user1@example.com")
+                .password("1234")
+                .name("user1")
+                .build();
+
         memberService.joinUser(memberDto);
+
+
+
+
+
 
 
         ProductDto productDto = ProductDto.builder()

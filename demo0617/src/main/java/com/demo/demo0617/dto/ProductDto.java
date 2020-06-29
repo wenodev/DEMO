@@ -4,6 +4,7 @@ package com.demo.demo0617.dto;
 import com.demo.demo0617.domain.Product;
 import lombok.*;
 
+@Setter
 @Getter
 @ToString
 @NoArgsConstructor
@@ -14,9 +15,7 @@ public class ProductDto {
     private String productName;
     private String productPrice;
     private String quantity;
-    @Setter
     private String productFileImg;
-    @Setter
     private String productUrlImg;
     private String imgType;
 

@@ -6,13 +6,16 @@
 </head>
 <body>
 
+<div th:insert="/nav"></div>
+
 <div th:each="product : ${product}">
     <div>
-        <div th:text="${product.productName}" ></div>
+        <div th:text="${product.productName}"></div>
 
         <div th:switch="${product.imgType}">
             <div th:case="'url'"><img style="width:50px; height:50px;" th:src=" @{ ${product.productUrlImg} }"></div>
-            <div th:case="'file'"><img style="width:50px; height:50px;" th:src=" @{/upload-dir/} + ${product.productFileImg}"></div>
+            <div th:case="'file'"><img style="width:50px; height:50px;"
+                                       th:src=" @{/upload-dir/} + ${product.productFileImg}"></div>
         </div>
 
         <div th:text="${product.productPrice}"></div>
@@ -20,19 +23,59 @@
     </div>
 </div>
 
-<div>
-    QTY :
-    <select name="quantity">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-    </select>
-    <button>카트</button>
-    <button>구매</button>
-</div>
+<form>
+    <div th:each="product : ${product}">
+        QTY :
+        <select id="quantity">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
 
+        <input type="text" id="productId" th:value="${product.id}" hidden/>
+
+        <button>카트</button>
+        <button id="btn-pay">구매</button>
+    </div>
+</form>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    var index = {
+        init: function () {
+            var _this = this;
+            $('#btn-pay').on('click', function () {
+                _this.save();
+            });
+        },
+        save: function () {
+            var data = {
+                quantity: $('#quantity').val(),
+                productId: $('#productId').val(),
+            };
+
+            alert(data.quantity);
+            alert(data.productId);
+
+            $.ajax({
+                type: 'GET',
+                url: '/order/' + data.productId,
+                data: data
+            }).done(function () {
+                alert('등록완료');
+                // window.location.href = '/order/' + data.productId;
+            }).fail(function (error) {
+                alert("실패");
+                alert(JSON.stringify(error));
+            })
+        }
+    };
+    index.init();
+
+</script>
 
 
 </body>
