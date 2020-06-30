@@ -34,12 +34,6 @@ public class adminUser implements CommandLineRunner {
 
         memberService.joinUser(memberDto);
 
-
-
-
-
-
-
         ProductDto productDto = ProductDto.builder()
                 .productCode("Product1-code")
                 .productPrice("100")

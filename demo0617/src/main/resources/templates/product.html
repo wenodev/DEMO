@@ -45,14 +45,8 @@
 
     <form th:action="@{/order/} + ${product.id}" method="post">
         QTY :
-        <select name="quantity">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
 
+        <input type="text" name="quantity" value="1"  />
         <input type="text"  th:value="${product.id}" hidden/>
 
         <button>카트</button>
@@ -60,38 +54,6 @@
     </form>
 
 </div>
-
-<!--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
-<!--<script>-->
-<!--    var index = {-->
-<!--        init: function () {-->
-<!--            var _this = this;-->
-<!--            $('#btn-pay').on('click', function () {-->
-<!--                _this.save();-->
-<!--            });-->
-<!--        },-->
-<!--        save: function () {-->
-<!--            var data = {-->
-<!--                // quantity: $('#quantity').val(),-->
-<!--                productId: $('#productId').val()-->
-<!--            };-->
-
-<!--            $.ajax({-->
-<!--                type: 'GET',-->
-<!--                url: '/order/' + data.productId,-->
-<!--                data: data-->
-<!--            }).done(function () {-->
-<!--                // alert('등록완료');-->
-<!--                // window.location.href = '/order/' + data.productId;-->
-<!--            }).fail(function (error) {-->
-<!--                alert("실패");-->
-<!--                alert(JSON.stringify(error));-->
-<!--            })-->
-<!--        }-->
-<!--    };-->
-<!--    index.init();-->
-
-<!--</script>-->
 
 
 </body>

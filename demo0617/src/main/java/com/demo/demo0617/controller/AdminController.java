@@ -44,34 +44,5 @@ public class AdminController {
         return "/admin/product-register";
     }
 
-    //상품 등록
-    @PostMapping("/admin/product-register")
-    public String saveProduct(String productCode, String productName, String productPrice, String quantity, @RequestParam("file") MultipartFile file, String productUrlImg, String imgType) {
-
-        System.out.println("file 이름 : " + file.getOriginalFilename());
-
-        if(!file.isEmpty()){
-            storageService.store(file);
-        }
-
-        ProductDto productDto = ProductDto.builder()
-                .productCode(productCode)
-                .productName(productName)
-                .productPrice(productPrice)
-                .quantity(quantity)
-                .productFileImg(file.getOriginalFilename())
-                .productUrlImg(productUrlImg)
-                .imgType(imgType)
-                .build();
-
-        if(imgType.equals("url")){
-            productDto.setProductFileImg(null);
-        }else{
-            productDto.setProductUrlImg(null);
-        }
-
-        productService.saveProduct(productDto);
-        return "redirect:/admin/product-list";
-    }
 
 }
