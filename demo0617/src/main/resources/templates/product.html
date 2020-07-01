@@ -23,37 +23,83 @@
     </div>
 </div>
 
-<!--<form>-->
-<!--    <div th:each="product : ${product}">-->
-<!--        QTY :-->
-<!--        <select id="quantity">-->
-<!--            <option value="1">1</option>-->
-<!--            <option value="2">2</option>-->
-<!--            <option value="3">3</option>-->
-<!--            <option value="4">4</option>-->
-<!--            <option value="5">5</option>-->
-<!--        </select>-->
-
-<!--        <input type="text" id="productId" th:value="${product.id}" hidden />-->
-
-<!--        <button>카트</button>-->
-<!--        <button id="btn-pay">구매</button>-->
-<!--        -->
-<!--    </div>-->
-<!--</form>-->
 <div th:each="product : ${product}">
 
-    <form th:action="@{/order/} + ${product.id}" method="post">
+    <!--    <form th:action="@{/order/} + ${product.id}" method="post">-->
+    <!--        QTY :-->
+
+    <!--        <input type="text" name="quantity" value="1"/>-->
+    <!--        <input type="text" th:value="${product.id}" hidden/>-->
+
+    <!--        <button>카트</button>-->
+    <!--        <button type="submit">구매</button>-->
+    <!--    </form>-->
+    <form name="productInfo" method="post">
         QTY :
-
-        <input type="text" name="quantity" value="1"  />
-        <input type="text"  th:value="${product.id}" hidden/>
-
-        <button>카트</button>
-        <button type="submit">구매</button>
+        <input type="text" name="quantity" value="1"/>
+        <input type="text" id="id" name="id" th:value="${product.id}" hidden/>
     </form>
+    <a href="#" onClick="btnCart();"><button>카트</button></a>
+    <a href="#" onClick="btnOrder();"><button>구매</button></a>
 
 </div>
+
+
+<script>
+    function btnCart(){
+        productInfo.action = "/cart" ;
+        productInfo.submit();
+    }
+
+    function btnOrder() {
+        var productId = document.getElementById("id").value;
+        alert(productId);
+
+        productInfo.action = "/order/" +productId;
+        productInfo.submit();
+    }
+</script>
+
+
+<!--<script>-->
+<!--    window.onload = function() {-->
+<!--        -->
+<!--        var productId = document.getElementById("productId");-->
+
+<!--        document.getElementById("btn-cart").addEventListener("click", function () {-->
+<!--            post_to_url("http://localhost:8080/cart", "post");-->
+<!--        });-->
+
+<!--        document.getElementById("btn-pay").addEventListener("click", function () {-->
+<!--            post_to_url("/order/" + productId, "post");-->
+<!--        });-->
+
+<!--    };-->
+
+
+<!--    function post_to_url(path, method) {-->
+
+<!--        alert("post_to_url");-->
+<!--        alert(path);-->
+<!--        alert(method);-->
+
+<!--        method = method || "post"; // Set method to post by default, if not specified.-->
+<!--        // The rest of this code assumes you are not using a library.-->
+<!--        // It can be made less wordy if you use one.-->
+<!--        var form = document.createElement("form");-->
+<!--        form.setAttribute("method", method);-->
+<!--        form.setAttribute("action", path);-->
+<!--        // for(var key in params) {-->
+<!--        //     var hiddenField = document.createElement("input");-->
+<!--        //     hiddenField.setAttribute("type", "text");-->
+<!--        //     hiddenField.setAttribute("name", key);-->
+<!--        //     hiddenField.setAttribute("value", params[key]);-->
+<!--        //     form.appendChild(hiddenField);-->
+<!--        // }-->
+<!--        document.body.appendChild(form);-->
+<!--        form.submit();-->
+<!--    }-->
+<!--</script>-->
 
 
 </body>
