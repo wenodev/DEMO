@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class CategoryController {
 
-    @GetMapping("/category")
+    @GetMapping("/admin/category-register")
     public String showCategory(){
         return "/admin/category-register";
     }

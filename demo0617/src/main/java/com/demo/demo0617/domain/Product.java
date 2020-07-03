@@ -38,6 +38,12 @@ public class Product {
     @Column
     private String imgType;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="category_id")
+    private Category category;
+
+
+
     @Builder
     public Product(Long id, String productCode, String productName, String productPrice, String quantity, String productFileImg, String productUrlImg, String imgType){
         this.id = id;

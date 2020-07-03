@@ -7,7 +7,7 @@
 <body>
 
 <form>
-    <input type="text" id="categoryCode" placeholder="카테코드"/>
+<!--    <input type="text" id="categoryCode" placeholder="카테코드"/>-->
     <input type="text" id="categoryName" placeholder="카테이름"/>
     <button id="btn-save">등록</button>
 </form>
@@ -23,8 +23,8 @@
         },
         save: function () {
             var data = {
-                categoryCode: $('#categoryCode').val(),
-                categoryName: $('#categoryName').val(),
+                // categoryCode: $('#categoryCode').val(),
+                categoryName: $('#categoryName').val()
             };
             $.ajax({
                 type: 'post',

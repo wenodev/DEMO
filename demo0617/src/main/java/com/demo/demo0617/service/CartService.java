@@ -23,4 +23,9 @@ public class CartService {
         return cartList;
     }
 
+    @Transactional
+    public void saveCart(CartDto cartDto){
+        cartRepository.save(cartDto.toEntity());
+    }
+
 }

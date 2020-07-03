@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,7 +8,19 @@
 
 <h2>카트</h2>
 
+<ul th:each="cart : ${cartList}">
+    <li>
 
+        <div th:switch="${cart.imgType}">
+            <div th:case="'url'"><img style="width:50px; height:50px;" th:src=" @{ ${cart.productUrlImg} }"></div>
+            <div th:case="'file'"><img style="width:50px; height:50px;" th:src=" @{/upload-dir/} + ${cart.productFileImg}"></div>
+        </div>
+
+        가격 : <span th:text="${cart.productPrice}"></span>
+        재고 : <span th:text="${cart.quantity}"></span>
+
+    </li>
+</ul>
 
 
 </body>

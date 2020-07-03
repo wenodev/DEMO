@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-
 </head>
 <body>
 
@@ -71,10 +70,8 @@
 
 </style>
 
-
 <div th:insert="/admin/nav"></div>
 <div th:insert="/admin/product-nav"></div>
-
 
 <form th:action="@{/admin/product-register}" method="post" enctype="multipart/form-data">
 
@@ -99,7 +96,6 @@
         </div>
     </div>
 
-
     <div id="rest">
         <input type="text" name="productCode" placeholder="상품코드">
         <input type="text" name="productName" placeholder="상품이름">
@@ -107,9 +103,7 @@
         <input type="text" name="quantity" placeholder="재고">
     </div>
 
-
     <button type="submit">상품등록</button>
-
 
 </form>
 
