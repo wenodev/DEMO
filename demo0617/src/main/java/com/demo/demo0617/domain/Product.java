@@ -24,10 +24,10 @@ public class Product {
     private String productName;
 
     @Column(length = 100)
-    private String productPrice;
+    private float productPrice;
 
     @Column(length = 100)
-    private String quantity;
+    private int quantity;
 
     @Column(length = 100)
     private String productFileImg;
@@ -45,7 +45,7 @@ public class Product {
 
 
     @Builder
-    public Product(Long id, String productCode, String productName, String productPrice, String quantity, String productFileImg, String productUrlImg, String imgType){
+    public Product(Long id, String productCode, String productName, float productPrice, int quantity, String productFileImg, String productUrlImg, String imgType, Category category){
         this.id = id;
         this.productCode = productCode;
         this.productName = productName;
@@ -54,5 +54,6 @@ public class Product {
         this.productFileImg = productFileImg;
         this.productUrlImg = productUrlImg;
         this.imgType = imgType;
+        this.category = category;
     }
 }

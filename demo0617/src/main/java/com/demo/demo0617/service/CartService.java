@@ -23,9 +23,18 @@ public class CartService {
         return cartList;
     }
 
-    @Transactional
-    public void saveCart(CartDto cartDto){
-        cartRepository.save(cartDto.toEntity());
+
+    public Cart findById(Long id){
+        return cartRepository.findById(id).get();
     }
+
+
+
+    @Transactional
+    public void saveCart(Cart cart){
+        cartRepository.save(cart);
+    }
+
+
 
 }

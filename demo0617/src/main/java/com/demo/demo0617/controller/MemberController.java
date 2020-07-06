@@ -1,16 +1,12 @@
 package com.demo.demo0617.controller;
 
-import com.demo.demo0617.domain.Product;
 import com.demo.demo0617.dto.MemberDto;
 import com.demo.demo0617.service.MemberService;
 import com.demo.demo0617.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -20,11 +16,10 @@ public class MemberController {
     private ProductService productService;
 
 
-
     // 회원가입 페이지
     @GetMapping("/signup")
     public String dispSignup() {
-        return "/customer/signup";
+        return "/signup";
     }
 
     // 회원가입 처리
@@ -37,7 +32,7 @@ public class MemberController {
     // 로그인 페이지
     @GetMapping("/login")
     public String dispLogin() {
-        return "/customer/login";
+        return "/login";
     }
 
     // 로그인 결과 페이지
@@ -55,7 +50,7 @@ public class MemberController {
     // 접근 거부 페이지
     @GetMapping("/denied")
     public String dispDenied() {
-        return "/denied";
+        return "/common/denied";
     }
 
     // 내 정보 페이지
@@ -63,7 +58,6 @@ public class MemberController {
     public String dispMyInfo() {
         return "/customer/myinfo";
     }
-
 
 
 }

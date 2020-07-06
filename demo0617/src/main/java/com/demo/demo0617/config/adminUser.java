@@ -30,7 +30,6 @@ public class adminUser implements CommandLineRunner {
 
         memberService.joinUser(adminDto);
 
-
         //사용자 등록
         MemberDto memberDto = MemberDto.builder()
                 .email("user1@example.com")
@@ -42,16 +41,13 @@ public class adminUser implements CommandLineRunner {
 
 
         //상품등록
-
-
         for (int i = 0; i < 10; i++) {
-
             ProductDto productDto = ProductDto.builder()
                     .productCode("Product-code" + i)
-                    .productPrice("100")
+                    .productPrice(1000 + i)
                     .productName("Product" + i)
                     .imgType("url")
-                    .quantity("100")
+                    .quantity(100 + i)
                     .productUrlImg("https://i.imgur.com/Vpj0PxO.png")
                     .build();
 
@@ -60,7 +56,6 @@ public class adminUser implements CommandLineRunner {
 
 
         // 카테고리 등록
-
         for (int num = 1; num <= 5; num++) {
             CategoryDto categoryDto = CategoryDto.builder()
                     .categoryCode("CATE-CODE-" + num)
@@ -68,7 +63,6 @@ public class adminUser implements CommandLineRunner {
                     .build();
             categoryService.saveCategory(categoryDto);
         }
-
 
     }
 }

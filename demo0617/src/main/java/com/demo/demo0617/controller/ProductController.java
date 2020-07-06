@@ -24,7 +24,7 @@ public class ProductController {
         List<Product> productList = productService.findAll();
         model.addAttribute("productList",productList);
 
-        return "/index";
+        return "/common/index";
     }
 
     @GetMapping("/product/{id}")
@@ -33,7 +33,7 @@ public class ProductController {
         Optional<Product> product = productService.findById(id);
         model.addAttribute("product", product.get());
 
-        return "product";
+        return "/common/product";
     }
 
 }

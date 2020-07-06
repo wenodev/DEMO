@@ -18,7 +18,7 @@ public class ProductApiController {
 
     //상품 등록
     @PostMapping("/admin/product-register")
-    public String saveProduct(String productCode, String productName, String productPrice, String quantity, @RequestParam("file") MultipartFile file, String productUrlImg, String imgType) {
+    public String saveProduct(String productCode, String productName, float productPrice, int quantity, @RequestParam("file") MultipartFile file, String productUrlImg, String imgType) {
 
         System.out.println("file 이름 : " + file.getOriginalFilename());
 
@@ -41,7 +41,6 @@ public class ProductApiController {
         }else{
             productDto.setProductUrlImg(null);
         }
-
         productService.saveProduct(productDto);
         return "redirect:/admin/product-list";
     }

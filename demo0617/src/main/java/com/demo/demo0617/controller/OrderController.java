@@ -5,7 +5,6 @@ import com.demo.demo0617.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -18,7 +17,7 @@ public class OrderController {
     private ProductService productService;
 
     @PostMapping("/order/{id}")
-    public String orderById(Model model, @PathVariable Long id, String quantity ){
+    public String orderById(Model model, @PathVariable Long id, int quantity ){
 
         System.out.println("productId : " + id);
         System.out.println("quantity : " + quantity);
@@ -28,7 +27,7 @@ public class OrderController {
 
         model.addAttribute("product", productDto.get());
 
-        return "order";
+        return "/customer/order";
     }
 
 //    @GetMapping("/product/{id}")

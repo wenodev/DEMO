@@ -3,6 +3,7 @@ package com.demo.demo0617.domain;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -22,10 +23,11 @@ public class Cart {
     private String productName;
 
     @Column(length = 100)
-    private String productPrice;
+    private float productPrice;
 
+    @Setter
     @Column(length = 100)
-    private String quantity;
+    private int quantity;
 
     @Column(length = 100)
     private String productFileImg;
@@ -36,8 +38,13 @@ public class Cart {
     @Column
     private String imgType;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="product_id")
+    private Product product;
+
+
     @Builder
-    public Cart(Long id, String productCode, String productName, String productPrice, String quantity, String productFileImg, String productUrlImg, String imgType){
+    public Cart(Long id, String productCode, String productName, float productPrice, int quantity, String productFileImg, String productUrlImg, String imgType, Product product){
         this.id = id;
         this.productCode = productCode;
         this.productName = productName;
@@ -46,6 +53,7 @@ public class Cart {
         this.productFileImg = productFileImg;
         this.productUrlImg = productUrlImg;
         this.imgType = imgType;
+        this.product = product;
     }
 
 
