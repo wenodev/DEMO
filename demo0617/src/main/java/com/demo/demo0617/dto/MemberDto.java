@@ -14,7 +14,6 @@ public class MemberDto {
     private String email;
     private String password;
     private String name;
-    private String address;
 
     public Member toEntity(){
         return Member.builder()
@@ -22,16 +21,14 @@ public class MemberDto {
                 .email(email)
                 .password(password)
                 .name(name)
-                .address(address)
                 .build();
     }
 
     @Builder
-    public MemberDto(Long id, String email, String password, String name, String address) {
+    public MemberDto(Long id, String email, String password, String name ) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
-        this.address = address;
     }
 }
