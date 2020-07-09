@@ -26,6 +26,7 @@ public class AddressDto {
                 .postalCode(postalCode)
                 .address(address)
                 .addressDetail(addressDetail)
+                .member(member)
                 .build();
     }
 

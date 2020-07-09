@@ -33,10 +33,6 @@ public class Address {
     @JoinColumn(name="member_id")
     private Member member;
 
-
-
-
-
     @Builder
     public Address(Long id, String postalCode, String address, String addressDetail, String comment, Member member){
         this.id = id;
@@ -46,9 +42,5 @@ public class Address {
         this.comment = comment;
         this.member = member;
     }
-
-
-
-
 
 }

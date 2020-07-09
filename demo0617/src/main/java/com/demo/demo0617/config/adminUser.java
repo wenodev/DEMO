@@ -1,14 +1,23 @@
 package com.demo.demo0617.config;
 
+import com.demo.demo0617.domain.Address;
+import com.demo.demo0617.domain.Member;
+import com.demo.demo0617.dto.AddressDto;
 import com.demo.demo0617.dto.CategoryDto;
 import com.demo.demo0617.dto.MemberDto;
 import com.demo.demo0617.dto.ProductDto;
+import com.demo.demo0617.service.AddressService;
 import com.demo.demo0617.service.CategoryService;
 import com.demo.demo0617.service.MemberService;
 import com.demo.demo0617.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Component
@@ -17,6 +26,7 @@ public class adminUser implements CommandLineRunner {
     private MemberService memberService;
     private ProductService productService;
     private CategoryService categoryService;
+    private AddressService addressService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -27,7 +37,6 @@ public class adminUser implements CommandLineRunner {
                 .password("1234")
                 .name("admin")
                 .build();
-
         memberService.joinUser(adminDto);
 
         //사용자 등록
@@ -36,11 +45,46 @@ public class adminUser implements CommandLineRunner {
                 .password("1234")
                 .name("user1")
                 .build();
-
         memberService.joinUser(memberDto);
 
 
-        //상품등록
+        Optional<Member> member = memberService.findByEmail(memberDto.getEmail());
+
+
+        //주소 등록록
+       AddressDto addressDto = AddressDto.builder()
+                .address("주소1")
+                .addressDetail("주소2")
+                .comment("상세")
+                .postalCode("12345")
+                .member(member.get())
+                .build();
+        addressService.saveAddress(addressDto);
+
+
+//        //주소 등록
+//        for (int num = 1; num <= 3; num++) {
+//            AddressDto addressDto = AddressDto.builder()
+//                    .address("주소1" + num)
+//                    .addressDetail("주소2" + num)
+//                    .comment("상세" + num)
+//                    .postalCode("12345" + num)
+//                    .member(memberDto.toEntity())
+//                    .build();
+//            addressService.saveAddress(addressDto);
+//        }
+
+
+//        // 카테고리 등록
+        for (int num = 1; num <= 5; num++) {
+            CategoryDto categoryDto = CategoryDto.builder()
+                    .categoryCode("CATE-CODE-" + num)
+                    .categoryName("CATE-NAME-" + num)
+                    .build();
+            categoryService.saveCategory(categoryDto);
+        }
+//
+//        //상품등록
         for (int i = 0; i < 10; i++) {
             ProductDto productDto = ProductDto.builder()
                     .productCode("Product-code" + i)
@@ -54,15 +98,6 @@ public class adminUser implements CommandLineRunner {
             productService.saveProduct(productDto);
         }
 
-
-        // 카테고리 등록
-        for (int num = 1; num <= 5; num++) {
-            CategoryDto categoryDto = CategoryDto.builder()
-                    .categoryCode("CATE-CODE-" + num)
-                    .categoryName("CATE-NAME-" + num)
-                    .build();
-            categoryService.saveCategory(categoryDto);
-        }
 
     }
 }

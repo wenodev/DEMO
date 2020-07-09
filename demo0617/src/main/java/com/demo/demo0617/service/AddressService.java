@@ -17,14 +17,21 @@ public class AddressService {
     private AddressRepository addressRepository;
 
     @Transactional
-    public Address saveAddress(Address address) {
-        return addressRepository.save(address);
+    public Address saveAddress(AddressDto addressDto) {
+        System.out.println("In Service : "+addressDto.getAddress());
+        return addressRepository.save(addressDto.toEntity());
     }
 
     @Transactional
     public List<Address> findAll(){
         return addressRepository.findAll();
     }
+
+    @Transactional
+    public List<Address> findByMemberId(Long id) {
+        return addressRepository.findByMemberId(id);
+    }
+
 
 
 }

@@ -21,18 +21,18 @@ public class AddressApiController {
     private MemberService memberService;
 
     @PostMapping("/address")
-    public Address savePost(@RequestBody Address address, Principal principal){
+    public AddressDto savePost(@RequestBody AddressDto addressDto, Principal principal){
 
         Optional<Member> member = memberService.findByEmail(principal.getName());
-        address.setMember(member.get());
+        addressDto.setMember(member.get());
 
 
         System.out.println("principal.getName() : " + principal.getName());
         System.out.println("member.get().getEmail() : " +  member.get().getEmail() );
 
-        addressService.saveAddress(address);
+        addressService.saveAddress(addressDto);
 
-        return address;
+        return addressDto;
     }
 
 
