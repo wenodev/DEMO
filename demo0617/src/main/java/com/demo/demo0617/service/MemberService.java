@@ -35,6 +35,12 @@ public class MemberService implements UserDetailsService {
     }
 
     @Transactional
+    public Optional<Member> findById(Long id){
+        return memberRepository.findById(id);
+    }
+
+
+    @Transactional
     public Optional<Member> findByEmail(String name){
         System.out.println("Called findByEmail!!");
         return memberRepository.findByEmail(name);

@@ -28,25 +28,14 @@ public class OrderController {
     @PostMapping("/order/{id}")
     public String orderById(Principal principal, Model model, @PathVariable Long id, int quantity ){
 
-        System.out.println("productId : " + id);
-        System.out.println("quantity : " + quantity);
-
-
         Optional<Product> productDto = productService.findById(id);
         productDto.get().setQuantity(quantity);
 
-
-        System.out.println("principal.getName() : " + principal.getName());
-
         Optional<Member> member = memberService.findByEmail(principal.getName());
-
         List<Address> address = addressService.findByMemberId(member.get().getId());
 
-
-        System.out.println("member name : " + member.get().getName());
-        System.out.println("member address : " + address.get(0).getAddress());
-
-
+        model.addAttribute("member", member.get());
+        model.addAttribute("addressList", address);
         model.addAttribute("product", productDto.get());
 
         return "/customer/order";

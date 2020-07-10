@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -20,6 +21,11 @@ public class AddressService {
     public Address saveAddress(AddressDto addressDto) {
         System.out.println("In Service : "+addressDto.getAddress());
         return addressRepository.save(addressDto.toEntity());
+    }
+
+    @Transactional
+    public Optional<Address> findById(Long id){
+        return addressRepository.findById(id);
     }
 
     @Transactional

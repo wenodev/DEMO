@@ -24,11 +24,6 @@ public class Member {
     @Column(length = 40)
     private String name;
 
-//    @OneToMany(mappedBy = "member")
-//    private Set<Address> addressList = new HashSet<>();
-
-
-
     @Builder
     public Member(Long id, String email, String password, String name ) {
         this.id = id;

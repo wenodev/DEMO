@@ -1,6 +1,5 @@
 package com.demo.demo0617.config;
 
-import com.demo.demo0617.domain.Address;
 import com.demo.demo0617.domain.Member;
 import com.demo.demo0617.dto.AddressDto;
 import com.demo.demo0617.dto.CategoryDto;
@@ -14,9 +13,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -50,29 +46,17 @@ public class adminUser implements CommandLineRunner {
 
         Optional<Member> member = memberService.findByEmail(memberDto.getEmail());
 
-
-        //주소 등록록
-       AddressDto addressDto = AddressDto.builder()
-                .address("주소1")
-                .addressDetail("주소2")
-                .comment("상세")
-                .postalCode("12345")
-                .member(member.get())
-                .build();
-        addressService.saveAddress(addressDto);
-
-
-//        //주소 등록
-//        for (int num = 1; num <= 3; num++) {
-//            AddressDto addressDto = AddressDto.builder()
-//                    .address("주소1" + num)
-//                    .addressDetail("주소2" + num)
-//                    .comment("상세" + num)
-//                    .postalCode("12345" + num)
-//                    .member(memberDto.toEntity())
-//                    .build();
-//            addressService.saveAddress(addressDto);
-//        }
+        //주소 등록
+        for (int num = 1; num <= 3; num++) {
+            AddressDto addressDto = AddressDto.builder()
+                    .address("주소1" + num)
+                    .addressDetail("주소2" + num)
+                    .comment("상세" + num)
+                    .postalCode("12345" + num)
+                    .member(member.get())
+                    .build();
+            addressService.saveAddress(addressDto);
+        }
 
 
 //        // 카테고리 등록
