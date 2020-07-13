@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Product {
+public class Product extends TimeEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

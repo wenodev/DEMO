@@ -22,7 +22,7 @@
     <div th:each="address : ${addressList}">
         <div>
             <input name=addressId type="radio" th:value="${address.id}">
-            
+
             <div th:text="${address.postalCode}"></div>
             <div th:text="${address.address}"></div>
             <div th:text="${address.addressDetail}"></div>

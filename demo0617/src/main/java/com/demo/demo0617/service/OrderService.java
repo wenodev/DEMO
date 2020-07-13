@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Service
 public class OrderService {
@@ -15,6 +17,11 @@ public class OrderService {
     @Transactional
     public Orders saveOrder(Orders order) {
         return orderRepository.save(order);
+    }
+
+    @Transactional
+    public List<Orders> findAll(){
+        return orderRepository.findAll();
     }
 
 }

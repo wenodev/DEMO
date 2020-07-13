@@ -5,6 +5,8 @@ import com.demo.demo0617.domain.Category;
 import com.demo.demo0617.domain.Product;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Setter
 @Getter
 @ToString
@@ -20,6 +22,8 @@ public class ProductDto {
     private String productUrlImg;
     private String imgType;
     private Category category;
+    private LocalDateTime createdDate;
+    private LocalDateTime modifiedDate;
 
     public Product toEntity(){
         return Product.builder()
@@ -36,7 +40,7 @@ public class ProductDto {
     }
 
     @Builder
-    public ProductDto(Long id, String productCode, String productName, float productPrice, int quantity, String productFileImg, String productUrlImg, String imgType, Category category){
+    public ProductDto(Long id, String productCode, String productName, float productPrice, int quantity, String productFileImg, String productUrlImg, String imgType, Category category, LocalDateTime createdDate, LocalDateTime modifiedDate){
         this.id = id;
         this.productCode = productCode;
         this.productName = productName;
@@ -46,6 +50,8 @@ public class ProductDto {
         this.productUrlImg = productUrlImg;
         this.imgType = imgType;
         this.category = category;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
     }
 
 

@@ -4,6 +4,8 @@ import com.demo.demo0617.domain.Cart;
 import com.demo.demo0617.domain.Product;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Setter
 @Getter
 @ToString
@@ -19,6 +21,8 @@ public class CartDto {
     private String productUrlImg;
     private String imgType;
     private Product product;
+    private LocalDateTime createdDate;
+    private LocalDateTime modifiedDate;
 
     public Cart toEntity(){
         return Cart.builder()
@@ -35,7 +39,7 @@ public class CartDto {
     }
 
     @Builder
-    public CartDto(Long id, String productCode, String productName, float productPrice, int quantity, String productFileImg, String productUrlImg, String imgType, Product product){
+    public CartDto(Long id, String productCode, String productName, float productPrice, int quantity, String productFileImg, String productUrlImg, String imgType, Product product, LocalDateTime createdDate, LocalDateTime modifiedDate){
         this.id = id;
         this.productCode = productCode;
         this.productName = productName;
@@ -45,6 +49,8 @@ public class CartDto {
         this.productUrlImg = productUrlImg;
         this.imgType = imgType;
         this.product = product;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
     }
 
 

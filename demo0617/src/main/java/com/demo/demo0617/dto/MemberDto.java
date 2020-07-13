@@ -14,6 +14,9 @@ public class MemberDto {
     private String email;
     private String password;
     private String name;
+    private LocalDateTime createdDate;
+    private LocalDateTime modifiedDate;
+
 
     public Member toEntity(){
         return Member.builder()
@@ -25,10 +28,12 @@ public class MemberDto {
     }
 
     @Builder
-    public MemberDto(Long id, String email, String password, String name ) {
+    public MemberDto(Long id, String email, String password, String name, LocalDateTime createdDate, LocalDateTime modifiedDate ) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
     }
 }
