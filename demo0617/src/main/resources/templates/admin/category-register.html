@@ -6,42 +6,35 @@
 </head>
 <body>
 
-<form>
-<!--    <input type="text" id="categoryCode" placeholder="카테코드"/>-->
     <input type="text" id="categoryName" placeholder="카테이름"/>
-    <button id="btn-save">등록</button>
-</form>
+    <button type="submit" id="btn-save">등록</button>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-    var index = {
-        init: function () {
-            var _this = this;
-            $('#btn-save').on('click', function () {
-                _this.save();
-            });
-        },
-        save: function () {
-            var data = {
-                // categoryCode: $('#categoryCode').val(),
-                categoryName: $('#categoryName').val()
-            };
-            $.ajax({
-                type: 'post',
-                url: '/category',
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                data: JSON.stringify(data)
-            }).done(function () {
-                alert('등록완료');
-                window.location.href = '/';
-            }).fail(function (error) {
-                alert(data.categoryCode);
-                alert(JSON.stringify(error));
-            })
-        }
-    };
-    index.init();
+
+
+    $('#btn-save').click(function () {
+        var data = {
+            // categoryCode: $('#categoryCode').val(),
+            categoryName: $('#categoryName').val()
+        };
+
+        $.ajax({
+            type: 'post',
+            url: '/category',
+            async: 'true', // true
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function () {
+            window.location.href = '/';
+            alert("설마..?");
+        }).fail(function (error) {
+            alert(data.categoryCode);
+            alert(JSON.stringify(error));
+        });
+    });
+
 
 </script>
 

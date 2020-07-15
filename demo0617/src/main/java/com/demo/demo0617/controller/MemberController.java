@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @AllArgsConstructor
@@ -24,9 +25,9 @@ public class MemberController {
 
     // 회원가입 처리
     @PostMapping("/signup")
-    public String execSignup(MemberDto memberDto) {
+    public void execSignup(@RequestBody MemberDto memberDto) {
         memberService.joinUser(memberDto);
-        return "redirect:/login";
+//        return "redirect:/login";
     }
 
     // 로그인 페이지
@@ -58,6 +59,5 @@ public class MemberController {
     public String dispMyInfo() {
         return "/customer/myinfo";
     }
-
 
 }

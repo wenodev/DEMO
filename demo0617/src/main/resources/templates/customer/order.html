@@ -18,7 +18,7 @@
 </div>
 
 <h3>받는사람 정보</h3>
-<form>
+
     <div th:each="address : ${addressList}">
         <div>
             <input name=addressId type="radio" th:value="${address.id}">
@@ -48,7 +48,7 @@
 
     </div>
 </div>
-</form>
+
 
 <h3>결제 정보</h3>
 

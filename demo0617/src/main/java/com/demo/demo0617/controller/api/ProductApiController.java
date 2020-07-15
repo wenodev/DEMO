@@ -4,13 +4,14 @@ import com.demo.demo0617.dto.ProductDto;
 import com.demo.demo0617.service.ProductService;
 import com.demo.demo0617.storage.StorageService;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @AllArgsConstructor
-@RestController
+@Controller
 public class ProductApiController {
 
     private ProductService productService;
@@ -21,6 +22,7 @@ public class ProductApiController {
     public String saveProduct(String productCode, String productName, float productPrice, int quantity, @RequestParam("file") MultipartFile file, String productUrlImg, String imgType) {
 
         System.out.println("file 이름 : " + file.getOriginalFilename());
+
 
         if(!file.isEmpty()){
             storageService.store(file);

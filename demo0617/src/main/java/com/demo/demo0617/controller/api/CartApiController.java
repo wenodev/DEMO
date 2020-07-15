@@ -22,6 +22,8 @@ public class CartApiController {
     @PostMapping("/cart")
     public String saveCart(Long id, int quantity){
 
+        System.out.println("CartController Called");
+
         Optional<Product> product = productService.findById(id);
 
         List<Cart> cartList = cartService.findAll();
