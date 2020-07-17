@@ -14,75 +14,40 @@
 
         <div th:switch="${product.imgType}">
             <div th:case="'url'"><img style="width:50px; height:50px;" th:src=" @{ ${product.productUrlImg} }"></div>
-            <div th:case="'file'"><img style="width:50px; height:50px;"
-                                       th:src=" @{/upload-dir/} + ${product.productFileImg}"></div>
+            <div th:case="'file'"><img style="width:50px; height:50px;" th:src=" @{/upload-dir/} + ${product.productFileImg}"></div>
         </div>
 
         <div id="productPrice" th:text="${product.productPrice}"></div>
         <div th:text="${product.quantity}"></div>
     </div>
 </div>
-
+<form name="productInfo">
 <div th:each="product : ${product}">
-
-    <form name="productInfo">
         QTY : <input type="text"  name="quantity" value="1">
-        <input type="text" name="id" th:value="${product.id}" hidden>
+        <input type="text" id="id" name="id" th:value="${product.id}" hidden>
         <button id="btn-cart">카트</button>
-        <button type="submit" id="btn-order">구매</button>
-    </form>
-
-
+        <button id="btn-order">구매</button>
 </div>
+</form>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <script>
 
     $('#btn-order').click(function () {
-
         var productId = document.getElementById("id").value;
-
         document.productInfo.method = "post";
-        document.productInfo.action = "/order/" +productId;                 // action으로 url을 지정
-        document.productInfo.submit();                     //  submit()을 하면됨;;
-
+        document.productInfo.action = "/order/" +productId; // action으로 url을 지정
+        document.productInfo.submit();                     //  submit()을 하면됨
     });
-
 
     $('#btn-cart').click(function () {
-
         document.productInfo.method = "post";
         document.productInfo.action = "/cart";              // action으로 url을 지정
-        document.productInfo.submit();                     //  submit()을 하면됨;;
-
+        document.productInfo.submit();                     //  submit()을 하면됨
     });
 
-
-
-
-    // $('#btn-cart').click(function () {
-    //     var data = {
-    //         id: $('#id').val(),
-    //         quantity: $('#quantity').val()
-    //     };
-    //
-    //     $.ajax({
-    //         type: 'post',
-    //         url: '/cart',
-    //         data: data,
-    //         dataType: 'text'
-    //     }).done(function (data) {
-    //         window.location.href = "/cart";
-    //     }).fail(function (error) {
-    //         alert(error)
-    //     })
-    //
-    // });
-
-
 </script>
-
 
 </body>
 </html>

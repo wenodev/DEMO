@@ -13,7 +13,6 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     public Category saveCategory(CategoryDto categoryDto) {
-        System.out.println("In Service : "+categoryDto.getCategoryName());
         return categoryRepository.save(categoryDto.toEntity());
     }
 

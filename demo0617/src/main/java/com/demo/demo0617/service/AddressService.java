@@ -19,7 +19,6 @@ public class AddressService {
 
     @Transactional
     public Address saveAddress(AddressDto addressDto) {
-        System.out.println("In Service : "+addressDto.getAddress());
         return addressRepository.save(addressDto.toEntity());
     }
 

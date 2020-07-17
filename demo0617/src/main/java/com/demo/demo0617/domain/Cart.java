@@ -16,27 +16,9 @@ public class Cart extends TimeEntity {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 100)
-    private String productCode;
-
-    @Column(length = 100)
-    private String productName;
-
-    @Column(length = 100)
-    private float productPrice;
-
     @Setter
     @Column(length = 100)
-    private int quantity;
-
-    @Column(length = 100)
-    private String productFileImg;
-
-    @Column(length = 100)
-    private String productUrlImg;
-
-    @Column
-    private String imgType;
+    private int cartQuantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="product_id")
@@ -44,15 +26,9 @@ public class Cart extends TimeEntity {
 
 
     @Builder
-    public Cart(Long id, String productCode, String productName, float productPrice, int quantity, String productFileImg, String productUrlImg, String imgType, Product product){
+    public Cart(Long id, int cartQuantity,  Product product){
         this.id = id;
-        this.productCode = productCode;
-        this.productName = productName;
-        this.productPrice = productPrice;
-        this.quantity = quantity;
-        this.productFileImg = productFileImg;
-        this.productUrlImg = productUrlImg;
-        this.imgType = imgType;
+        this.cartQuantity = cartQuantity;
         this.product = product;
     }
 

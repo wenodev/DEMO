@@ -18,7 +18,6 @@
             // categoryCode: $('#categoryCode').val(),
             categoryName: $('#categoryName').val()
         };
-
         $.ajax({
             type: 'post',
             url: '/category',
@@ -28,9 +27,7 @@
             data: JSON.stringify(data)
         }).done(function () {
             window.location.href = '/';
-            alert("설마..?");
         }).fail(function (error) {
-            alert(data.categoryCode);
             alert(JSON.stringify(error));
         });
     });

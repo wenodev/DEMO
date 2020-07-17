@@ -9,6 +9,8 @@ import com.demo.demo0617.service.MemberService;
 import com.demo.demo0617.service.OrderService;
 import com.demo.demo0617.service.ProductService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,14 +33,24 @@ public class OrderController {
     @PostMapping("/order/{id}")
     public String orderById(Principal principal, Model model, @PathVariable Long id, int quantity ){
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
         Optional<Product> productDto = productService.findById(id);
         productDto.get().setQuantity(quantity);
 
-        Optional<Member> member = memberService.findByEmail(principal.getName());
-        List<Address> address = addressService.findByMemberId(member.get().getId());
 
-        model.addAttribute("member", member.get());
-        model.addAttribute("addressList", address);
+        System.out.println("이름 뭐였더라?" + authentication.getName());
+
+        if(authentication.getName().equals("anonymousUser")){
+            model.addAttribute("member", Member.builder().email("anonymousUser"));
+
+
+        }else{
+            Optional<Member> member = memberService.findByEmail(principal.getName());
+            List<Address> address = addressService.findByMemberId(member.get().getId());
+            model.addAttribute("member", member.get());
+            model.addAttribute("addressList", address);
+        }
         model.addAttribute("product", productDto.get());
 
         return "/customer/order";
@@ -57,8 +69,6 @@ public class OrderController {
         System.out.println("ordersList.get(0).getOrderNumber() : " + ordersList.get(0).getOrderNumber());
 
         model.addAttribute("ordersList", ordersList);
-
-        System.out.println("====주문 내역 페이지 시작=====");
 
         return "/customer/order-list";
     }

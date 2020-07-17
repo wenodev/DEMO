@@ -11,13 +11,13 @@
 <ul th:each="cart : ${cartList}">
     <li>
 
-        <div th:switch="${cart.imgType}">
-            <div th:case="'url'"><img style="width:50px; height:50px;" th:src=" @{ ${cart.productUrlImg} }"></div>
-            <div th:case="'file'"><img style="width:50px; height:50px;" th:src=" @{/upload-dir/} + ${cart.productFileImg}"></div>
+        <div th:switch="${cart.product.imgType}">
+            <div th:case="'url'"><img style="width:50px; height:50px;" th:src=" @{ ${cart.product.productUrlImg} }"></div>
+            <div th:case="'file'"><img style="width:50px; height:50px;" th:src=" @{/upload-dir/} + ${cart.product.productFileImg}"></div>
         </div>
 
-        가격 : <span th:text="${cart.productPrice}"></span>
-        재고 : <span th:text="${cart.quantity}"></span>
+        가격 : <span th:text="${cart.product.productPrice}"></span>
+        재고 : <span th:text="${cart.cartQuantity}"></span>
 
     </li>
 </ul>

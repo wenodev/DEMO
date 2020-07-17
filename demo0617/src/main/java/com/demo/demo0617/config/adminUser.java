@@ -69,7 +69,7 @@ public class adminUser implements CommandLineRunner {
         }
 //
 //        //상품등록
-        for (int i = 0; i < 10; i++) {
+        for (int i = 1; i <= 10; i++) {
             ProductDto productDto = ProductDto.builder()
                     .productCode("Product-code" + i)
                     .productPrice(1000 + i)

@@ -21,9 +21,6 @@ public class ProductApiController {
     @PostMapping("/admin/product-register")
     public String saveProduct(String productCode, String productName, float productPrice, int quantity, @RequestParam("file") MultipartFile file, String productUrlImg, String imgType) {
 
-        System.out.println("file 이름 : " + file.getOriginalFilename());
-
-
         if(!file.isEmpty()){
             storageService.store(file);
         }

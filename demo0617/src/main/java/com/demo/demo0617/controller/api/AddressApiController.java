@@ -26,10 +26,6 @@ public class AddressApiController {
         Optional<Member> member = memberService.findByEmail(principal.getName());
         addressDto.setMember(member.get());
 
-
-        System.out.println("principal.getName() : " + principal.getName());
-        System.out.println("member.get().getEmail() : " +  member.get().getEmail() );
-
         addressService.saveAddress(addressDto);
 
         return addressDto;

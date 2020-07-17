@@ -13,13 +13,7 @@ import java.time.LocalDateTime;
 public class CartDto {
 
     private Long id;
-    private String productCode;
-    private String productName;
-    private float productPrice;
-    private int quantity;
-    private String productFileImg;
-    private String productUrlImg;
-    private String imgType;
+    private int cartQuantity;
     private Product product;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
@@ -27,27 +21,15 @@ public class CartDto {
     public Cart toEntity(){
         return Cart.builder()
                 .id(id)
-                .productCode(productCode)
-                .productName(productName)
-                .productPrice(productPrice)
-                .quantity(quantity)
-                .productFileImg(productFileImg)
-                .productUrlImg(productUrlImg)
-                .imgType(imgType)
+                .cartQuantity(cartQuantity)
                 .product(product)
                 .build();
     }
 
     @Builder
-    public CartDto(Long id, String productCode, String productName, float productPrice, int quantity, String productFileImg, String productUrlImg, String imgType, Product product, LocalDateTime createdDate, LocalDateTime modifiedDate){
+    public CartDto(Long id, int cartQuantity, Product product, LocalDateTime createdDate, LocalDateTime modifiedDate){
         this.id = id;
-        this.productCode = productCode;
-        this.productName = productName;
-        this.productPrice = productPrice;
-        this.quantity = quantity;
-        this.productFileImg = productFileImg;
-        this.productUrlImg = productUrlImg;
-        this.imgType = imgType;
+        this.cartQuantity = cartQuantity;
         this.product = product;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;

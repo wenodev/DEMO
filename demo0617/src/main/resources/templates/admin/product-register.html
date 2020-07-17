@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
 </head>
 <body>
 
@@ -74,17 +73,14 @@
 <div th:insert="/admin/product-nav"></div>
 
 <form th:action="@{/admin/product-register}" method="post" enctype="multipart/form-data">
-
     <div id="container">
         <ul class="tabs">
-
             <li class="active"  rel="tab1">
-                <input type="radio" name="imgType" value="file">
-                파일 업로드 등록</li>
-
+                <input type="radio" name="imgType" value="file">파일 업로드 등록
+            </li>
             <li rel="tab2">
-                <input type="radio" name="imgType" value="url">
-                url 등록</li>
+                <input type="radio" name="imgType" value="url"> url 등록
+            </li>
         </ul>
         <div class="tab_container">
             <div id="tab1" class="tab_content">
@@ -95,24 +91,19 @@
             </div>
         </div>
     </div>
-
     <div id="rest">
         <input type="text" name="productCode" placeholder="상품코드">
         <input type="text" name="productName" placeholder="상품이름">
         <input type="text" name="productPrice" placeholder="상품가격">
         <input type="text" name="quantity" placeholder="재고">
     </div>
-
     <button type="submit">상품등록</button>
-
 </form>
-
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <script>
     $(function () {
-
         $(".tab_content").hide();
         $(".tab_content:first").show();
 
@@ -126,42 +117,6 @@
         });
     });
 </script>
-
-
-
-<!--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
-<!--<script>-->
-<!--    var index = {-->
-<!--        init: function () {-->
-<!--            var _this = this;-->
-<!--            $('#btn-save').on('click', function () {-->
-<!--                _this.save();-->
-<!--            });-->
-<!--        },-->
-<!--        save: function () {-->
-<!--            var data = {-->
-<!--                categoryCode: $('#categoryCode').val(),-->
-<!--                categoryName: $('#categoryName').val(),-->
-<!--            };-->
-<!--            $.ajax({-->
-<!--                type: 'post',-->
-<!--                url: '/category',-->
-<!--                dataType: 'json',-->
-<!--                contentType: 'application/json; charset=utf-8',-->
-<!--                data: JSON.stringify(data)-->
-<!--            }).done(function () {-->
-<!--                alert('등록완료');-->
-<!--                window.location.href = '/';-->
-<!--            }).fail(function (error) {-->
-<!--                alert(data.categoryCode);-->
-<!--                alert(JSON.stringify(error));-->
-<!--            })-->
-<!--        }-->
-<!--    };-->
-<!--    index.init();-->
-
-<!--</script>-->
-
 
 </body>
 </html>

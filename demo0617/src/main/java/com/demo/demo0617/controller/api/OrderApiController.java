@@ -9,6 +9,8 @@ import com.demo.demo0617.service.MemberService;
 import com.demo.demo0617.service.OrderService;
 import com.demo.demo0617.service.ProductService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,21 +25,10 @@ public class OrderApiController {
     private AddressService addressService;
     private ProductService productService;
 
-//    @PostMapping("/order")
-//    public Orders saveOrder(@RequestBody Orders order){
-//        System.out.println("order : " + order);
-//        return order;
-//    }
-
     @PostMapping("/order")
     public void saveOrder(int quantity, float totalPrice, Long memberId, Long addressId, Long productId){
 
-        System.out.println("quantity : " + quantity);
-        System.out.println("totalPrice : " + totalPrice);
-        System.out.println("memberId : " + memberId);
-        System.out.println("addressId : " + addressId);
-        System.out.println("productId : " + productId);
-
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         Optional<Member> member = memberService.findById(memberId);
         Optional<Address> address = addressService.findById(addressId);

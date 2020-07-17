@@ -39,13 +39,10 @@ public class MemberService implements UserDetailsService {
         return memberRepository.findById(id);
     }
 
-
     @Transactional
     public Optional<Member> findByEmail(String name){
-        System.out.println("Called findByEmail!!");
         return memberRepository.findByEmail(name);
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
@@ -53,7 +50,6 @@ public class MemberService implements UserDetailsService {
         Member userEntity = userEntityWrapper.get();
 
         List<GrantedAuthority> authorities = new ArrayList<>();
-
 
         if (("admin@example.com").equals(userEmail)) {
             authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
@@ -63,10 +59,5 @@ public class MemberService implements UserDetailsService {
 
         return new User(userEntity.getEmail(), userEntity.getPassword(), authorities);
     }
-
-
-
-
-
 
 }

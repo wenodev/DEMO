@@ -27,7 +27,6 @@ public class MemberController {
     @PostMapping("/signup")
     public void execSignup(@RequestBody MemberDto memberDto) {
         memberService.joinUser(memberDto);
-//        return "redirect:/login";
     }
 
     // 로그인 페이지

@@ -16,7 +16,6 @@ public class CategoryApiController {
     @PostMapping("/category")
     public ResponseEntity<?> saveCategory(@RequestBody CategoryDto categoryDto){
 
-        System.out.println("In Controller : "+categoryDto.getCategoryName());
         categoryService.saveCategory(categoryDto);
 
         return ResponseEntity.ok(categoryDto);

@@ -24,10 +24,4 @@ public class CartController {
         return "/customer/cart";
     }
 
-
-
-
-
-
-
 }

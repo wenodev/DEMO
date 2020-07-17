@@ -16,25 +16,19 @@ public class CartService {
 
     private CartRepository cartRepository;
 
-
     @Transactional
     public List<Cart> findAll(){
         List<Cart> cartList = cartRepository.findAll();
         return cartList;
     }
 
-
     public Cart findById(Long id){
         return cartRepository.findById(id).get();
     }
-
-
 
     @Transactional
     public void saveCart(Cart cart){
         cartRepository.save(cart);
     }
-
-
 
 }

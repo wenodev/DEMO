@@ -13,10 +13,6 @@ public class AjaxTestApiController {
     @PostMapping("/ajaxTest")
     public ResponseEntity<?> ajaxTest(@RequestBody AjaxTest ajaxTest){
 
-        System.out.println("ajaxTest.getId() : " + ajaxTest.getId());
-        System.out.println("ajaxTest.getTemp1() : " + ajaxTest.getTemp1());
-        System.out.println("ajaxTest.getTemp2() : " + ajaxTest.getTemp2());
-
         return ResponseEntity.ok(ajaxTest);
 
     }
