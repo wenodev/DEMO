@@ -9,15 +9,15 @@ import com.demo.demo0617.service.MemberService;
 import com.demo.demo0617.service.OrderService;
 import com.demo.demo0617.service.ProductService;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,27 +30,44 @@ public class OrderController {
     private AddressService addressService;
     private OrderService orderService;
 
-    @PostMapping("/order/{id}")
-    public String orderById(Principal principal, Model model, @PathVariable Long id, int quantity ){
+    @PostMapping("/orderFromCart")
+    public String orderFromCart(
+            Principal principal, Model model,
+            @RequestParam(value="id", required=true) List<Long> id,
+            @RequestParam(value="quantity", required=true) List<Integer> quantity ){
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        id.forEach(productId ->{
+//            System.out.println("productId : " + productId);
+//        });
+//
+//        quantity.forEach(cartQuantity -> {
+//            System.out.println("cartQuantity : " + cartQuantity);
+//        });
 
-        Optional<Product> productDto = productService.findById(id);
-        productDto.get().setQuantity(quantity);
+        for(int i=0; i<id.size(); i++){
+            List<Optional<Product>> productDto = Collections.singletonList(productService.findById(id.get(i)));
+            productDto.get(i).get().setQuantity(quantity.get(i));
 
-
-        System.out.println("이름 뭐였더라?" + authentication.getName());
-
-        if(authentication.getName().equals("anonymousUser")){
-            model.addAttribute("member", Member.builder().email("anonymousUser"));
-
-
-        }else{
             Optional<Member> member = memberService.findByEmail(principal.getName());
             List<Address> address = addressService.findByMemberId(member.get().getId());
             model.addAttribute("member", member.get());
             model.addAttribute("addressList", address);
+            model.addAttribute("product", productDto.get(i));
         }
+
+        return "/customer/order";
+    }
+
+    @PostMapping("/order/{id}")
+    public String orderById(Principal principal, Model model, @PathVariable Long id, int quantity) {
+
+        Optional<Product> productDto = productService.findById(id);
+        productDto.get().setQuantity(quantity);
+
+        Optional<Member> member = memberService.findByEmail(principal.getName());
+        List<Address> address = addressService.findByMemberId(member.get().getId());
+        model.addAttribute("member", member.get());
+        model.addAttribute("addressList", address);
         model.addAttribute("product", productDto.get());
 
         return "/customer/order";
@@ -63,7 +80,7 @@ public class OrderController {
     }
 
     @GetMapping("/order/list")
-    public String orderList(Model model){
+    public String orderList(Model model) {
 
         List<Orders> ordersList = orderService.findAll();
         System.out.println("ordersList.get(0).getOrderNumber() : " + ordersList.get(0).getOrderNumber());

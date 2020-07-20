@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @AllArgsConstructor
 public class MemberController {
@@ -31,8 +33,12 @@ public class MemberController {
 
     // 로그인 페이지
     @GetMapping("/login")
-    public String dispLogin() {
-        return "/login";
+    public String dispLogin(HttpServletRequest request) {
+
+        String referrer = request.getHeader("Referer");
+        request.getSession().setAttribute("prevPage", referrer);
+
+        return "login";
     }
 
     // 로그인 결과 페이지

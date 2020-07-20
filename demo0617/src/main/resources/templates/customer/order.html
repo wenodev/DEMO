@@ -11,16 +11,16 @@
 <h3>구매자 정보</h3>
 <div th:each="member : ${member}">
     <div>
-        asdasdasdad
-        <input id="memberId" th:text="${member.id}" th:value="${member.id}"/>
-        <input th:value="${member.email}" />
-        <input th:value="${member.name}"/>
+        <input id="memberId" th:value="${member.id}"  hidden/>
+        회원 아이디 : <div th:text="${member.email}" th:value="${member.email}" />
+        회원 이름 : <div th:text="${member.name}" th:value="${member.name}"/>
     </div>
 </div>
 
 <h3>받는사람 정보</h3>
 
     <div th:each="address : ${addressList}">
+        asdasdasdasd
         <div>
             <input name=addressId type="radio" th:value="${address.id}">
             <div th:text="${address.postalCode}"></div>

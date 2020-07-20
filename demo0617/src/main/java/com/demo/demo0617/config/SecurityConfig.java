@@ -11,7 +11,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.context.request.ServletWebRequest;
+
+import javax.servlet.Servlet;
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 @Configuration
 @EnableWebSecurity
@@ -34,6 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http
                 .headers().frameOptions().disable().and()
                 .csrf().ignoringAntMatchers("/h2-console/**").and()
@@ -42,12 +51,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 페이지 권한 설정
                 .antMatchers("/admin/**").hasRole("ADMIN")
 //                .antMatchers("/cart/**").hasRole("MEMBER")
-//                .antMatchers("/order/**").hasRole("MEMBER")
+                .antMatchers("/order/**").hasRole("MEMBER")
+                .antMatchers("/orderFromCart/**").hasRole("MEMBER")
+
                 .antMatchers("/**").permitAll()
                 .and() // 로그인 설정
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/login/result")
+                .successHandler(successHandler())
+//                .defaultSuccessUrl("/login/result")
                 .permitAll()
                 .and() // 로그아웃 설정
                 .logout()
@@ -59,10 +71,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().accessDeniedPage("/denied");
     }
 
+    @Bean
+    public AuthenticationSuccessHandler successHandler() {
+        return new CustomLoginSuccessHandler("/defaultUrl");
+    }
+
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
     }
-
 
 }
