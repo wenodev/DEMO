@@ -35,13 +35,32 @@ public class MemberService implements UserDetailsService {
     }
 
     @Transactional
-    public Optional<Member> findById(Long id){
-        return memberRepository.findById(id);
+    public Member findById(Long id){
+
+        Optional<Member> optional = memberRepository.findById(id);
+        Member member = null;
+
+        if(optional.isPresent()){
+            member = optional.get();
+        }else{
+            throw new RuntimeException("Member not found for id : " + id);
+        }
+        return member;
     }
 
     @Transactional
-    public Optional<Member> findByEmail(String name){
-        return memberRepository.findByEmail(name);
+    public Member findByEmail(String name){
+
+        Optional<Member> optional = memberRepository.findByEmail(name);
+        Member member = null;
+
+        if(optional.isPresent()){
+            member = optional.get();
+        }else{
+            throw new RuntimeException("Member not found for name : " + name);
+        }
+
+        return member;
     }
 
     @Override

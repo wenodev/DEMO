@@ -8,24 +8,34 @@
 
 <h2>주문내역</h2>
 
-<ul th:each="order : ${ordersList}">
-    <li>주문 번호 : <span th:text="${order.orderNumber}"></span></li>
-    <li>주문일 : <span th:text="${order.createdDate}"></span></li>
-    <li>주문일 : <span th:text="${#temporals.format(order.createdDate,'yyyy/MM/dd')}"></span></li>
-    <li>상품명 : <span th:text="${order.product.productName}"></span></li>
-    <li>결제금액 : <span th:text="${order.totalPrice}"></span></li>
-    <li>상품이미지
-        <div th:switch="${order.product.imgType}">
-            <div th:case="'url'"><img style="width:50px; height:50px;" th:src=" @{ ${order.product.productUrlImg} }"></div>
-            <div th:case="'file'"><img style="width:50px; height:50px;" th:src=" @{/upload-dir/} + ${order.product.productFileImg}"></div>
-        </div>
-    </li>
-    <li>배송지 정보
-        <div th:text="${order.address.postalCode}"></div>
-        <div th:text="${order.address.address}"></div>
-        <div th:text="${order.address.addressDetail}"></div>
-    </li>
-</ul>
+<div th:switch="${isZero}">
+
+    <div th:case="NO">
+        <ul th:each="order : ${ordersList}">
+            <li>주문 번호 : <span th:text="${order.orderNumber}"></span></li>
+            <li>주문일 : <span th:text="${order.createdDate}"></span></li>
+            <li>주문일 : <span th:text="${#temporals.format(order.createdDate,'yyyy/MM/dd')}"></span></li>
+            <li>상품명 : <span th:text="${order.product.productName}"></span></li>
+            <li>결제금액 : <span th:text="${order.totalPrice}"></span></li>
+            <li>상품이미지
+                <div th:switch="${order.product.imgType}">
+                    <div th:case="'url'"><img style="width:50px; height:50px;" th:src=" @{ ${order.product.productUrlImg} }"></div>
+                    <div th:case="'file'"><img style="width:50px; height:50px;" th:src=" @{/upload-dir/} + ${order.product.productFileImg}"></div>
+                </div>
+            </li>
+            <li>배송지 정보
+                <div th:text="${order.address.postalCode}"></div>
+                <div th:text="${order.address.address}"></div>
+                <div th:text="${order.address.addressDetail}"></div>
+            </li>
+        </ul>
+    </div>
+
+    <div th:case="YES">
+        없뜸!!
+    </div>
+
+</div>
 
 </body>
 </html>

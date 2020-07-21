@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -23,7 +24,17 @@ public class CartService {
     }
 
     public Cart findById(Long id){
-        return cartRepository.findById(id).get();
+
+        Optional<Cart> optional = cartRepository.findById(id);
+        Cart cart = null;
+
+        if(optional.isPresent()){
+            cart = optional.get();
+        }else{
+            throw new RuntimeException("Cart not found for id : " + id);
+        }
+        return cart;
+
     }
 
     @Transactional

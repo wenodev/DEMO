@@ -23,8 +23,8 @@ public class AddressApiController {
     @PostMapping("/address")
     public AddressDto savePost(@RequestBody AddressDto addressDto, Principal principal){
 
-        Optional<Member> member = memberService.findByEmail(principal.getName());
-        addressDto.setMember(member.get());
+        Member member = memberService.findByEmail(principal.getName());
+        addressDto.setMember(member);
 
         addressService.saveAddress(addressDto);
 

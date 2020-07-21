@@ -15,7 +15,6 @@ public class Demo0617Application {
 		SpringApplication.run(Demo0617Application.class, args);
 	}
 
-
 	@Bean
 	CommandLineRunner init(StorageService storageService) {
 		return (args) -> {

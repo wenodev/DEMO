@@ -44,7 +44,7 @@ public class adminUser implements CommandLineRunner {
         memberService.joinUser(memberDto);
 
 
-        Optional<Member> member = memberService.findByEmail(memberDto.getEmail());
+        Member member = memberService.findByEmail(memberDto.getEmail());
 
         //주소 등록
         for (int num = 1; num <= 3; num++) {
@@ -53,7 +53,7 @@ public class adminUser implements CommandLineRunner {
                     .addressDetail("주소2" + num)
                     .comment("상세" + num)
                     .postalCode("12345" + num)
-                    .member(member.get())
+                    .member(member)
                     .build();
             addressService.saveAddress(addressDto);
         }

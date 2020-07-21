@@ -30,8 +30,8 @@ public class ProductController {
     @GetMapping("/product/{id}")
     public String productById(Model model, @PathVariable Long id){
 
-        Optional<Product> product = productService.findById(id);
-        model.addAttribute("product", product.get());
+        Product product = productService.findById(id);
+        model.addAttribute("product", product);
 
         return "/common/product";
     }

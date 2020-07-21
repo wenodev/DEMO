@@ -12,9 +12,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -26,23 +27,27 @@ public class OrderApiController {
     private ProductService productService;
 
     @PostMapping("/order")
-    public void saveOrder(int quantity, float totalPrice, Long memberId, Long addressId, Long productId){
+    public void saveOrder(int quantity, float totalPrice, Long memberId, Long addressId, @RequestParam(value="productId[]", required=true)  List<Long> productId){
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        Optional<Member> member = memberService.findById(memberId);
-        Optional<Address> address = addressService.findById(addressId);
-        Optional<Product> product = productService.findById(productId);
+        Member member = memberService.findById(memberId);
+        Address address = addressService.findById(addressId);
 
-        Orders order = Orders.builder()
-                .quantity(quantity)
-                .totalPrice(totalPrice)
-                .member(member.get())
-                .product(product.get())
-                .address(address.get())
-                .build();
 
-        orderService.saveOrder(order);
+        for(int i=0; i<productId.size(); i++){
+            Product product = productService.findById(productId.get(i));
+
+            Orders order = Orders.builder()
+                    .quantity(quantity)
+                    .totalPrice(totalPrice)
+                    .member(member)
+                    .product(product)
+                    .address(address)
+                    .build();
+            orderService.saveOrder(order);
+        }
+
 
     }
 

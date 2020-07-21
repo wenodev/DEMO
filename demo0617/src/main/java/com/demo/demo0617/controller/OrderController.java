@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,24 +36,22 @@ public class OrderController {
             @RequestParam(value="id", required=true) List<Long> id,
             @RequestParam(value="quantity", required=true) List<Integer> quantity ){
 
-//        id.forEach(productId ->{
-//            System.out.println("productId : " + productId);
-//        });
-//
-//        quantity.forEach(cartQuantity -> {
-//            System.out.println("cartQuantity : " + cartQuantity);
-//        });
+        List<Product> productList = new ArrayList<>();
 
         for(int i=0; i<id.size(); i++){
-            List<Optional<Product>> productDto = Collections.singletonList(productService.findById(id.get(i)));
-            productDto.get(i).get().setQuantity(quantity.get(i));
-
-            Optional<Member> member = memberService.findByEmail(principal.getName());
-            List<Address> address = addressService.findByMemberId(member.get().getId());
-            model.addAttribute("member", member.get());
-            model.addAttribute("addressList", address);
-            model.addAttribute("product", productDto.get(i));
+            Product product = productService.findById(id.get(i));
+            product.setQuantity(quantity.get(i));
+            productList.add(product);
         }
+
+        Member member = memberService.findByEmail(principal.getName());
+        List<Address> address = addressService.findByMemberId(member.getId());
+
+
+        model.addAttribute("member", member);
+        model.addAttribute("addressList", address);
+        model.addAttribute("product", productList);
+
 
         return "/customer/order";
     }
@@ -61,14 +59,16 @@ public class OrderController {
     @PostMapping("/order/{id}")
     public String orderById(Principal principal, Model model, @PathVariable Long id, int quantity) {
 
-        Optional<Product> productDto = productService.findById(id);
-        productDto.get().setQuantity(quantity);
+        Product productDto = productService.findById(id);
+        productDto.setQuantity(quantity);
 
-        Optional<Member> member = memberService.findByEmail(principal.getName());
-        List<Address> address = addressService.findByMemberId(member.get().getId());
-        model.addAttribute("member", member.get());
+        Member member = memberService.findByEmail(principal.getName());
+        List<Address> address = addressService.findByMemberId(member.getId());
+
+
+        model.addAttribute("member", member);
         model.addAttribute("addressList", address);
-        model.addAttribute("product", productDto.get());
+        model.addAttribute("product", productDto);
 
         return "/customer/order";
     }
@@ -81,12 +81,18 @@ public class OrderController {
 
     @GetMapping("/order/list")
     public String orderList(Model model) {
-
         List<Orders> ordersList = orderService.findAll();
-        System.out.println("ordersList.get(0).getOrderNumber() : " + ordersList.get(0).getOrderNumber());
+        String isZero = "";
 
-        model.addAttribute("ordersList", ordersList);
 
+        if(ordersList.size() == 0){
+            isZero = "YES";
+            model.addAttribute("isZero", isZero);
+        }else{
+            isZero = "NO";
+            model.addAttribute("isZero", isZero);
+            model.addAttribute("ordersList", ordersList);
+        }
         return "/customer/order-list";
     }
 

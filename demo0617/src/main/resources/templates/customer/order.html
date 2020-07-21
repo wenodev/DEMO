@@ -33,6 +33,7 @@
 <h3>상품 정보</h3>
 <div th:each="product : ${product}">
     <div>
+        <input name=productId type="checkbox" th:value="${product.id}" >
         <div th:text="${product.productName}"></div>
 
         <div th:switch="${product.imgType}">
@@ -42,7 +43,7 @@
 
         <div id="productPrice" th:text="${product.productPrice}" th:value="${product.productPrice}"></div>
         <div id="quantity" th:text="${product.quantity}" th:value="${product.quantity}"></div>
-        <input name=productId type="text" th:value="${product.id}" hidden>
+<!--        <input name=productId type="text" th:value="${product.id}" hidden>-->
     </div>
 </div>
 
@@ -80,13 +81,18 @@
         onApprove: function (data, actions) {
             return actions.order.capture().then(function (details) {
 
+                var productId = [];
+
                 // Show a success message to the buyer
                 var price = document.getElementById("productPrice").getAttribute('value');
                 var quantity = document.getElementById("quantity").getAttribute('value');
                 var totalPrice = price * quantity;
                 var memberId = document.getElementById("memberId").getAttribute('value');
                 var addressId = $('input[name=addressId]:checked').val();
-                var productId = $('input[name=productId]').val();
+
+                $('input[name="productId"]:checked').each(function(i){//체크된 리스트 저장
+                    productId.push($(this).val());
+                });
 
                 var data = {
                     quantity: quantity,

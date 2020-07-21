@@ -26,8 +26,17 @@ public class ProductService {
         return productList;
     }
 
-    public Optional<Product> findById(Long id) {
-        return productRepository.findById(id);
+    public Product findById(Long id) {
+
+        Optional<Product> optional = productRepository.findById(id);
+        Product product = null;
+
+        if (optional.isPresent()){
+            product = optional.get();
+        }else{
+            throw new RuntimeException("Product not found for id : " + id);
+        }
+        return product;
     }
 
 }

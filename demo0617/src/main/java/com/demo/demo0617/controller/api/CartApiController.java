@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Controller
@@ -22,7 +21,7 @@ public class CartApiController {
 
     @PostMapping("/cart")
     public String saveCart(Long id, int quantity){
-        Optional<Product> product = productService.findById(id);
+        Product product = productService.findById(id);
         List<Cart> cartList = cartService.findAll();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -31,7 +30,7 @@ public class CartApiController {
 
         for(int i=0; i<cartList.size(); i++){
 
-             if(cartList.get(i).getProduct().getId() == product.get().getId()){
+             if(cartList.get(i).getProduct().getId() == product.getId()){
 
                  Cart cart = cartService.findById(Long.valueOf(i+1));
                  cart.setCartQuantity(cart.getCartQuantity()+quantity);
@@ -46,7 +45,7 @@ public class CartApiController {
         if(flag == true){
             Cart cart = Cart.builder()
                     .cartQuantity(quantity)
-                    .product(product.get())
+                    .product(product)
                     .build();
             cartService.saveCart(cart);
         }

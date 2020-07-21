@@ -23,8 +23,15 @@ public class AddressService {
     }
 
     @Transactional
-    public Optional<Address> findById(Long id){
-        return addressRepository.findById(id);
+    public Address findById(Long id){
+        Optional<Address> optional = addressRepository.findById(id);
+        Address address = null;
+        if (optional.isPresent()){
+            address = optional.get();
+        }else{
+            throw new RuntimeException("Address not found for id : " + id);
+        }
+        return address;
     }
 
     @Transactional
