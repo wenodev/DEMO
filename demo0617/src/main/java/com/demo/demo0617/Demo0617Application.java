@@ -1,6 +1,6 @@
 package com.demo.demo0617;
 
-import com.demo.demo0617.storage.StorageService;
+import com.demo.demo0617.config.storage.StorageService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

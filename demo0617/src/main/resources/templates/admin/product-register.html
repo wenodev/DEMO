@@ -91,7 +91,11 @@
             </div>
         </div>
     </div>
-    <div id="rest">
+
+    <div id="rest" >
+        <select name="categoryId" >
+            <option th:each="category : ${categoryList}" th:value="${category.id}" th:text="${category.categoryName}">
+        </select>
         <input type="text" name="productCode" placeholder="상품코드">
         <input type="text" name="productName" placeholder="상품이름">
         <input type="text" name="productPrice" placeholder="상품가격">

@@ -1,6 +1,6 @@
 package com.demo.demo0617.config;
 
-import com.demo.demo0617.service.MemberService;
+import com.demo.demo0617.shopuser.service.MemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,13 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.context.request.ServletWebRequest;
-
-import javax.servlet.Servlet;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
 
 @Configuration
 @EnableWebSecurity

@@ -1,19 +1,18 @@
 package com.demo.demo0617.config;
 
-import com.demo.demo0617.domain.Member;
-import com.demo.demo0617.dto.AddressDto;
-import com.demo.demo0617.dto.CategoryDto;
-import com.demo.demo0617.dto.MemberDto;
-import com.demo.demo0617.dto.ProductDto;
-import com.demo.demo0617.service.AddressService;
-import com.demo.demo0617.service.CategoryService;
-import com.demo.demo0617.service.MemberService;
-import com.demo.demo0617.service.ProductService;
+import com.demo.demo0617.common.domain.Category;
+import com.demo.demo0617.common.domain.Member;
+import com.demo.demo0617.common.dto.AddressDto;
+import com.demo.demo0617.common.dto.CategoryDto;
+import com.demo.demo0617.common.dto.MemberDto;
+import com.demo.demo0617.common.dto.ProductDto;
+import com.demo.demo0617.shopadmin.service.CategoryService;
+import com.demo.demo0617.shopadmin.service.ProductService;
+import com.demo.demo0617.shopuser.service.AddressService;
+import com.demo.demo0617.shopuser.service.MemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 @AllArgsConstructor
 @Component
@@ -43,10 +42,8 @@ public class adminUser implements CommandLineRunner {
                 .build();
         memberService.joinUser(memberDto);
 
-
-        Member member = memberService.findByEmail(memberDto.getEmail());
-
         //주소 등록
+        Member member = memberService.findByEmail(memberDto.getEmail());
         for (int num = 1; num <= 3; num++) {
             AddressDto addressDto = AddressDto.builder()
                     .address("주소1" + num)
@@ -58,8 +55,7 @@ public class adminUser implements CommandLineRunner {
             addressService.saveAddress(addressDto);
         }
 
-
-//        // 카테고리 등록
+        // 카테고리 등록
         for (int num = 1; num <= 5; num++) {
             CategoryDto categoryDto = CategoryDto.builder()
                     .categoryCode("CATE-CODE-" + num)
@@ -67,8 +63,9 @@ public class adminUser implements CommandLineRunner {
                     .build();
             categoryService.saveCategory(categoryDto);
         }
-//
-//        //상품등록
+
+        //상품등록
+        Category category = categoryService.findById(1L);
         for (int i = 1; i <= 10; i++) {
             ProductDto productDto = ProductDto.builder()
                     .productCode("Product-code" + i)
@@ -76,12 +73,11 @@ public class adminUser implements CommandLineRunner {
                     .productName("Product" + i)
                     .imgType("url")
                     .quantity(100 + i)
+                    .category(category)
                     .productUrlImg("https://i.imgur.com/Vpj0PxO.png")
                     .build();
-
             productService.saveProduct(productDto);
         }
-
 
     }
 }
