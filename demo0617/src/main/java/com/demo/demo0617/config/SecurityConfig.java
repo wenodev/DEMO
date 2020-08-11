@@ -34,8 +34,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
+    }
 
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
         http
                 .headers().frameOptions().disable().and()
                 .csrf().ignoringAntMatchers("/h2-console/**").and()
@@ -46,7 +50,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/cart/**").hasRole("MEMBER")
                 .antMatchers("/order/**").hasRole("MEMBER")
                 .antMatchers("/orderFromCart/**").hasRole("MEMBER")
-
                 .antMatchers("/**").permitAll()
                 .and() // 로그인 설정
                 .formLogin()
@@ -69,9 +72,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new CustomLoginSuccessHandler("/defaultUrl");
     }
 
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
-    }
+
 
 }

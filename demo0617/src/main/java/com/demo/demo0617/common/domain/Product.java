@@ -42,8 +42,6 @@ public class Product extends TimeEntity {
     @JoinColumn(name="category_id")
     private Category category;
 
-
-
     @Builder
     public Product(Long id, String productCode, String productName, float productPrice, int quantity, String productFileImg, String productUrlImg, String imgType, Category category){
         this.id = id;

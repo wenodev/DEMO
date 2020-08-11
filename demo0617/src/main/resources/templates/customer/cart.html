@@ -3,11 +3,145 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="description" content="Ashion Template">
+    <meta name="keywords" content="Ashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>e-commerce</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
 <body>
 
-<h2>카트</h2>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<div th:insert="/common/nav"></div>
+
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__links">
+                    <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                    <span>Shopping cart</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+
+<!-- Shop Cart Section Begin -->
+<form name="cartInfo">
+    <section class="shop-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shop__cart__table">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr  th:each="cart : ${cartList}">
+                                    <div th:text="${cart.product.id}"></div>
+                                <td class="cart__product__item">
+                                    <div th:switch="${cart.product.imgType}">
+                                        <div th:case="'url'"><img style="width: 90px; height: 90px;" th:src=" @{ ${cart.product.productUrlImg} }">
+                                        </div>
+                                        <div th:case="'file'"><img style="width: 90px; height: 90px;"
+                                                th:src=" @{/upload-dir/} + ${cart.product.productFileImg}"></div>
+                                    </div>
+                                    <div class="cart__product__item__title">
+                                        <h6 th:text="${cart.product.productName}" ></h6>
+                                        <div class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="cart__price" th:text="${cart.product.productPrice}"></td>
+                                <td class="cart__quantity">
+                                    <div class="pro-qty" onClick="getCartPrice(this)">
+                                        <input type="text" name="quantity" th:value="${cart.cartQuantity}" >
+                                    </div>
+                                </td>
+                                <td class="cart__total">$ 300.0</td>
+                                <td class="cart__close"><span class="icon_close"></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="cart__btn">
+                        <a href="#">Continue Shopping</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="cart__btn update__btn">
+                        <a href="#"><span class="icon_loading"></span> Update cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="discount__content">
+                        <h6>Discount codes</h6>
+                        <form action="#">
+                            <input type="text" placeholder="Enter your coupon code">
+                            <button type="submit" class="site-btn">Apply</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4 offset-lg-2">
+                    <div class="cart__total__procced">
+                        <h6>Cart total</h6>
+                        <ul>
+                            <li>Subtotal <span>$ 750.0</span></li>
+                            <li>Total <span>$ 750.0</span></li>
+                        </ul>
+                        <a href="#" class="primary-btn">Proceed to checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+<!-- Shop Cart Section End -->
+
+
 <form name="cartInfo">
     <ul th:each="cart : ${cartList}">
         <li>
@@ -19,19 +153,45 @@
                                            th:src=" @{/upload-dir/} + ${cart.product.productFileImg}"></div>
             </div>
             가격 : <span th:text="${cart.product.productPrice}"></span>
-            재고 : <input type="text" name="quantity" th:value="${cart.cartQuantity}"/>
+            재고 : <input type="text" name="quantity"  th:value="${cart.cartQuantity}"/>
         </li>
     </ul>
     <button id="btn-order">구매</button>
 </form>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/mixitup.min.js"></script>
+<script src="/js/jquery.countdown.min.js"></script>
+<script src="/js/jquery.slicknav.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.nicescroll.min.js"></script>
+<script src="/js/main.js"></script>
+
+
 <script>
     $('#btn-order').click(function () {
         document.cartInfo.method = "post";
         document.cartInfo.action = "/orderFromCart"; // action으로 url을 지정
         document.cartInfo.submit();                     //  submit()을 하면됨
     });
+
+    function getCartPrice(object){
+        console.log(object);
+        console.log(object.children);
+        console.log(object.children[1].value);
+        console.log(object.parentElement);
+        console.log(object.parentElement.parentElement);
+        console.log(object.parentElement.parentNode);
+        console.log(object.parentNode);
+        console.log(object.parentNode.parentNode);
+        console.log(object.parentNode.parentElement);
+
+    }
+
 </script>
 
 
