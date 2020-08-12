@@ -56,6 +56,11 @@ public class OrderController {
     @PostMapping("/order/{id}")
     public String orderById(Principal principal, Model model, @PathVariable Long id, int quantity) {
 
+
+        System.out.println("id : " + id);
+        System.out.println("quantity : " + quantity);
+
+
         Product productDto = productService.findById(id);
         productDto.setQuantity(quantity);
 

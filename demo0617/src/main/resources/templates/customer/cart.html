@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
     <link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="/css   /magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
@@ -67,8 +67,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr  th:each="cart : ${cartList}">
-                                    <div th:text="${cart.product.id}"></div>
+                            <tr th:each="cart : ${cartList}">
+                                <input type="text" name="id" th:value="${cart.product.id}" hidden>
                                 <td class="cart__product__item">
                                     <div th:switch="${cart.product.imgType}">
                                         <div th:case="'url'"><img style="width: 90px; height: 90px;" th:src=" @{ ${cart.product.productUrlImg} }">
@@ -89,11 +89,11 @@
                                 </td>
                                 <td class="cart__price" th:text="${cart.product.productPrice}"></td>
                                 <td class="cart__quantity">
-                                    <div class="pro-qty" onClick="getCartPrice(this)">
+                                    <div class="pro-qty" >
                                         <input type="text" name="quantity" th:value="${cart.cartQuantity}" >
                                     </div>
                                 </td>
-                                <td class="cart__total">$ 300.0</td>
+                                <td class="cart__total"  th:text="${cart.cartPrice}" ></td>
                                 <td class="cart__close"><span class="icon_close"></span></td>
                             </tr>
                             </tbody>
@@ -132,7 +132,7 @@
                             <li>Subtotal <span>$ 750.0</span></li>
                             <li>Total <span>$ 750.0</span></li>
                         </ul>
-                        <a href="#" class="primary-btn">Proceed to checkout</a>
+                        <a href="#" class="primary-btn" id="btn-order">Proceed to checkout</a>
                     </div>
                 </div>
             </div>
@@ -142,22 +142,106 @@
 <!-- Shop Cart Section End -->
 
 
-<form name="cartInfo">
-    <ul th:each="cart : ${cartList}">
-        <li>
-            <input type="text" name="id" th:value="${cart.product.id}" hidden>
-            <div th:switch="${cart.product.imgType}">
-                <div th:case="'url'"><img style="width:50px; height:50px;" th:src=" @{ ${cart.product.productUrlImg} }">
+<!--<form name="cartInfo">-->
+<!--    <ul th:each="cart : ${cartList}">-->
+<!--        <li>-->
+<!--            <input type="text" name="id" th:value="${cart.product.id}" hidden>-->
+<!--            <div th:switch="${cart.product.imgType}">-->
+<!--                <div th:case="'url'"><img style="width:50px; height:50px;" th:src=" @{ ${cart.product.productUrlImg} }">-->
+<!--                </div>-->
+<!--                <div th:case="'file'"><img style="width:50px; height:50px;"-->
+<!--                                           th:src=" @{/upload-dir/} + ${cart.product.productFileImg}"></div>-->
+<!--            </div>-->
+<!--            가격 : <span th:text="${cart.product.productPrice}"></span>-->
+<!--            재고 : <input type="text" name="quantity"  th:value="${cart.cartQuantity}"/>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--    <button id="btn-order">구매</button>-->
+<!--</form>-->
+
+<!-- Footer Section Begin -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-7">
+                <div class="footer__about">
+                    <div class="footer__logo">
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                        cilisis.</p>
+                    <div class="footer__payment">
+                        <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
+                    </div>
                 </div>
-                <div th:case="'file'"><img style="width:50px; height:50px;"
-                                           th:src=" @{/upload-dir/} + ${cart.product.productFileImg}"></div>
             </div>
-            가격 : <span th:text="${cart.product.productPrice}"></span>
-            재고 : <input type="text" name="quantity"  th:value="${cart.cartQuantity}"/>
-        </li>
-    </ul>
-    <button id="btn-order">구매</button>
-</form>
+            <div class="col-lg-2 col-md-3 col-sm-5">
+                <div class="footer__widget">
+                    <h6>Quick links</h6>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blogs</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <div class="footer__widget">
+                    <h6>Account</h6>
+                    <ul>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Orders Tracking</a></li>
+                        <li><a href="#">Checkout</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-8 col-sm-8">
+                <div class="footer__newslatter">
+                    <h6>NEWSLETTER</h6>
+                    <form action="#">
+                        <input type="text" placeholder="Email">
+                        <button type="submit" class="site-btn">Subscribe</button>
+                    </form>
+                    <div class="footer__social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                <div class="footer__copyright__text">
+                    <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+                </div>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </div>
+        </div>
+    </div>
+
+</footer>
+<!-- Footer Section End -->
+
+<!-- Search Begin -->
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+<!-- Search End -->
 
 
 <script src="/js/jquery-3.3.1.min.js"></script>
@@ -171,7 +255,6 @@
 <script src="/js/jquery.nicescroll.min.js"></script>
 <script src="/js/main.js"></script>
 
-
 <script>
     $('#btn-order').click(function () {
         document.cartInfo.method = "post";
@@ -179,21 +262,22 @@
         document.cartInfo.submit();                     //  submit()을 하면됨
     });
 
-    function getCartPrice(object){
-        console.log(object);
-        console.log(object.children);
-        console.log(object.children[1].value);
-        console.log(object.parentElement);
-        console.log(object.parentElement.parentElement);
-        console.log(object.parentElement.parentNode);
-        console.log(object.parentNode);
-        console.log(object.parentNode.parentNode);
-        console.log(object.parentNode.parentElement);
+    $('.dec').click(function () {
+        let quantity = parseFloat($(this).next().val()) - 1;
+        let price = parseFloat($(this).parent().parent().parent().children(".cart__price").text());
+        let total = quantity * price;
 
-    }
+        $(this).parent().parent().parent().children(".cart__total").text(total.toFixed(1));
+    });
 
+    $('.inc').click(function () {
+        let quantity = parseFloat($(this).prev().val()) + 1;
+        let price = parseFloat($(this).parent().parent().parent().children(".cart__price").text());
+        let total = quantity * price;
+
+        $(this).parent().parent().parent().children(".cart__total").text(total.toFixed(1));
+    });
 </script>
-
 
 </body>
 </html>

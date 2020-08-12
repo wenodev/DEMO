@@ -20,15 +20,19 @@ public class Cart extends TimeEntity {
     @Column(length = 100)
     private int cartQuantity;
 
+    @Setter
+    @Column(length = 100)
+    private float cartPrice;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="product_id")
     private Product product;
 
-
     @Builder
-    public Cart(Long id, int cartQuantity,  Product product){
+    public Cart(Long id, int cartQuantity, float cartPrice,  Product product){
         this.id = id;
         this.cartQuantity = cartQuantity;
+        this.cartPrice = cartPrice;
         this.product = product;
     }
 

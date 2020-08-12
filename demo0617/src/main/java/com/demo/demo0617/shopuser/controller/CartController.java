@@ -40,6 +40,7 @@ public class CartController {
             if(cartList.get(i).getProduct().getId() == product.getId()){
                 Cart cart = cartService.findById(Long.valueOf(i+1));
                 cart.setCartQuantity(cart.getCartQuantity()+quantity);
+                cart.setCartPrice(cart.getProduct().getProductPrice() * cart.getCartQuantity());
                 cartService.saveCart(cart);
                 flag = false;
                 break;
@@ -49,6 +50,7 @@ public class CartController {
         if(flag == true){
             Cart cart = Cart.builder()
                     .cartQuantity(quantity)
+                    .cartPrice(quantity * product.getProductPrice())
                     .product(product)
                     .build();
             cartService.saveCart(cart);
