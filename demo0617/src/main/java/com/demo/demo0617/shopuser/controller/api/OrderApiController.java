@@ -25,10 +25,15 @@ public class OrderApiController {
     private OrderService orderService;
 
     @PostMapping("/order")
-    public void saveOrder(int quantity, float totalPrice, Long memberId, Long addressId, @RequestParam(value="productId[]", required=true) List<Long> productId){
+    public void saveOrder(@RequestParam(value="quantity[]", required=true) List<Integer> quantity, float totalPrice, Long memberId, Long addressId, @RequestParam(value="productId[]", required=true) List<Long> productId){
 
         Member member = memberService.findById(memberId);
         Address address = addressService.findById(addressId);
+
+        System.out.println("quantity.size() : " + quantity.size());
+        System.out.println("productId.size() : " + productId.size());
+
+        System.out.println("quantity : " + quantity.get(0).);
 
         int orderNumber = makeRandom();
 
@@ -36,7 +41,7 @@ public class OrderApiController {
             Product product = productService.findById(productId.get(i));
             Orders order = Orders.builder()
                     .orderNumber("order-" + orderNumber)
-                    .quantity(quantity)
+                    .quantity(quantity.get(i))
                     .totalPrice(totalPrice)
                     .member(member)
                     .product(product)

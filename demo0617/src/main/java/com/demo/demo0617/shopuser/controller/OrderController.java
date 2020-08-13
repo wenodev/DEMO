@@ -35,20 +35,41 @@ public class OrderController {
             @RequestParam(value="id", required=true) List<Long> id,
             @RequestParam(value="quantity", required=true) List<Integer> quantity ){
 
-        List<Product> productList = new ArrayList<>();
+
+        System.out.println("orderFromCart 확인");
+
+        List<Orders> orderList = new ArrayList<>();
+        float subTotal = 0;
+
 
         for(int i=0; i<id.size(); i++){
+
             Product product = productService.findById(id.get(i));
-            product.setQuantity(quantity.get(i));
-            productList.add(product);
+
+            Orders orders = Orders.builder()
+                    .product(product)
+                    .quantity(quantity.get(i))
+                    .totalPrice(product.getProductPrice() * quantity.get(i))
+                    .build();
+
+            orderList.add(orders);
+
+            subTotal += orders.getTotalPrice();
         }
+
+
+
+
+
 
         Member member = memberService.findByEmail(principal.getName());
         List<Address> address = addressService.findByMemberId(member.getId());
 
         model.addAttribute("member", member);
         model.addAttribute("addressList", address);
-        model.addAttribute("product", productList);
+        model.addAttribute("orderList", orderList);
+        model.addAttribute("subTotal", subTotal);
+
 
         return "/customer/order";
     }
@@ -56,20 +77,27 @@ public class OrderController {
     @PostMapping("/order/{id}")
     public String orderById(Principal principal, Model model, @PathVariable Long id, int quantity) {
 
-
         System.out.println("id : " + id);
         System.out.println("quantity : " + quantity);
 
-
         Product productDto = productService.findById(id);
-        productDto.setQuantity(quantity);
+        float subTotal = 0;
+
+        Orders orders = Orders.builder()
+                .quantity(quantity)
+                .totalPrice(productDto.getProductPrice() * quantity)
+                .product(productDto)
+                .build();
 
         Member member = memberService.findByEmail(principal.getName());
         List<Address> address = addressService.findByMemberId(member.getId());
+        subTotal = orders.getTotalPrice();
 
         model.addAttribute("member", member);
         model.addAttribute("addressList", address);
-        model.addAttribute("product", productDto);
+        model.addAttribute("orderList", orders);
+        model.addAttribute("subTotal", subTotal);
+
 
         return "/customer/order";
     }

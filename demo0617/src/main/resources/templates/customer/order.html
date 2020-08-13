@@ -52,98 +52,86 @@
 <!-- Checkout Section Begin -->
 <section class="checkout spad">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h6 class="coupon__link"><span class="icon_tag_alt"></span> <a href="#">Have a coupon?</a> Click
-                    here to enter your code.</h6>
-            </div>
-        </div>
+
+        <!--<div th:each="member : ${member}">-->
+        <!--    <div>-->
+        <!--        <input id="memberId" th:value="${member.id}" hidden/>-->
+        <!--        회원 아이디 :-->
+        <!--        <div th:text="${member.email}" th:value="${member.email}"/>-->
+        <!--        회원 이름 :-->
+        <!--        <div th:text="${member.name}" th:value="${member.name}"/>-->
+        <!--    </div>-->
+        <!--</div>-->
+
         <form action="#" class="checkout__form">
             <div class="row">
                 <div class="col-lg-8">
-                    <h5>Billing detail</h5>
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="checkout__form__input">
-                                <p>First Name <span>*</span></p>
-                                <input type="text">
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="checkout__form__input">
-                                <p>Last Name <span>*</span></p>
-                                <input type="text">
-                            </div>
-                        </div>
+
                         <div class="col-lg-12">
+                            <h5>개인 정보</h5>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6" th:each="member : ${member}"
+                             style="margin-bottom: 40px;">
                             <div class="checkout__form__input">
-                                <p>Country <span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__form__input">
-                                <p>Address <span>*</span></p>
-                                <input type="text" placeholder="Street Address">
-                                <input type="text" placeholder="Apartment. suite, unite ect ( optinal )">
-                            </div>
-                            <div class="checkout__form__input">
-                                <p>Town/City <span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__form__input">
-                                <p>Country/State <span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__form__input">
-                                <p>Postcode/Zip <span>*</span></p>
-                                <input type="text">
+                                <p>ID</p>
+                                <input id="memberId" th:value="${member.id}" hidden/>
+                                <input th:value="${member.email}" readonly/>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6" th:each="member : ${member}">
                             <div class="checkout__form__input">
-                                <p>Phone <span>*</span></p>
-                                <input type="text">
+                                <p>Name</p>
+                                <input th:value="${member.name}" readonly/>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="checkout__form__input">
-                                <p>Email <span>*</span></p>
-                                <input type="text">
-                            </div>
-                        </div>
+
                         <div class="col-lg-12">
-                            <div class="checkout__form__checkbox">
-                                <label for="acc">
-                                    Create an acount?
-                                    <input type="checkbox" id="acc">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <p>Create am acount by entering the information below. If you are a returing
-                                    customer login at the <br />top of the page</p>
+                            <h5>배송지 정보</h5>
+                        </div>
+
+                        <!--<div th:each="address : ${addressList}">-->
+                        <!--    asdasdasdasd-->
+                        <!--    <div>-->
+                        <!--        <input name=addressId type="radio" th:value="${address.id}">-->
+                        <!--        <div th:text="${address.postalCode}"></div>-->
+                        <!--        <div th:text="${address.address}"></div>-->
+                        <!--        <div th:text="${address.addressDetail}"></div>-->
+                        <!--        <div th:text="${address.comment}"></div>-->
+                        <!--    </div>-->
+                        <!--</div>-->
+
+                        <div class="col-lg-12">
+                            <button type="button" class="btn btn-primary btn-sm"
+                                    style="float: right; margin-bottom: 10px;"><a href="/address"
+                                                                                  style="color: white; text-decoration: none;">배송지
+                                추가</a></button>
+                        </div>
+
+                        <div class="col-lg-12" th:each="address : ${addressList}"
+                             style="margin-bottom: 20px; border: 1px solid #999; border-radius: 10px;">
+
+                            <div style="border-bottom: 1px solid black; height: 50px; padding-top: 10px; font-size: 20px; margin-bottom: 20px; font-weight: bold;">
+                                <input name=addressId type="radio" th:value="${address.id}">
+                                <span th:text="${address.addressMemberName}"> </span>
                             </div>
                             <div class="checkout__form__input">
-                                <p>Account Password <span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__form__checkbox">
-                                <label for="note">
-                                    Note about your order, e.g, special noe for delivery
-                                    <input type="checkbox" id="note">
-                                    <span class="checkmark"></span>
-                                </label>
+                                <p>PostalCode</p>
+                                <input th:value="${address.postalCode}"/>
                             </div>
                             <div class="checkout__form__input">
-                                <p>Oder notes <span>*</span></p>
-                                <input type="text"
-                                       placeholder="Note about your order, e.g, special noe for delivery">
+                                <p>Address</p>
+                                <input th:value="${address.address}"/>
+                                <input th:value="${address.addressDetail}"/>
+                            </div>
+                            <div class="checkout__form__input">
+                                <p>comment</p>
+                                <input th:value="${address.comment}" placeholder="배송 특이사항을 입력하세요."/>
                             </div>
                         </div>
+
                     </div>
                 </div>
-
-
-
-
-
 
 
                 <div class="col-lg-4">
@@ -152,19 +140,29 @@
                         <div class="checkout__order__product">
                             <ul>
                                 <li>
-                                    <span class="top__text">Product</span>
+                                    <span class="top__text" style="width: 90px;">Product</span>
+                                    <span class="top__text" style="width : 50%; text-align: center;">Quantity</span>
                                     <span class="top__text__right">Total</span>
                                 </li>
-                                <li>01. Chain buck bag <span>$ 300.0</span></li>
-                                <li>02. Zip-pockets pebbled<br /> tote briefcase <span>$ 170.0</span></li>
-                                <li>03. Black jean <span>$ 170.0</span></li>
-                                <li>04. Cotton shirt <span>$ 110.0</span></li>
+                                <li th:each="order : ${orderList}">
+                                    <span style="font-weight: normal; width: 90px;" class="top__text"
+                                          th:text="${order.product.productName}"></span>
+                                    <span style="font-weight: normal; width : 50%; text-align: center;"
+                                          class="top__text"
+                                          id="quantity" th:text="${order.quantity}"
+                                          th:value="${order.quantity}"></span>
+                                    <span style="font-weight: normal" class="top__text__right" id="totalPrice"
+                                          th:text="${order.totalPrice}" th:value="${order.totalPrice}"></span>
+                                    <input name=productId type="checkbox" th:value="${order.product.id}" checked
+                                           hidden/>
+                                </li>
                             </ul>
                         </div>
                         <div class="checkout__order__total">
                             <ul>
-                                <li>Subtotal <span>$ 750.0</span></li>
-                                <li>Total <span>$ 750.0</span></li>
+                                <li>SubTotal
+                                    <span id="subTotal" th:text="${subTotal}"></span>
+                                </li>
                             </ul>
                         </div>
                         <div class="checkout__order__widget">
@@ -177,8 +175,6 @@
     </div>
 </section>
 <!-- Checkout Section End -->
-
-
 
 
 <!-- Footer Section Begin -->
@@ -293,25 +289,25 @@
 <!--    </div>-->
 <!--</div>-->
 
-<h3>상품 정보</h3>
-<div th:each="product : ${product}">
-    <div>
-        <input name=productId type="checkbox" th:value="${product.id}">
-        <div th:text="${product.productName}"></div>
+<!--<h3>상품 정보</h3>-->
+<!--<div th:each="product : ${product}">-->
+<!--    <div>-->
+<!--        <input name=productId type="checkbox" th:value="${product.id}">-->
+<!--        <div th:text="${product.productName}"></div>-->
 
-        <div th:switch="${product.imgType}">
-            <div th:case="'url'"><img style="width:50px; height:50px;" th:src=" @{ ${product.productUrlImg} }"></div>
-            <div th:case="'file'"><img style="width:50px; height:50px;"
-                                       th:src=" @{/upload-dir/} + ${product.productFileImg}"></div>
-        </div>
+<!--        <div th:switch="${product.imgType}">-->
+<!--            <div th:case="'url'"><img style="width:50px; height:50px;" th:src=" @{ ${product.productUrlImg} }"></div>-->
+<!--            <div th:case="'file'"><img style="width:50px; height:50px;"-->
+<!--                                       th:src=" @{/upload-dir/} + ${product.productFileImg}"></div>-->
+<!--        </div>-->
 
-        <div id="productPrice" th:text="${product.productPrice}" th:value="${product.productPrice}"></div>
-        <div id="quantity" th:text="${product.quantity}" th:value="${product.quantity}"></div>
-        <!--        <input name=productId type="text" th:value="${product.id}" hidden>-->
-    </div>
-</div>
+<!--        <div id="productPrice" th:text="${product.productPrice}" th:value="${product.productPrice}"></div>-->
+<!--        <div id="quantity" th:text="${product.quantity}" th:value="${product.quantity}"></div>-->
+<!--        &lt;!&ndash;        <input name=productId type="text" th:value="${product.id}" hidden>&ndash;&gt;-->
+<!--    </div>-->
+<!--</div>-->
 
-<h3>결제 정보</h3>
+<!--<h3>결제 정보</h3>-->
 
 <!-- Set up a container element for the button -->
 <!--<div id="paypal-button-container"></div>-->
@@ -328,9 +324,13 @@
         // Set up the transaction
         createOrder: function (data, actions) {
 
-            var price = document.getElementById("productPrice").getAttribute('value');
-            var quantity = document.getElementById("quantity").getAttribute('value');
-            var totalPrice = price * quantity;
+            var totalPrice = document.getElementById("subTotal").innerText;
+            var quantity = [];
+            $('span[id="quantity"]').each(function (i) {//체크된 리스트 저장
+                quantity.push($(this).val());
+            });
+
+            // var quantity = document.getElementById("quantity").getAttribute('value');
 
             return actions.order.create({
                 purchase_units: [{
@@ -345,17 +345,22 @@
         onApprove: function (data, actions) {
             return actions.order.capture().then(function (details) {
 
+
                 var productId = [];
+                var quantity = [];
 
                 // Show a success message to the buyer
-                var price = document.getElementById("productPrice").getAttribute('value');
-                var quantity = document.getElementById("quantity").getAttribute('value');
-                var totalPrice = price * quantity;
+                var totalPrice = document.getElementById("subTotal").innerText;
+                // var quantity = document.getElementById("quantity").getAttribute('value');
                 var memberId = document.getElementById("memberId").getAttribute('value');
                 var addressId = $('input[name=addressId]:checked').val();
 
                 $('input[name="productId"]:checked').each(function (i) {//체크된 리스트 저장
                     productId.push($(this).val());
+                });
+
+                $('span[id="quantity"]').each(function (i) {//체크된 리스트 저장
+                    quantity.push($(this).val());
                 });
 
                 var data = {
@@ -380,7 +385,6 @@
         }
     }).render('#paypal-button-container');
 </script>
-
 
 <!-- Js Plugins -->
 <script src="/js/jquery-3.3.1.min.js"></script>

@@ -16,6 +16,7 @@ public class AddressDto {
     private String postalCode;
     private String address;
     private String addressDetail;
+    private String addressMemberName;
     private String comment;
     @Setter
     private Member member;
@@ -26,17 +27,19 @@ public class AddressDto {
                 .postalCode(postalCode)
                 .address(address)
                 .addressDetail(addressDetail)
+                .addressMemberName(addressMemberName)
                 .member(member)
                 .build();
     }
 
     @Builder
-    public AddressDto(Long id, String postalCode, String address, String addressDetail, String comment, Member member){
+    public AddressDto(Long id, String postalCode, String address, String addressDetail, String comment, String addressMemberName, Member member){
         this.id = id;
         this.postalCode = postalCode;
         this.address = address;
         this.addressDetail = addressDetail;
         this.comment = comment;
+        this.addressMemberName = addressMemberName;
         this.member = member;
     }
 

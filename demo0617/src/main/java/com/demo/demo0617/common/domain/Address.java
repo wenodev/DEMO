@@ -28,18 +28,22 @@ public class Address {
     @Column
     private String comment;
 
+    @Column
+    private String AddressMemberName;
+
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")
     private Member member;
 
     @Builder
-    public Address(Long id, String postalCode, String address, String addressDetail, String comment, Member member){
+    public Address(Long id, String postalCode, String address, String addressDetail, String comment, String addressMemberName, Member member){
         this.id = id;
         this.postalCode = postalCode;
         this.address = address;
         this.addressDetail = addressDetail;
         this.comment = comment;
+        this.AddressMemberName = addressMemberName;
         this.member = member;
     }
 

@@ -44,12 +44,13 @@ public class adminUser implements CommandLineRunner {
 
         //주소 등록
         Member member = memberService.findByEmail(memberDto.getEmail());
-        for (int num = 1; num <= 3; num++) {
+        for (int num = 1; num <= 2; num++) {
             AddressDto addressDto = AddressDto.builder()
                     .address("주소1" + num)
                     .addressDetail("주소2" + num)
                     .comment("상세" + num)
                     .postalCode("12345" + num)
+                    .addressMemberName("name" + num)
                     .member(member)
                     .build();
             addressService.saveAddress(addressDto);
