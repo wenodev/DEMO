@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @AllArgsConstructor
@@ -41,6 +42,8 @@ public class OrderController {
         List<Orders> orderList = new ArrayList<>();
         float subTotal = 0;
 
+        int sumOfQuantity = quantity.stream().mapToInt(n -> n).sum();
+
 
         for(int i=0; i<id.size(); i++){
 
@@ -59,9 +62,6 @@ public class OrderController {
 
 
 
-
-
-
         Member member = memberService.findByEmail(principal.getName());
         List<Address> address = addressService.findByMemberId(member.getId());
 
@@ -69,6 +69,7 @@ public class OrderController {
         model.addAttribute("addressList", address);
         model.addAttribute("orderList", orderList);
         model.addAttribute("subTotal", subTotal);
+        model.addAttribute("sumOfQuantity", sumOfQuantity);
 
 
         return "/customer/order";
@@ -97,6 +98,7 @@ public class OrderController {
         model.addAttribute("addressList", address);
         model.addAttribute("orderList", orders);
         model.addAttribute("subTotal", subTotal);
+        model.addAttribute("sumOfQuantity", quantity);
 
 
         return "/customer/order";
