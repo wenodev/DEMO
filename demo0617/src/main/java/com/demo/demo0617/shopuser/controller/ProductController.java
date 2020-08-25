@@ -16,19 +16,20 @@ public class ProductController {
 
     private ProductService productService;
 
+
     // 메인 페이지
-    @GetMapping("/")
+    @GetMapping(value = {"/", "/index"})
     public String index(Model model) {
         List<Product> productList = productService.findAll();
         model.addAttribute("productList",productList);
-        return "/common/index";
+        return "/customer/index";
     }
 
     @GetMapping("/product/{id}")
     public String productById(Model model, @PathVariable Long id){
         Product product = productService.findById(id);
         model.addAttribute("product", product);
-        return "/common/product";
+        return "/customer/product";
     }
 
 }

@@ -1,15 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>내정보</title>
-</head>
-<body>
-<h1>마이페이지</h1>
-<hr>
+<div th:insert="/customer/header" xmlns:th="http://www.w3.org/1999/xhtml" th:remove="tag"></div>
 
+<body xmlns:th="http://www.w3.org/1999/xhtml">
+
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<div th:insert="/customer/nav"></div>
+
+<h1>마이페이지</h1>
 <a href="/order/list">주문 내역</a>
 <a href="/address">배송지 목록</a>
 
+<!-- footer -->
+<div th:insert="/customer/footer"></div>
+
 </body>
+
 </html>

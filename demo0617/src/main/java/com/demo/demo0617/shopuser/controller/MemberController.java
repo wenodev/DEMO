@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,13 +23,18 @@ public class MemberController {
     // 회원가입 페이지
     @GetMapping("/signup")
     public String dispSignup() {
-        return "/signup";
+        return "/customer/signup";
     }
 
     // 회원가입 처리
     @PostMapping("/signup")
-    public void execSignup(@RequestBody MemberDto memberDto) {
+    public @ResponseBody MemberDto execSignup(@RequestBody MemberDto memberDto) {
+
+        System.out.println("execSignup Controller");
+        System.out.println(memberDto.getEmail());
+
         memberService.joinUser(memberDto);
+        return memberDto;
     }
 
     // 로그인 페이지
@@ -38,7 +44,7 @@ public class MemberController {
         String referrer = request.getHeader("Referer");
         request.getSession().setAttribute("prevPage", referrer);
 
-        return "login";
+        return "/customer/login";
     }
 
     // 로그인 결과 페이지
@@ -56,7 +62,7 @@ public class MemberController {
     // 접근 거부 페이지
     @GetMapping("/denied")
     public String dispDenied() {
-        return "/common/denied";
+        return "/customer/denied";
     }
 
     // 내 정보 페이지

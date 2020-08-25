@@ -34,13 +34,24 @@ public class adminUser implements CommandLineRunner {
                 .build();
         memberService.joinUser(adminDto);
 
-        //사용자 등록
+        //회원 등록
         MemberDto memberDto = MemberDto.builder()
                 .email("user1@example.com")
                 .password("1234")
                 .name("user1")
                 .build();
         memberService.joinUser(memberDto);
+
+
+        //비회원 등록
+        MemberDto memberDtoNonmember = MemberDto.builder()
+                .email("nonmember@example.com")
+                .password("1234")
+                .name("nonmember")
+                .build();
+        memberService.joinUser(memberDtoNonmember);
+
+
 
         //주소 등록
         Member member = memberService.findByEmail(memberDto.getEmail());

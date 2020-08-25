@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div th:insert="/customer/header" xmlns:th="http://www.w3.org/1999/xhtml" th:remove="tag"></div>
+
+<body xmlns:th="http://www.w3.org/1999/xhtml">
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<div th:insert="/customer/nav"></div>
 
 <h2>주소 등록</h2>
 
@@ -23,6 +25,14 @@
     <input type="text" id="sample6_detailAddress" placeholder="상세주소">
     <input type="text" id="sample6_extraAddress" placeholder="참고항목">
     <button id="btn-save">등록</button>
+
+
+
+
+
+<!-- footer -->
+<div th:insert="/customer/footer"></div>
+
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -75,7 +85,6 @@
     }
 </script>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
     var index = {
         init: function () {
@@ -109,5 +118,9 @@
     index.init();
 </script>
 
+
+
+
 </body>
+
 </html>

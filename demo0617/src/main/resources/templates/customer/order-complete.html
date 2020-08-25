@@ -1,11 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div th:insert="/customer/header" xmlns:th="http://www.w3.org/1999/xhtml" th:remove="tag"></div>
+
+<body xmlns:th="http://www.w3.org/1999/xhtml">
+
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<div th:insert="/customer/nav"></div>
+
 <h2>오더완료 페이지</h2>
 <a href="/">메인페이지로</a>
+
+
+<!-- footer -->
+<div th:insert="/customer/footer"></div>
+
+
 </body>
+
 </html>
