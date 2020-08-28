@@ -12,10 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.List;
 
@@ -27,42 +23,23 @@ public class CartController {
     private ProductService productService;
     private MemberService memberService;
 
-
     @GetMapping("/cart")
-    public String cartPage(Model model, HttpServletRequest request) {
+    public String cartPage(Model model, Principal principal) {
+        System.out.println("cart check");
 
-        List<Cart> cartList = cartService.findAll();
+
+        Member member = memberService.findByEmail(principal.getName());
+        List<Cart> cartList = cartService.findByMember(member);
+
         model.addAttribute("cartList", cartList);
-
-        Cookie[] cookie = request.getCookies();
-
-
-
-
-
-
 
         return "/customer/cart";
     }
 
     @PostMapping("/cart")
-    public String saveCart(Long id, int quantity, Principal principal, HttpServletResponse response) {
+    public String saveCart(Long id, int quantity, Principal principal) {
 
-        //쿠키 설정
-        Cookie cookie = new Cookie("noneUser", "noneUser");
-
-        cookie.setMaxAge(60);
-
-        response.addCookie(cookie);
-
-        //회원 비회원 구분
-        Member member = null;
-        if (principal != null) {
-            member = memberService.findByEmail(principal.getName());
-        } else {
-            member = memberService.findByEmail(memberService.findByEmail("nonmember@example.com").getEmail());
-        }
-
+        Member member = memberService.findByEmail(principal.getName());
         Product product = productService.findById(id);
         List<Cart> cartList = cartService.findAll();
 

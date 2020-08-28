@@ -17,8 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 public class MemberController {
 
     private MemberService memberService;
-    private ProductService productService;
-
 
     // 회원가입 페이지
     @GetMapping("/signup")
@@ -40,10 +38,6 @@ public class MemberController {
     // 로그인 페이지
     @GetMapping("/login")
     public String dispLogin(HttpServletRequest request) {
-
-        String referrer = request.getHeader("Referer");
-        request.getSession().setAttribute("prevPage", referrer);
-
         return "/customer/login";
     }
 

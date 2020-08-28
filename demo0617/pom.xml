@@ -20,6 +20,12 @@
 
 	<dependencies>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+
+
 		<!--파일 업로드를 위한 의존성-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

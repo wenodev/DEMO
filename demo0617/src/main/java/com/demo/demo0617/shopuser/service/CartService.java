@@ -2,6 +2,7 @@ package com.demo.demo0617.shopuser.service;
 
 import com.demo.demo0617.common.domain.Cart;
 import com.demo.demo0617.common.domain.CartRepository;
+import com.demo.demo0617.common.domain.Member;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,7 @@ public class CartService {
         return cartList;
     }
 
+    @Transactional
     public Cart findById(Long id){
 
         Optional<Cart> optional = cartRepository.findById(id);
@@ -40,4 +42,9 @@ public class CartService {
         cartRepository.save(cart);
     }
 
+    @Transactional
+    public List<Cart> findByMember(Member member) {
+        List<Cart> cartList = cartRepository.findByMember(member);
+        return cartList;
+    }
 }

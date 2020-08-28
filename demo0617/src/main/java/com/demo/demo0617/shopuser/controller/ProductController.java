@@ -18,7 +18,11 @@ public class ProductController {
 
 
     // 메인 페이지
-    @GetMapping(value = {"/", "/index"})
+//    @GetMapping(value = {"/", "/index"})
+
+
+
+    @GetMapping("/")
     public String index(Model model) {
         List<Product> productList = productService.findAll();
         model.addAttribute("productList",productList);

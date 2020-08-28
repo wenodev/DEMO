@@ -2,22 +2,14 @@
 
 
 <style>
-    .login-form-1 {
-        width: 100%;
-        margin: 100px 0px;
-    }
-
-    .login-form-2 {
+    .login-form {
         width: 50%;
         margin: 0 auto;
     }
 
-    .login-form-2 > h1{
+    .login-form > h1{
         text-align: center;
-    }
-
-    .register-btn > button {
-        width: 20%;
+        margin: 50px 0px;
     }
 </style>
 
@@ -32,10 +24,8 @@
 <div th:insert="/customer/nav"></div>
 
 
-
-
-<div class="login-form-1">
-    <div class="login-form-2">
+<div class="container" style="margin-bottom: 100px;">
+    <div class="login-form">
         <h1>회원 가입</h1>
             <div class="form-group">
                 <h3>Email address</h3>
@@ -58,14 +48,6 @@
             </div>
     </div>
 </div>
-
-<!--<form>-->
-<!--    <input type="text" id="email" placeholder="이메일 입력해주세요">-->
-<!--    <input type="password" id="password" placeholder="비밀번호">-->
-<!--    <input type="text" id="name" placeholder="이름">-->
-<!--    <input type="text" id="address" placeholder="주소">-->
-<!--    <button id="btn-save" type="submit">가입하기</button>-->
-<!--</form>-->
 
 <!-- footer -->
 <div th:insert="/customer/footer"></div>

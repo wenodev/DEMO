@@ -1,23 +1,17 @@
 <div th:insert="/customer/header" xmlns:th="http://www.w3.org/1999/xhtml" th:remove="tag"></div>
 
 <style>
-    .login-form-1 {
-        width: 100%;
-        margin: 100px 0px;
-    }
 
-    .login-form-2 {
+    .login-form {
         width: 50%;
         margin: 0 auto;
     }
 
-    .login-form-2 > h1{
+    .login-form > h1{
         text-align: center;
+        margin: 50px 0px;
     }
 
-    .login-btn > button{
-        width: 20%;
-    }
 </style>
 
 
@@ -29,8 +23,8 @@
 
 <div th:insert="/customer/nav"></div>
 
-<div class="login-form-1">
-    <div class="login-form-2">
+<div class="container" style="margin-bottom: 100px;">
+    <div class="login-form">
         <h1>로그인</h1>
         <form action="/login" method="post">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
