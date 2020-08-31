@@ -13,7 +13,7 @@
 
 <div th:switch="${isZero}">
     <div th:case="NO" class="container">
-        <h2>주문내역</h2>
+        <h2 style="margin : 15px 0px 10px 0px;">주문내역</h2>
         <table class="table" th:each="order : ${ordersList}">
             <thead>
             <tr>
