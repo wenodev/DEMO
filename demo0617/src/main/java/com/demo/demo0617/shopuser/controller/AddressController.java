@@ -16,11 +16,19 @@ public class AddressController {
     private AddressService addressService;
 
     @GetMapping("/address")
+    public String addressList(Model model){
+        List<Address> addressList = addressService.findAll();
+        model.addAttribute("addressList", addressList);
+        return "/customer/address-list";
+    }
+
+    @GetMapping("/address/add")
     public String addressAdd(Model model){
         List<Address> addressList = addressService.findAll();
         model.addAttribute("addressList", addressList);
         return "/customer/address-add";
     }
+
 
 
 }

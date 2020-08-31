@@ -67,45 +67,38 @@
                             <h5>배송지 정보</h5>
                         </div>
 
-                        <!--<div th:each="address : ${addressList}">-->
-                        <!--    asdasdasdasd-->
-                        <!--    <div>-->
-                        <!--        <input name=addressId type="radio" th:value="${address.id}">-->
-                        <!--        <div th:text="${address.postalCode}"></div>-->
-                        <!--        <div th:text="${address.address}"></div>-->
-                        <!--        <div th:text="${address.addressDetail}"></div>-->
-                        <!--        <div th:text="${address.comment}"></div>-->
-                        <!--    </div>-->
-                        <!--</div>-->
-
                         <div class="col-lg-12">
                             <button type="button" class="btn btn-primary btn-sm"
-                                    style="float: right; margin-bottom: 10px;"><a href="/address"
-                                                                                  style="color: white; text-decoration: none;">배송지
-                                추가</a></button>
+                                    style="float: left; margin-bottom: 10px;">
+                                <a href="/address" style="color: white; text-decoration: none;">배송지 추가</a>
+                            </button>
                         </div>
 
-                        <div class="col-lg-12" th:each="address : ${addressList}"
-                             style="margin-bottom: 20px; border: 1px solid #999; border-radius: 10px;">
 
-                            <div style="border-bottom: 1px solid black; height: 50px; padding-top: 10px; font-size: 20px; margin-bottom: 20px; font-weight: bold;">
-                                <input name=addressId type="radio" th:value="${address.id}">
-                                <span th:text="${address.addressMemberName}"> </span>
-                            </div>
-                            <div class="checkout__form__input">
-                                <p>PostalCode</p>
-                                <input th:value="${address.postalCode}"/>
-                            </div>
-                            <div class="checkout__form__input">
-                                <p>Address</p>
-                                <input th:value="${address.address}"/>
-                                <input th:value="${address.addressDetail}"/>
-                            </div>
-                            <div class="checkout__form__input">
-                                <p>comment</p>
-                                <input th:value="${address.comment}" placeholder="배송 특이사항을 입력하세요."/>
+                        <div class="row justify-content-md-center">
+                            <div class="col col-lg-5 border" th:each="address : ${addressList}"
+                                 style="margin: 10px 10px; border-radius: 10px;">
+
+                                <div style="border-bottom: 1px solid black; height: 50px; padding-top: 10px; font-size: 20px; margin-bottom: 20px; font-weight: bold;">
+                                    <input name=addressId type="radio" th:value="${address.id}">
+                                    <span th:text="${address.addressMemberName}"> </span>
+                                </div>
+                                <div class="checkout__form__input">
+                                    <p>PostalCode</p>
+                                    <input th:value="${address.postalCode}"/>
+                                </div>
+                                <div class="checkout__form__input">
+                                    <p>Address</p>
+                                    <input th:value="${address.address}"/>
+                                    <input th:value="${address.addressDetail}"/>
+                                </div>
+                                <div class="checkout__form__input">
+                                    <p>comment</p>
+                                    <input th:value="${address.comment}" placeholder="배송 특이사항을 입력하세요."/>
+                                </div>
                             </div>
                         </div>
+
 
                     </div>
                 </div>
@@ -122,14 +115,19 @@
                                     <span class="top__text__right">Total</span>
                                 </li>
                                 <li th:each="order : ${orderList}">
-                                    <input name=productId type="checkbox" th:value="${order.product.id}" checked hidden/>
+                                    <input name=productId type="checkbox" th:value="${order.product.id}" checked
+                                           hidden/>
 
-                                    <span style="font-weight: normal; width: 90px;" class="top__text" th:text="${order.product.productName}"></span>
-                                    <span style="font-weight: normal; width : 50%; text-align: center;" class="top__text" th:text="${order.quantity}"></span>
-                                    <input name="quantity" th:value="${order.quantity}" type="checkbox" checked hidden />
+                                    <span style="font-weight: normal; width: 90px;" class="top__text"
+                                          th:text="${order.product.productName}"></span>
+                                    <span style="font-weight: normal; width : 50%; text-align: center;"
+                                          class="top__text" th:text="${order.quantity}"></span>
+                                    <input name="quantity" th:value="${order.quantity}" type="checkbox" checked hidden/>
 
-                                    <span style="font-weight: normal" class="top__text__right" id="totalPrice" th:text="${order.totalPrice}" th:value="${order.totalPrice}"></span>
-                                    <input name="totalPrice" th:value="${order.totalPrice}" type="checkbox" checked hidden />
+                                    <span style="font-weight: normal" class="top__text__right" id="totalPrice"
+                                          th:text="${order.totalPrice}" th:value="${order.totalPrice}"></span>
+                                    <input name="totalPrice" th:value="${order.totalPrice}" type="checkbox" checked
+                                           hidden/>
 
                                 </li>
                             </ul>
@@ -138,8 +136,10 @@
                             <ul>
                                 <li>
                                     <span class="top__text" style="width: 90px; float:left;">SubTotal</span>
-                                    <span id="sumOfQuantity" class="top__text" style="width : 50%; text-align: center; float:left;" th:text="${sumOfQuantity}"></span>
-                                    <span id="subTotal" class="top__text__right" th:text="${subTotal}" ></span>
+                                    <span id="sumOfQuantity" class="top__text"
+                                          style="width : 50%; text-align: center; float:left;"
+                                          th:text="${sumOfQuantity}"></span>
+                                    <span id="subTotal" class="top__text__right" th:text="${subTotal}"></span>
                                 </li>
                             </ul>
                         </div>
@@ -206,7 +206,6 @@
 <div th:insert="/customer/footer"></div>
 
 
-
 <!-- Include the PayPal JavaScript SDK -->
 <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
 
@@ -216,14 +215,17 @@
 
         // Set up the transaction
         createOrder: function (data, actions) {
+
+
             var subTotal = document.getElementById("subTotal").innerText;
 
             var addressId = $('input[name=addressId]:checked').val();
 
-            if(typeof addressId == "undefined"){
+            if (typeof addressId == "undefined") {
                 alert("배송지를 선택하세요.");
-                return true;
+                return 0;
             }
+
 
             return actions.order.create({
                 purchase_units: [{
@@ -239,7 +241,7 @@
             return actions.order.capture().then(function (details) {
 
                 var productId = [];
-                var quantity =  [];
+                var quantity = [];
                 var totalPrice = [];
 
                 // Show a success message to the buyer
@@ -279,10 +281,6 @@
         }
     }).render('#paypal-button-container');
 </script>
-
-
-
-
 
 
 </body>

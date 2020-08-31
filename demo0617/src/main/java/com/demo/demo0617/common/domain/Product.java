@@ -17,33 +17,37 @@ public class Product extends TimeEntity {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 100)
+    @Column
     private String productCode;
 
-    @Column(length = 100)
+    @Column
     private String productName;
 
-    @Column(length = 100)
+    @Column
     private float productPrice;
 
-    @Column(length = 100)
+    @Column
     private int quantity;
 
-    @Column(length = 100)
+    @Column
     private String productFileImg;
 
-    @Column(length = 100)
+    @Column
     private String productUrlImg;
 
     @Column
     private String imgType;
+
+    @Column
+    private String productDescription;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="category_id")
     private Category category;
 
     @Builder
-    public Product(Long id, String productCode, String productName, float productPrice, int quantity, String productFileImg, String productUrlImg, String imgType, Category category){
+    public Product(Long id, String productCode, String productName, float productPrice, int quantity, String productFileImg,
+                   String productUrlImg, String imgType, String productDescription, Category category){
         this.id = id;
         this.productCode = productCode;
         this.productName = productName;
@@ -52,6 +56,7 @@ public class Product extends TimeEntity {
         this.productFileImg = productFileImg;
         this.productUrlImg = productUrlImg;
         this.imgType = imgType;
+        this.productDescription = productDescription;
         this.category = category;
     }
 }

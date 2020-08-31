@@ -21,6 +21,7 @@ public class ProductDto {
     private String productFileImg;
     private String productUrlImg;
     private String imgType;
+    private String productDescription;
     private Category category;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
@@ -35,12 +36,13 @@ public class ProductDto {
                 .productFileImg(productFileImg)
                 .productUrlImg(productUrlImg)
                 .imgType(imgType)
+                .productDescription(productDescription)
                 .category(category)
                 .build();
     }
 
     @Builder
-    public ProductDto(Long id, String productCode, String productName, float productPrice, int quantity, String productFileImg, String productUrlImg, String imgType, Category category, LocalDateTime createdDate, LocalDateTime modifiedDate){
+    public ProductDto(Long id, String productCode, String productName, float productPrice, int quantity, String productFileImg, String productUrlImg, String imgType, String productDescription, Category category, LocalDateTime createdDate, LocalDateTime modifiedDate){
         this.id = id;
         this.productCode = productCode;
         this.productName = productName;
@@ -49,6 +51,7 @@ public class ProductDto {
         this.productFileImg = productFileImg;
         this.productUrlImg = productUrlImg;
         this.imgType = imgType;
+        this.productDescription = productDescription;
         this.category = category;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;

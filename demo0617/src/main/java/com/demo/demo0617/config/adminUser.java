@@ -76,10 +76,13 @@ public class adminUser implements CommandLineRunner {
                     .imgType("url")
                     .quantity(100 + i)
                     .category(category)
+                    .productDescription("Product-Description" + i)
                     .productUrlImg("https://i.imgur.com/Vpj0PxO.png")
                     .build();
             productService.saveProduct(productDto);
         }
+
+
 
     }
 }
