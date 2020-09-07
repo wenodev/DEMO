@@ -1,0 +1,117 @@
+<div th:insert="/admin/header" xmlns:th="http://www.w3.org/1999/xhtml" th:remove="tag"></div>
+
+<body xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:insert="/admin/nav"></div>
+
+<div class="container" style="margin-top: 50px;">
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+               aria-selected="true">리스트</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+               aria-selected="false">등록</a>
+        </li>
+    </ul>
+
+    <div class="tab-content container" id="myTabContent">
+
+        <div class="tab-pane fade show active container" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <table class="table">
+                <tr>
+                    <td>번호</td>
+                    <td>이미지</td>
+                    <td>코드</td>
+                    <td>상품명</td>
+                    <td>가격</td>
+                    <td>재고</td>
+                </tr>
+                <tr th:each="product : ${productList}">
+                    <td th:text="${product.id}"></td>
+                    <div th:switch="${product.imgType}">
+                        <td th:case="'url'"><img style="width:50px; height:50px;"
+                                                 th:src=" @{ ${product.productUrlImg} }"></td>
+                        <td th:case="'file'"><img style="width:50px; height:50px;"
+                                                  th:src=" @{/upload-dir/} + ${product.productFileImg}"></td>
+                    </div>
+                    <td th:text="${product.productCode}"></td>
+                    <td th:text="${product.productName}"></td>
+                    <td th:text="${product.productPrice}"></td>
+                    <td th:text="${product.quantity}"></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="tab-pane fade container" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <form th:action="@{/admin/product-register}" method="post" enctype="multipart/form-data">
+
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text">카테고리</label>
+                    </div>
+                    <select class="custom-select" name="categoryId">
+                        <option selected>Choose Category</option>
+                        <option th:each="category : ${categoryList}" th:value="${category.id}"
+                                th:text="${category.categoryName}">
+
+                    </select>
+                </div>
+
+                <div style="display: none">
+                    <input type="radio" name="imgType" value="file">파일 업로드 등록
+                    <input type="file" name="file"/>
+                    <input type="radio" name="imgType" value="url" checked> url 등록
+                </div>
+
+                <div id="container">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">상품코드</span>
+                        </div>
+                        <input type="text" name="productCode" class="form-control" aria-label="Sizing example input"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">상품이름</span>
+                        </div>
+                        <input type="text" name="productName" class="form-control" aria-label="Sizing example input"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">가격</span>
+                        </div>
+                        <input type="text" name="productPrice" class="form-control" aria-label="Sizing example input"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">재고</span>
+                        </div>
+                        <input type="text" name="quantity" class="form-control" aria-label="Sizing example input"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">이미지</span>
+                        </div>
+                        <input type="text" name="productUrlImg" class="form-control" placeholder="url 입력"
+                               aria-label="Sizing example input"
+                               aria-describedby="inputGroup-sizing-default">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">등록</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:insert="/admin/footer"></div>
+
+</body>
+</html>

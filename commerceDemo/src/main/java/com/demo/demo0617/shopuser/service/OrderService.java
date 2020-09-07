@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -24,5 +25,10 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    @Transactional
+    public int findTableNumber(){
+        List<Orders> orderList = orderRepository.findAll();
+        return orderList.size();
+    }
 
 }

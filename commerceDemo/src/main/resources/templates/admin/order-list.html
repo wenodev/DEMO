@@ -1,0 +1,42 @@
+<div th:insert="/admin/header" xmlns:th="http://www.w3.org/1999/xhtml" th:remove="tag"></div>
+
+<body xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:insert="/admin/nav"></div>
+
+
+<div class="container text-center" style="margin-top: 50px">
+
+    <h2 style="margin-bottom: 20px">Order List</h2>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">번호</th>
+            <th scope="col">날짜</th>
+            <th scope="col">주문번호</th>
+            <th scope="col">주문가격</th>
+            <th scope="col">수량</th>
+            <th scope="col">상품명</th>
+            <th scope="col">주문자 아이디</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orderList}">
+            <th th:text="${order.id}"></th>
+            <td th:text="${order.createdDate}"></td>
+            <td th:text="${order.orderNumber}"></td>
+
+            <td th:text="${order.totalPrice}"></td>
+            <td th:text="${order.quantity}"></td>
+            <td th:text="${order.product.productName}"></td>
+            <td th:text="${order.member.email}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:insert="/admin/footer"></div>
+
+
+</body>
+</html>

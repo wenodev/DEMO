@@ -16,6 +16,7 @@ public class ProductService {
 
     private ProductRepository productRepository;
 
+    @Transactional
     public Long saveProduct(ProductDto productDto){
         return productRepository.save(productDto.toEntity()).getId();
     }
@@ -26,6 +27,7 @@ public class ProductService {
         return productList;
     }
 
+    @Transactional
     public Product findById(Long id) {
 
         Optional<Product> optional = productRepository.findById(id);
@@ -38,5 +40,12 @@ public class ProductService {
         }
         return product;
     }
+
+    @Transactional
+    public int findTableNumber(){
+        List<Product> productList = productRepository.findAll();
+        return productList.size();
+    }
+
 
 }

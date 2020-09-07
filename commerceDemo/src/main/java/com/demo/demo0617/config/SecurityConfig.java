@@ -47,11 +47,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 
                 // 페이지 권한 설정
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/order/**").hasRole("MEMBER")
-//                .antMatchers("/info/**").hasRole("MEMBER")
-//                .antMatchers("/cart/**").hasRole("MEMBER")
-//                .antMatchers("/orderFromCart/**").hasRole("MEMBER")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/order/**").hasRole("MEMBER")
+                .antMatchers("/info/**").hasRole("MEMBER")
+                .antMatchers("/cart/**").hasRole("MEMBER")
+                .antMatchers("/orderFromCart/**").hasRole("MEMBER")
                 .antMatchers("/**").permitAll()
                 .and() // 로그인 설정
                 .formLogin()

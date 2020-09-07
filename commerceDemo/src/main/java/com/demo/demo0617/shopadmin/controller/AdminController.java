@@ -18,12 +18,18 @@ public class AdminController {
 
     private ProductService productService;
     private CategoryService categoryService;
-    private final StorageService storageService;
     private OrderService orderService;
 
     // 어드민 페이지
     @GetMapping("/admin")
-    public String dispAdmin() {
+    public String dispAdmin(Model model) {
+
+        int productNumber = productService.findTableNumber();
+        int orderNumber = orderService.findTableNumber();
+
+        model.addAttribute("productNumber", productNumber);
+        model.addAttribute("orderNumber", orderNumber);
+
         return "/admin/index";
     }
 
@@ -33,7 +39,7 @@ public class AdminController {
 
         List<Product> productList = productService.findAll();
         model.addAttribute("productList", productList);
-
+        model.addAttribute("categoryList", categoryService.findAll());
         return "/admin/product-list";
     }
 
