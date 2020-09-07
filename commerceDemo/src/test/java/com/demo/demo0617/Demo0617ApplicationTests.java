@@ -14,10 +14,4 @@ public class Demo0617ApplicationTests {
 		System.out.println("test1");
 	}
 
-	@Test
-	public void test2(){
-		System.out.println("test2");
-	}
-
-
 }

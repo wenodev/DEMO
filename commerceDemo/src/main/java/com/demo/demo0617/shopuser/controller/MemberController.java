@@ -1,7 +1,6 @@
 package com.demo.demo0617.shopuser.controller;
 
 import com.demo.demo0617.common.dto.MemberDto;
-import com.demo.demo0617.shopadmin.service.ProductService;
 import com.demo.demo0617.shopuser.service.MemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

@@ -1,35 +1,39 @@
 package com.demo.demo0617.shopuser.controller;
 
-import com.demo.demo0617.common.dto.MemberDto;
-import com.demo.demo0617.shopuser.service.MemberService;
-import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.InjectMocks;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(MemberController.class)
-@Slf4j
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
+
+@RunWith(MockitoJUnitRunner.class)
 public class MemberControllerTest {
 
-    @Autowired
-    MockMvc mvc;
+    @InjectMocks
+    private MemberController memberController;
+    private MockMvc mockMvc;
 
-    @MockBean
-    private MemberService memberService;
+    @Before
+    public void setup(){
+        mockMvc = MockMvcBuilders.standaloneSetup(memberController).build();
+    }
 
     @Test
-    void signUp() throws Exception{
-
-        //given
-        MemberDto memberDto = MemberDto.builder()
-                .name("name1")
-                .email("email")
-                .build();
+    public void 회원가입페이지테스트() throws Exception {
+        mockMvc.perform(get("/signup"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("/customer/signup"));
     }
+
+
+
+
 
 }
