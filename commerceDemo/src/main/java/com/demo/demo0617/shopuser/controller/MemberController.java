@@ -23,16 +23,55 @@ public class MemberController {
         return "/customer/signup";
     }
 
+
+
+
+
+
     // 회원가입 처리
     @PostMapping("/signup")
-    public @ResponseBody MemberDto execSignup(@RequestBody MemberDto memberDto) {
-
-        System.out.println("execSignup Controller");
-        System.out.println(memberDto.getEmail());
-
+    public @ResponseBody MemberDto signUp(@RequestBody MemberDto memberDto) {
         memberService.joinUser(memberDto);
         return memberDto;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // 로그인 페이지
     @GetMapping("/login")
@@ -65,3 +104,5 @@ public class MemberController {
     }
 
 }
+//        System.out.println("execSignup Controller");
+//                System.out.println(memberDto.getEmail());
