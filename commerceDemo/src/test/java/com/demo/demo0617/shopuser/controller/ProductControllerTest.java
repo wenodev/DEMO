@@ -60,9 +60,26 @@ public class ProductControllerTest {
 
     //상품 상세 페이지
     @Test
-    public void productByIdTest(){
+    public void productByIdTest() throws Exception {
 
-        
+        //given
+        Long id = 11L;
+
+        Product mockProduct = Product.builder()
+                .id(id)
+                .build();
+
+        given(productService.findById(id)).willReturn(mockProduct);
+
+        //when
+        mockMvc.perform(get("/product/" + id))
+                .andExpect(view().name("/customer/product"))
+                .andExpect(model().attributeExists("product"))
+                .andExpect(status().isOk());
+
+        //then
+        verify(productService).findById(id);
+
     }
 
 }
