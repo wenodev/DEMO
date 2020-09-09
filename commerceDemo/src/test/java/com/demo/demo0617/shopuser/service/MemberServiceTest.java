@@ -1,17 +1,22 @@
 package com.demo.demo0617.shopuser.service;
 
-
 import com.demo.demo0617.common.domain.Member;
 import com.demo.demo0617.common.domain.MemberRepository;
+import com.demo.demo0617.common.dto.MemberDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.Optional;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MemberServiceTest {
@@ -22,19 +27,72 @@ public class MemberServiceTest {
     @Mock
     private MemberRepository memberRepository;
 
-
-    //회원 아이디로 찾기
+    //회원 가입 처리
     @Test
-    public void findByIdTest(){
+    public void joinUserTest(){
 
-        Member member = Member.builder()
-                .email("test@test.com")
+        //given
+        Long id = 1L;
+        MemberDto mockMemberDto = MemberDto.builder()
+                .id(id)
+                .password("pwd1")
                 .build();
 
-        given(memberRepository.findByEmail("test@test.com"))
-                .willReturn(java.util.Optional.ofNullable(member));
-        then(memberRepository).should()
-                .findByEmail(any());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        mockMemberDto.setPassword(passwordEncoder.encode(mockMemberDto.getPassword()));;
+
+        given(memberRepository.save(any())).willReturn(mockMemberDto.toEntity());
+
+
+        //when
+        Long resultId = memberService.joinUser(mockMemberDto);
+
+        //then
+        verify(memberRepository).save(any());
+        assertThat(mockMemberDto.getId(), is(resultId));
+    }
+
+    //회원 id로 찾기
+    @Test
+    public void findByIdTest(){
+        //given
+        Long id = 11L;
+
+        Member mockMember = Member.builder()
+                .id(id)
+                .build();
+
+        given(memberRepository.findById(id)).willReturn(Optional.of(mockMember));
+
+        //when
+        Member member = memberService.findById(id);
+
+        //then
+        verify(memberRepository).findById(id);
+        assertThat(member.getId(), is(id));
+
+    }
+
+
+
+    //회원 email로 찾기
+    @Test
+    public void findByIdEmail() {
+
+        //given
+        String email = "test@tset.com";
+        Member mockMember = Member.builder()
+                .email(email)
+                .build();
+
+        given(memberRepository.findByEmail(email)).willReturn(Optional.of(mockMember));
+
+        //when
+        Member member = memberService.findByEmail(email);
+
+        //then
+        verify(memberRepository).findByEmail(email);
+        assertThat(member.getEmail(), is(email));
     }
 
 }

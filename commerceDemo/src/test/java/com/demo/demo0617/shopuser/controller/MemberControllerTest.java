@@ -55,13 +55,14 @@ public class MemberControllerTest {
                 .email("test@email.com")
                 .build();
 
-        //then
+        //when
         ObjectMapper objectMapper = new ObjectMapper();
         mockMvc.perform(post("/signup")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(memberDto)))
                 .andExpect(status().isOk());
 
+        //then
         verify(memberService).joinUser(any(MemberDto.class));
     }
 
