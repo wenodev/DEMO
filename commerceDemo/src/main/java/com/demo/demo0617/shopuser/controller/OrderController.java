@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @AllArgsConstructor
@@ -35,9 +34,6 @@ public class OrderController {
             Principal principal, Model model,
             @RequestParam(value="id", required=true) List<Long> id,
             @RequestParam(value="quantity", required=true) List<Integer> quantity ){
-
-
-        System.out.println("orderFromCart 확인");
 
         List<Orders> orderList = new ArrayList<>();
         float subTotal = 0;
@@ -59,7 +55,6 @@ public class OrderController {
 
             subTotal += orders.getTotalPrice();
         }
-
 
 
         Member member = memberService.findByEmail(principal.getName());

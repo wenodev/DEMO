@@ -11,7 +11,7 @@ public class Demo0617ApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		System.out.println("test1");
+		System.out.println("통합테스트 진행");
 	}
 
 }

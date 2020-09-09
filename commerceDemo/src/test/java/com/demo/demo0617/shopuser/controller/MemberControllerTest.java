@@ -37,17 +37,17 @@ public class MemberControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(memberController).build();
     }
 
-
+    //회원 가입 페이지
     @Test
-    public void 회원가입페이지테스트() throws Exception {
+    public void dispSignupTest() throws Exception {
         mockMvc.perform(get("/signup"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("/customer/signup"));
+                .andExpect(view().name("/customer/signup"))
+                .andExpect(status().isOk());
     }
 
-
+    //회원 가입 처리
     @Test
-    public void 회원가입처리() throws Exception {
+    public void signUpTest() throws Exception {
 
         //given
         MemberDto memberDto = MemberDto.builder()
@@ -64,6 +64,14 @@ public class MemberControllerTest {
 
         //then
         verify(memberService).joinUser(any(MemberDto.class));
+    }
+
+    //로그인 페이지
+    @Test
+    public void login() throws Exception {
+        mockMvc.perform(get("/login"))
+                .andExpect(view().name("/customer/login"))
+                .andExpect(status().isOk());
     }
 
 
