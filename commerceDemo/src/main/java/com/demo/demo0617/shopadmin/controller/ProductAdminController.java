@@ -1,4 +1,4 @@
-package com.demo.demo0617.shopadmin.api;
+package com.demo.demo0617.shopadmin.controller;
 
 import com.demo.demo0617.common.domain.Category;
 import com.demo.demo0617.common.dto.ProductDto;
@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @AllArgsConstructor
 @Controller
-public class ProductApiController {
+public class ProductAdminController {
 
     private ProductService productService;
     private CategoryService categoryService;
@@ -47,4 +47,6 @@ public class ProductApiController {
         productService.saveProduct(productDto);
         return "redirect:/admin/product-list";
     }
+
+
 }

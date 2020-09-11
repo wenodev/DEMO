@@ -11,10 +11,7 @@ import com.demo.demo0617.shopuser.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -98,6 +95,42 @@ public class OrderController {
 
         return "/customer/order";
     }
+
+
+    @PostMapping("/order")
+    public String saveOrder(@RequestParam(value="quantity[]", required=true) List<Integer> quantity, @RequestParam(value="totalPrice[]", required=true)  List<Float> totalPrice, Long memberId, Long addressId, @RequestParam(value="productId[]", required=true) List<Long> productId){
+
+
+        System.out.println("saveOrderController memberId : " + memberId);
+
+        Member member = memberService.findById(memberId);
+        Address address = addressService.findById(addressId);
+
+        int orderNumber = makeRandom();
+
+        for(int i=0; i<productId.size(); i++){
+            Product product = productService.findById(productId.get(i));
+            Orders order = Orders.builder()
+                    .orderNumber("order-" + orderNumber)
+                    .quantity(quantity.get(i))
+                    .totalPrice(totalPrice.get(i))
+                    .member(member)
+                    .product(product)
+                    .address(address)
+                    .build();
+            orderService.saveOrder(order);
+        }
+        return "/customer/order-complete";
+    }
+
+    //주문번호 생성
+    public int makeRandom(){
+        return (int)(Math.random()*1000000000) % 10000;
+    }
+
+
+
+
 
     @GetMapping("/order/complete")
     public String orderComplete() {
