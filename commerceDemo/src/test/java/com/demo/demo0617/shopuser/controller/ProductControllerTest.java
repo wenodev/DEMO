@@ -14,8 +14,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -55,7 +55,7 @@ public class ProductControllerTest {
                 .andExpect(status().isOk());
 
         //then
-        verify(productService).findAll();
+        then(productService).should().findAll();
     }
 
     //상품 상세 페이지
@@ -78,8 +78,7 @@ public class ProductControllerTest {
                 .andExpect(status().isOk());
 
         //then
-        verify(productService).findById(id);
-
+        then(productService).should().findById(id);
     }
 
 }

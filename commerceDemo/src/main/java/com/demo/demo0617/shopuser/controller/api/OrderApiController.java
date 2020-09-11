@@ -30,11 +30,6 @@ public class OrderApiController {
         Member member = memberService.findById(memberId);
         Address address = addressService.findById(addressId);
 
-        System.out.println("productId.size() : " + productId.size());
-
-        System.out.println("productId : " + productId);
-        System.out.println("quantity : " + quantity);
-
         int orderNumber = makeRandom();
 
         for(int i=0; i<productId.size(); i++){

@@ -23,10 +23,9 @@ public class CartController {
     private ProductService productService;
     private MemberService memberService;
 
+
     @GetMapping("/cart")
     public String cartPage(Model model, Principal principal) {
-        System.out.println("cart check");
-
 
         Member member = memberService.findByEmail(principal.getName());
         List<Cart> cartList = cartService.findByMember(member);

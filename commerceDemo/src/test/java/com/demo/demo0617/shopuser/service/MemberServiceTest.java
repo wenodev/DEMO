@@ -2,6 +2,7 @@ package com.demo.demo0617.shopuser.service;
 
 import com.demo.demo0617.common.domain.Member;
 import com.demo.demo0617.common.domain.MemberRepository;
+import com.demo.demo0617.common.domain.Product;
 import com.demo.demo0617.common.dto.MemberDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,13 +11,18 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MemberServiceTest {
@@ -43,12 +49,11 @@ public class MemberServiceTest {
 
         given(memberRepository.save(any())).willReturn(mockMemberDto.toEntity());
 
-
         //when
         Long resultId = memberService.joinUser(mockMemberDto);
 
         //then
-        verify(memberRepository).save(any());
+        then(memberRepository).should().save(any());
         assertThat(mockMemberDto.getId(), is(resultId));
     }
 
@@ -68,7 +73,7 @@ public class MemberServiceTest {
         Member member = memberService.findById(id);
 
         //then
-        verify(memberRepository).findById(id);
+        then(memberRepository).should().findById(id);
         assertThat(member.getId(), is(id));
 
     }
@@ -91,7 +96,7 @@ public class MemberServiceTest {
         Member member = memberService.findByEmail(email);
 
         //then
-        verify(memberRepository).findByEmail(email);
+        then(memberRepository).should().findByEmail(email);
         assertThat(member.getEmail(), is(email));
     }
 
