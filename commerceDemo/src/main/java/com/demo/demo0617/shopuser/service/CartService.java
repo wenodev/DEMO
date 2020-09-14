@@ -3,6 +3,8 @@ package com.demo.demo0617.shopuser.service;
 import com.demo.demo0617.common.domain.Cart;
 import com.demo.demo0617.common.domain.CartRepository;
 import com.demo.demo0617.common.domain.Member;
+import com.demo.demo0617.common.domain.Product;
+import com.demo.demo0617.common.dto.CartDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,20 +19,20 @@ public class CartService {
     private CartRepository cartRepository;
 
     @Transactional
-    public List<Cart> findAll(){
+    public List<Cart> findAll() {
         List<Cart> cartList = cartRepository.findAll();
         return cartList;
     }
 
     @Transactional
-    public Cart findById(Long id){
+    public Cart findById(Long id) {
 
         Optional<Cart> optional = cartRepository.findById(id);
         Cart cart = null;
 
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             cart = optional.get();
-        }else{
+        } else {
             throw new RuntimeException("Cart not found for id : " + id);
         }
         return cart;
@@ -38,8 +40,36 @@ public class CartService {
     }
 
     @Transactional
-    public void saveCart(Cart cart){
-        cartRepository.save(cart);
+    public void saveCart(Member member, Product product, int quantity) {
+
+        // 기존에 카트에 담긴 상품이 있다면 갯수를 추가
+        List<Cart> cartList = findByMember(member);
+        boolean flag = true;
+        for (int i = 0; i < cartList.size(); i++) {
+            if (cartList.get(i).getProduct().getId() == product.getId()) {
+                Cart cart = findById(Long.valueOf(i + 1));
+                cart.setCartQuantity(cart.getCartQuantity() + quantity);
+                cart.setCartPrice(cart.getProduct().getProductPrice() * cart.getCartQuantity());
+                cart.setMember(member);
+                cartRepository.save(cart);
+                flag = false;
+                break;
+            }
+        }
+
+        // 기존에 카트에 담긴 상품이 없음
+        if (flag == true) {
+            Cart cart = Cart.builder()
+                    .cartQuantity(quantity)
+                    .cartPrice(quantity * product.getProductPrice())
+                    .product(product)
+                    .member(member)
+                    .build();
+            cartRepository.save(cart);
+        }
+
+
+
     }
 
     @Transactional

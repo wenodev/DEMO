@@ -40,31 +40,8 @@ public class CartController {
 
         Member member = memberService.findByEmail(principal.getName());
         Product product = productService.findById(id);
-        List<Cart> cartList = cartService.findAll();
 
-        boolean flag = true;
-
-        for (int i = 0; i < cartList.size(); i++) {
-            if (cartList.get(i).getProduct().getId() == product.getId()) {
-                Cart cart = cartService.findById(Long.valueOf(i + 1));
-                cart.setCartQuantity(cart.getCartQuantity() + quantity);
-                cart.setCartPrice(cart.getProduct().getProductPrice() * cart.getCartQuantity());
-                cart.setMember(member);
-                cartService.saveCart(cart);
-                flag = false;
-                break;
-            }
-        }
-
-        if (flag == true) {
-            Cart cart = Cart.builder()
-                    .cartQuantity(quantity)
-                    .cartPrice(quantity * product.getProductPrice())
-                    .product(product)
-                    .member(member)
-                    .build();
-            cartService.saveCart(cart);
-        }
+        cartService.saveCart(member, product, quantity);
 
         return "redirect:/cart";
     }

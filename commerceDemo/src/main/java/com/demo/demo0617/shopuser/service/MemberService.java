@@ -51,8 +51,6 @@ public class MemberService implements UserDetailsService {
     @Transactional
     public Member findByEmail(String name){
 
-        System.out.println(name);
-
         Optional<Member> optional = memberRepository.findByEmail(name);
         Member member = null;
 
