@@ -30,16 +30,6 @@
 <section class="checkout spad">
     <div class="container">
 
-        <!--<div th:each="member : ${member}">-->
-        <!--    <div>-->
-        <!--        <input id="memberId" th:value="${member.id}" hidden/>-->
-        <!--        회원 아이디 :-->
-        <!--        <div th:text="${member.email}" th:value="${member.email}"/>-->
-        <!--        회원 이름 :-->
-        <!--        <div th:text="${member.name}" th:value="${member.name}"/>-->
-        <!--    </div>-->
-        <!--</div>-->
-
         <form action="#" class="checkout__form">
             <div class="row">
                 <div class="col-lg-8">
@@ -153,54 +143,6 @@
     </div>
 </section>
 <!-- Checkout Section End -->
-
-
-<!--<h3>구매자 정보</h3>-->
-<!--<div th:each="member : ${member}">-->
-<!--    <div>-->
-<!--        <input id="memberId" th:value="${member.id}" hidden/>-->
-<!--        회원 아이디 :-->
-<!--        <div th:text="${member.email}" th:value="${member.email}"/>-->
-<!--        회원 이름 :-->
-<!--        <div th:text="${member.name}" th:value="${member.name}"/>-->
-<!--    </div>-->
-<!--</div>-->
-
-<!--<h3>받는사람 정보</h3>-->
-
-<!--<div th:each="address : ${addressList}">-->
-<!--    asdasdasdasd-->
-<!--    <div>-->
-<!--        <input name=addressId type="radio" th:value="${address.id}">-->
-<!--        <div th:text="${address.postalCode}"></div>-->
-<!--        <div th:text="${address.address}"></div>-->
-<!--        <div th:text="${address.addressDetail}"></div>-->
-<!--        <div th:text="${address.comment}"></div>-->
-<!--    </div>-->
-<!--</div>-->
-
-<!--<h3>상품 정보</h3>-->
-<!--<div th:each="product : ${product}">-->
-<!--    <div>-->
-<!--        <input name=productId type="checkbox" th:value="${product.id}">-->
-<!--        <div th:text="${product.productName}"></div>-->
-
-<!--        <div th:switch="${product.imgType}">-->
-<!--            <div th:case="'url'"><img style="width:50px; height:50px;" th:src=" @{ ${product.productUrlImg} }"></div>-->
-<!--            <div th:case="'file'"><img style="width:50px; height:50px;"-->
-<!--                                       th:src=" @{/upload-dir/} + ${product.productFileImg}"></div>-->
-<!--        </div>-->
-
-<!--        <div id="productPrice" th:text="${product.productPrice}" th:value="${product.productPrice}"></div>-->
-<!--        <div id="quantity" th:text="${product.quantity}" th:value="${product.quantity}"></div>-->
-<!--        &lt;!&ndash;        <input name=productId type="text" th:value="${product.id}" hidden>&ndash;&gt;-->
-<!--    </div>-->
-<!--</div>-->
-
-<!--<h3>결제 정보</h3>-->
-
-<!-- Set up a container element for the button -->
-<!--<div id="paypal-button-container"></div>-->
 
 <!-- footer -->
 <div th:insert="/customer/footer"></div>

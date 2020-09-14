@@ -1,19 +1,9 @@
-<!--<div xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">-->
-<!--    <a sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>-->
-<!--    <a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>-->
-<!--    <a sec:authorize="isAnonymous()" th:href="@{/signup}">회원가입</a>-->
-<!--    <a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/info}">내정보</a>-->
-<!--    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">어드민</a>-->
-<!--</div>-->
-
 <!-- Offcanvas Menu Begin -->
 <div class="offcanvas-menu-overlay"></div>
 <div class="offcanvas-menu-wrapper">
     <div class="offcanvas__close">+</div>
     <ul class="offcanvas__widget">
-<!--        <li><span class="icon_search search-switch"></span></li>-->
-<!--        <li><a href="#"><span class="icon_heart_alt"></span><div class="tip">2</div></a></li>-->
-<!--        <li><a href="#"><span class="icon_bag_alt"></span></a></li>-->
+
     </ul>
     <div class="offcanvas__logo">
         <a href="index.html"><img src="/img/logo.png" alt=""></a>
@@ -41,28 +31,14 @@
 
             <div class="col-xl-6 col-lg-7">
                 <nav class="header__menu">
-<!--                    <ul>-->
-<!--                        <li class="active"><a href="./index.html">Home</a></li>-->
-<!--                        <li><a href="#">Women’s</a></li>-->
-<!--                        <li><a href="#">Men’s</a></li>-->
-<!--                        <li><a href="./shop.html">Shop</a></li>-->
-<!--                        <li><a href="#">Pages</a>-->
-<!--                            <ul class="dropdown">-->
-<!--                                <li><a href="./product-details.html">Product Details</a></li>-->
-<!--                                <li><a href="./shop-cart.html">Shop Cart</a></li>-->
-<!--                                <li><a href="./checkout.html">Checkout</a></li>-->
-<!--                                <li><a href="./blog-details.html">Blog Details</a></li>-->
-<!--                            </ul>-->
-<!--                        </li>-->
-<!--                        <li><a href="./blog.html">Blog</a></li>-->
-<!--                        <li><a href="./contact.html">Contact</a></li>-->
-<!--                    </ul>-->
+
                 </nav>
             </div>
 
             <div class="col-lg-3">
                 <div class="header__right">
-                    <div class="header__right__auth" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+                    <div class="header__right__auth" xmlns:sec="http://www.w3.org/1999/xhtml"
+                         xmlns:th="http://www.w3.org/1999/xhtml">
                         <a sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
                         <a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
                         <a sec:authorize="isAnonymous()" th:href="@{/signup}">회원가입</a>
@@ -70,9 +46,7 @@
                         <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">어드민</a>
                     </div>
                     <ul class="header__right__widget">
-<!--                        <li><span class="icon_search search-switch"></span></li>-->
-<!--                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>-->
-<!--                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>-->
+
                     </ul>
                 </div>
             </div>
