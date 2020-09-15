@@ -41,21 +41,22 @@ public class ProductDto {
                 .build();
     }
 
-    @Builder
-    public ProductDto(Long id, String productCode, String productName, float productPrice, int quantity, String productFileImg, String productUrlImg, String imgType, String productDescription, Category category, LocalDateTime createdDate, LocalDateTime modifiedDate){
-        this.id = id;
-        this.productCode = productCode;
-        this.productName = productName;
-        this.productPrice = productPrice;
-        this.quantity = quantity;
-        this.productFileImg = productFileImg;
-        this.productUrlImg = productUrlImg;
-        this.imgType = imgType;
-        this.productDescription = productDescription;
-        this.category = category;
-        this.createdDate = createdDate;
-        this.modifiedDate = modifiedDate;
-    }
+
+@Builder
+public ProductDto(Product product){
+    this.id = product.getId();
+    this.productCode = product.getProductCode();
+    this.productName = product.getProductName();
+    this.productPrice = product.getProductPrice();
+    this.quantity = product.getQuantity();
+    this.productFileImg = product.getProductFileImg();
+    this.productUrlImg = product.getProductUrlImg();
+    this.imgType = product.getImgType();
+    this.productDescription = product.getProductDescription();
+    this.category = product.getCategory();
+    this.createdDate = product.getCreatedDate();
+    this.modifiedDate = product.getModifiedDate();
+}
 
 
 

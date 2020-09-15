@@ -27,6 +27,7 @@ public class MemberService implements UserDetailsService {
 
     @Transactional
     public Long joinUser(MemberDto memberDto) {
+
         // 비밀번호 암호화
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
@@ -35,7 +36,7 @@ public class MemberService implements UserDetailsService {
     }
 
     @Transactional
-    public Member findById(Long id){
+    public MemberDto findById(Long id){
 
         Optional<Member> optional = memberRepository.findById(id);
         Member member = null;
@@ -45,11 +46,12 @@ public class MemberService implements UserDetailsService {
         }else{
             throw new RuntimeException("Member not found for id : " + id);
         }
-        return member;
+
+        return MemberDto.builder().member(member).build();
     }
 
     @Transactional
-    public Member findByEmail(String name){
+    public MemberDto findByEmail(String name){
 
         Optional<Member> optional = memberRepository.findByEmail(name);
         Member member = null;
@@ -60,7 +62,7 @@ public class MemberService implements UserDetailsService {
             throw new RuntimeException("Member not found for name : " + name);
         }
 
-        return member;
+        return MemberDto.builder().member(member).build();
     }
 
     @Override

@@ -27,13 +27,25 @@ public class MemberDto {
                 .build();
     }
 
+
     @Builder
-    public MemberDto(Long id, String email, String password, String name, LocalDateTime createdDate, LocalDateTime modifiedDate ) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.createdDate = createdDate;
-        this.modifiedDate = modifiedDate;
+    public MemberDto(Member member) {
+        this.id = member.getId();
+        this.email = member.getEmail();
+        this.password = member.getPassword();
+        this.name = member.getName();
+        this.createdDate = member.getCreatedDate();
+        this.modifiedDate = member.getModifiedDate();
     }
+
+
+//    @Builder
+//    public MemberDto(Long id, String email, String password, String name, LocalDateTime createdDate, LocalDateTime modifiedDate ) {
+//        this.id = id;
+//        this.email = email;
+//        this.password = password;
+//        this.name = name;
+//        this.createdDate = createdDate;
+//        this.modifiedDate = modifiedDate;
+//    }
 }

@@ -18,12 +18,12 @@ public class AddressService {
     private AddressRepository addressRepository;
 
     @Transactional
-    public Address saveAddress(AddressDto addressDto) {
-        return addressRepository.save(addressDto.toEntity());
+    public void saveAddress(AddressDto addressDto) {
+        addressRepository.save(addressDto.toEntity());
     }
 
     @Transactional
-    public Address findById(Long id){
+    public AddressDto findById(Long id){
         Optional<Address> optional = addressRepository.findById(id);
         Address address = null;
         if (optional.isPresent()){
@@ -31,7 +31,7 @@ public class AddressService {
         }else{
             throw new RuntimeException("Address not found for id : " + id);
         }
-        return address;
+        return AddressDto.builder().address(address).build();
     }
 
     @Transactional

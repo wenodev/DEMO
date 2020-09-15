@@ -28,7 +28,7 @@ public class ProductService {
     }
 
     @Transactional
-    public Product findById(Long id) {
+    public ProductDto findById(Long id) {
 
         Optional<Product> optional = productRepository.findById(id);
         Product product = null;
@@ -38,7 +38,7 @@ public class ProductService {
         }else{
             throw new RuntimeException("Product not found for id : " + id);
         }
-        return product;
+        return ProductDto.builder().product(product).build();
     }
 
     @Transactional

@@ -4,6 +4,8 @@ import com.demo.demo0617.common.domain.Address;
 import com.demo.demo0617.common.domain.Member;
 import com.demo.demo0617.common.domain.Orders;
 import com.demo.demo0617.common.domain.Product;
+import com.demo.demo0617.common.dto.OrdersDto;
+import com.demo.demo0617.common.dto.ProductDto;
 import com.demo.demo0617.shopadmin.service.ProductService;
 import com.demo.demo0617.shopuser.service.AddressService;
 import com.demo.demo0617.shopuser.service.MemberService;
@@ -26,6 +28,7 @@ public class OrderController {
     private AddressService addressService;
     private OrderService orderService;
 
+    //카트페이지에서 주문페이지 이동
     @PostMapping("/orderFromCart")
     public String orderFromCart(
             Principal principal, Model model,
@@ -67,67 +70,49 @@ public class OrderController {
         return "/customer/order";
     }
 
+    //상품페이지에서 주문페이지 이동
     @PostMapping("/order/{id}")
-    public String orderById(Principal principal, Model model, @PathVariable Long id, int quantity) {
+    public String orderById(Principal principal, Model model, @PathVariable Long productId, int productQuantity) {
 
-        System.out.println("id : " + id);
-        System.out.println("quantity : " + quantity);
-
-        Product productDto = productService.findById(id);
-        float subTotal = 0;
-
-        Orders orders = Orders.builder()
-                .quantity(quantity)
-                .totalPrice(productDto.getProductPrice() * quantity)
-                .product(productDto)
-                .build();
-
+        OrdersDto ordersDto = orderService.readyForOrder(productId, productQuantity);
         Member member = memberService.findByEmail(principal.getName());
         List<Address> address = addressService.findByMemberId(member.getId());
-        subTotal = orders.getTotalPrice();
 
         model.addAttribute("member", member);
         model.addAttribute("addressList", address);
-        model.addAttribute("orderList", orders);
-        model.addAttribute("subTotal", subTotal);
-        model.addAttribute("sumOfQuantity", quantity);
-
+        model.addAttribute("orderList", ordersDto);
+        model.addAttribute("subTotal", ordersDto.getTotalPrice());
+        model.addAttribute("sumOfQuantity", productQuantity);
 
         return "/customer/order";
     }
 
 
+    //paypal 완료 후 처리
     @PostMapping("/order")
-    public String saveOrder(@RequestParam(value="quantity[]", required=true) List<Integer> quantity, @RequestParam(value="totalPrice[]", required=true)  List<Float> totalPrice, Long memberId, Long addressId, @RequestParam(value="productId[]", required=true) List<Long> productId){
+    public String saveOrder( @RequestParam(value="productId[]", required=true) List<Long> productId,  @RequestParam(value="quantity[]", required=true) List<Integer> quantity, @RequestParam(value="totalPrice[]", required=true)  List<Float> totalPrice, Long memberId, Long addressId){
 
+        orderService.saveOrders(productId, quantity, totalPrice, memberId, addressId);
 
-        System.out.println("saveOrderController memberId : " + memberId);
 
         Member member = memberService.findById(memberId);
         Address address = addressService.findById(addressId);
 
-        int orderNumber = makeRandom();
 
         for(int i=0; i<productId.size(); i++){
-            Product product = productService.findById(productId.get(i));
-            Orders order = Orders.builder()
+            ProductDto productDto = productService.findById(productId.get(i));
+            OrdersDto orderDto = OrdersDto.builder()
                     .orderNumber("order-" + orderNumber)
                     .quantity(quantity.get(i))
                     .totalPrice(totalPrice.get(i))
                     .member(member)
-                    .product(product)
+                    .product(productDto.toEntity())
                     .address(address)
                     .build();
             orderService.saveOrder(order);
         }
         return "/customer/order-complete";
     }
-
-    //주문번호 생성
-    public int makeRandom(){
-        return (int)(Math.random()*1000000000) % 10000;
-    }
-
 
 
 

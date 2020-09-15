@@ -32,16 +32,30 @@ public class AddressDto {
                 .build();
     }
 
+
     @Builder
-    public AddressDto(Long id, String postalCode, String address, String addressDetail, String comment, String addressMemberName, Member member){
-        this.id = id;
-        this.postalCode = postalCode;
-        this.address = address;
-        this.addressDetail = addressDetail;
-        this.comment = comment;
-        this.addressMemberName = addressMemberName;
-        this.member = member;
+    public AddressDto(Address address){
+        this.id = address.getId();
+        this.postalCode = address.getPostalCode();
+        this.address = address.getAddress();
+        this.addressDetail = address.getAddressDetail();
+        this.comment = address.getComment();
+        this.addressMemberName =address.getAddressMemberName();
+        this.member = address.getMember();
     }
+
+
+
+//    @Builder
+//    public AddressDto(Long id, String postalCode, String address, String addressDetail, String comment, String addressMemberName, Member member){
+//        this.id = id;
+//        this.postalCode = postalCode;
+//        this.address = address;
+//        this.addressDetail = addressDetail;
+//        this.comment = comment;
+//        this.addressMemberName = addressMemberName;
+//        this.member = member;
+//    }
 
 
 
