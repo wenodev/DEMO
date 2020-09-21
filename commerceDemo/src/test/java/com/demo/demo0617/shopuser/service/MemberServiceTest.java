@@ -39,10 +39,17 @@ public class MemberServiceTest {
 
         //given
         Long id = 1L;
-        MemberDto mockMemberDto = MemberDto.builder()
+        Member member = Member.builder()
                 .id(id)
                 .password("pwd1")
                 .build();
+
+
+        MemberDto mockMemberDto = MemberDto.builder()
+                .member(member)
+                .build();
+
+
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         mockMemberDto.setPassword(passwordEncoder.encode(mockMemberDto.getPassword()));;
@@ -70,14 +77,13 @@ public class MemberServiceTest {
         given(memberRepository.findById(id)).willReturn(Optional.of(mockMember));
 
         //when
-        Member member = memberService.findById(id);
+        MemberDto memberDto = memberService.findById(id);
 
         //then
         then(memberRepository).should().findById(id);
-        assertThat(member.getId(), is(id));
+        assertThat(memberDto.getId(), is(id));
 
     }
-
 
 
     //회원 email로 찾기
@@ -93,11 +99,11 @@ public class MemberServiceTest {
         given(memberRepository.findByEmail(email)).willReturn(Optional.of(mockMember));
 
         //when
-        Member member = memberService.findByEmail(email);
+        MemberDto memberDto = memberService.findByEmail(email);
 
         //then
         then(memberRepository).should().findByEmail(email);
-        assertThat(member.getEmail(), is(email));
+        assertThat(memberDto.getEmail(), is(email));
     }
 
 }

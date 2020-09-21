@@ -3,6 +3,7 @@ package com.demo.demo0617.shopuser.controller;
 import com.demo.demo0617.common.domain.Address;
 import com.demo.demo0617.common.domain.Member;
 import com.demo.demo0617.common.dto.AddressDto;
+import com.demo.demo0617.common.dto.MemberDto;
 import com.demo.demo0617.shopuser.service.AddressService;
 import com.demo.demo0617.shopuser.service.MemberService;
 import lombok.AllArgsConstructor;
@@ -40,8 +41,8 @@ public class AddressController {
     @PostMapping("/address")
     public @ResponseBody AddressDto savePost(@RequestBody AddressDto addressDto, Principal principal){
 
-        Member member = memberService.findByEmail(principal.getName());
-        addressDto.setMember(member);
+        MemberDto memberDto = memberService.findByEmail(principal.getName());
+        addressDto.setMember(memberDto.toEntity());
 
         addressService.saveAddress(addressDto);
 

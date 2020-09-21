@@ -1,5 +1,6 @@
 package com.demo.demo0617.shopuser.controller;
 
+import com.demo.demo0617.common.domain.Member;
 import com.demo.demo0617.common.dto.MemberDto;
 import com.demo.demo0617.shopuser.service.MemberService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -50,9 +51,13 @@ public class MemberControllerTest {
     public void signUpTest() throws Exception {
 
         //given
-        MemberDto memberDto = MemberDto.builder()
+        Member member = Member.builder()
                 .id(11L)
                 .email("test@email.com")
+                .build();
+        
+        MemberDto memberDto = MemberDto.builder()
+                .member(member)
                 .build();
 
         //when

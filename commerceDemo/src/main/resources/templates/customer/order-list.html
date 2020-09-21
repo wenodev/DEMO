@@ -17,20 +17,20 @@
         <table class="table" th:each="order : ${ordersList}">
             <thead>
             <tr>
-                <th scope="col" >날짜</th>
-                <th scope="col" >주문번호</th>
-                <th scope="col" >상품명</th>
+                <th scope="col">날짜</th>
+                <th scope="col">주문번호</th>
+                <th scope="col">상품명</th>
                 <th scope="col">갯수</th>
                 <th scope="col">금액</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <th scope="row" th:text="${#temporals.format(order.createdDate,'yyyy/MM/dd')}"></th>
+                <th scope="row" th:text="${#temporals.format(order.createdDate,'yyyy/MM/dd/HH:MM')}"></th>
                 <td th:text="${order.orderNumber}"></td>
-                <td th:text="${order.product.productName}" ></td>
-                <td th:text="${order.product.quantity}"></td>
-                <td th:text="${order.totalPrice}" ></td>
+                <td th:text="${order.product.productName}"></td>
+                <td th:text="${order.quantity}"></td>
+                <td th:text="${order.totalPrice}"></td>
             </tr>
             </tbody>
         </table>

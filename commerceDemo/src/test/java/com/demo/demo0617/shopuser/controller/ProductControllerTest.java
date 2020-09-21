@@ -1,6 +1,7 @@
 package com.demo.demo0617.shopuser.controller;
 
 import com.demo.demo0617.common.domain.Product;
+import com.demo.demo0617.common.dto.ProductDto;
 import com.demo.demo0617.shopadmin.service.ProductService;
 import org.junit.Before;
 import org.junit.Test;
@@ -69,7 +70,12 @@ public class ProductControllerTest {
                 .id(id)
                 .build();
 
-        given(productService.findById(id)).willReturn(mockProduct);
+        ProductDto mockProductDto = ProductDto.builder()
+                .product(mockProduct)
+                .build();
+
+
+        given(productService.findById(id)).willReturn(mockProductDto);
 
         //when
         mockMvc.perform(get("/product/" + id))

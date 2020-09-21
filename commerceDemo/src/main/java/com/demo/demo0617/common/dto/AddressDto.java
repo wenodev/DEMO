@@ -45,19 +45,4 @@ public class AddressDto {
     }
 
 
-
-//    @Builder
-//    public AddressDto(Long id, String postalCode, String address, String addressDetail, String comment, String addressMemberName, Member member){
-//        this.id = id;
-//        this.postalCode = postalCode;
-//        this.address = address;
-//        this.addressDetail = addressDetail;
-//        this.comment = comment;
-//        this.addressMemberName = addressMemberName;
-//        this.member = member;
-//    }
-
-
-
-
 }

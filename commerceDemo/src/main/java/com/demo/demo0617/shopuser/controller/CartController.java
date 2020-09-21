@@ -3,6 +3,8 @@ package com.demo.demo0617.shopuser.controller;
 import com.demo.demo0617.common.domain.Cart;
 import com.demo.demo0617.common.domain.Member;
 import com.demo.demo0617.common.domain.Product;
+import com.demo.demo0617.common.dto.MemberDto;
+import com.demo.demo0617.common.dto.ProductDto;
 import com.demo.demo0617.shopadmin.service.ProductService;
 import com.demo.demo0617.shopuser.service.CartService;
 import com.demo.demo0617.shopuser.service.MemberService;
@@ -27,8 +29,10 @@ public class CartController {
     @GetMapping("/cart")
     public String cartPage(Model model, Principal principal) {
 
-        Member member = memberService.findByEmail(principal.getName());
-        List<Cart> cartList = cartService.findByMember(member);
+        MemberDto memberDto = memberService.findByEmail(principal.getName());
+
+
+        List<Cart> cartList = cartService.findByMember(memberDto.toEntity());
 
         model.addAttribute("cartList", cartList);
 
@@ -36,12 +40,12 @@ public class CartController {
     }
 
     @PostMapping("/cart")
-    public String saveCart(Long id, int quantity, Principal principal) {
+    public String saveCart(Long productId, int productQuantity, Principal principal) {
 
-        Member member = memberService.findByEmail(principal.getName());
-        Product product = productService.findById(id);
+        MemberDto memberDto = memberService.findByEmail(principal.getName());
+        ProductDto productDto = productService.findById(productId);
 
-        cartService.saveCart(member, product, quantity);
+        cartService.saveCart(memberDto.toEntity(), productDto.toEntity(), productQuantity);
 
         return "redirect:/cart";
     }

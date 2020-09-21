@@ -17,7 +17,6 @@ public class MemberDto {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-
     public Member toEntity(){
         return Member.builder()
                 .id(id)
@@ -26,7 +25,6 @@ public class MemberDto {
                 .name(name)
                 .build();
     }
-
 
     @Builder
     public MemberDto(Member member) {
@@ -38,14 +36,4 @@ public class MemberDto {
         this.modifiedDate = member.getModifiedDate();
     }
 
-
-//    @Builder
-//    public MemberDto(Long id, String email, String password, String name, LocalDateTime createdDate, LocalDateTime modifiedDate ) {
-//        this.id = id;
-//        this.email = email;
-//        this.password = password;
-//        this.name = name;
-//        this.createdDate = createdDate;
-//        this.modifiedDate = modifiedDate;
-//    }
 }

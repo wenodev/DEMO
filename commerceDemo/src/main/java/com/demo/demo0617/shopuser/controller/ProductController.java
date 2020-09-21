@@ -1,6 +1,7 @@
 package com.demo.demo0617.shopuser.controller;
 
 import com.demo.demo0617.common.domain.Product;
+import com.demo.demo0617.common.dto.ProductDto;
 import com.demo.demo0617.shopadmin.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -25,8 +26,8 @@ public class ProductController {
 
     @GetMapping("/product/{id}")
     public String productById(Model model, @PathVariable Long id) {
-        Product product = productService.findById(id);
-        model.addAttribute("product", product);
+        ProductDto productDto = productService.findById(id);
+        model.addAttribute("product", productDto);
         return "/customer/product";
     }
 

@@ -1,6 +1,8 @@
 package com.demo.demo0617.shopadmin.controller;
 
 import com.demo.demo0617.common.domain.Category;
+import com.demo.demo0617.common.domain.Product;
+import com.demo.demo0617.common.dto.CategoryDto;
 import com.demo.demo0617.common.dto.ProductDto;
 import com.demo.demo0617.config.storage.StorageService;
 import com.demo.demo0617.shopadmin.service.CategoryService;
@@ -29,7 +31,7 @@ public class ProductAdminController {
 
         Category category = categoryService.findById(categoryId);
 
-        ProductDto productDto = ProductDto.builder()
+        Product product = Product.builder()
                 .category(category)
                 .productCode(productCode)
                 .productName(productName)
@@ -39,6 +41,12 @@ public class ProductAdminController {
                 .productUrlImg(productUrlImg)
                 .imgType(imgType)
                 .build();
+
+        ProductDto productDto = ProductDto.builder()
+                .product(product)
+                .build();
+
+
         if(imgType.equals("url")){
             productDto.setProductFileImg(null);
         }else{

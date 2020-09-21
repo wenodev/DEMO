@@ -23,6 +23,12 @@ public class AddressService {
     }
 
     @Transactional
+    public void saveAll(List<Address> addressList){
+        addressRepository.saveAll(addressList);
+    }
+
+
+    @Transactional
     public AddressDto findById(Long id){
         Optional<Address> optional = addressRepository.findById(id);
         Address address = null;
