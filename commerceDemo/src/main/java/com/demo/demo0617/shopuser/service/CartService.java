@@ -1,7 +1,9 @@
 package com.demo.demo0617.shopuser.service;
 
-import com.demo.demo0617.common.domain.*;
-import com.demo.demo0617.common.dto.CartDto;
+import com.demo.demo0617.common.domain.Cart;
+import com.demo.demo0617.common.domain.CartRepository;
+import com.demo.demo0617.common.domain.Member;
+import com.demo.demo0617.common.domain.Product;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,8 +66,6 @@ public class CartService {
                     .build();
             cartRepository.save(cart);
         }
-
-
 
     }
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -15,10 +16,27 @@ import java.util.Optional;
 public class ProductService {
 
     private ProductRepository productRepository;
+    private CategoryService categoryService;
 
     @Transactional
-    public Long saveProduct(ProductDto productDto){
-        return productRepository.save(productDto.toEntity()).getId();
+    public void saveProduct(Map<String, Object> productDtoIntegerMap){
+
+
+        for (Map.Entry<String, Object> entry : productDtoIntegerMap.entrySet()){
+            System.out.println("KEY : " + entry.getKey());
+            System.out.println("VALUE : " + entry.getValue());
+        }
+
+        Long categoryId = Long.valueOf((String) productDtoIntegerMap.get("categoryId"));
+        System.out.println(categoryId);
+
+
+        Object productDtoTemp = productDtoIntegerMap.get("productDto");
+        ProductDto productDto = (ProductDto) productDtoTemp;
+
+        System.out.println(productDto);
+
+
     }
 
     @Transactional

@@ -97,7 +97,6 @@ public class adminUser implements CommandLineRunner {
                     .productCode("Product-code" + i)
                     .productPrice(1000 + i)
                     .productName("Product" + i)
-                    .imgType("url")
                     .quantity(100 + i)
                     .category(category)
                     .productDescription("Product-Description" + i)
@@ -108,7 +107,7 @@ public class adminUser implements CommandLineRunner {
                     .product(product)
                     .build();
 
-            productService.saveProduct(productDto);
+//            productService.saveProduct(productDto.toEntity());
         }
 
     }

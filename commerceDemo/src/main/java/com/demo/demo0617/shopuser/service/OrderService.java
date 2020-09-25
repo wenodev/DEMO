@@ -1,6 +1,7 @@
 package com.demo.demo0617.shopuser.service;
 
-import com.demo.demo0617.common.domain.*;
+import com.demo.demo0617.common.domain.OrderRepository;
+import com.demo.demo0617.common.domain.Orders;
 import com.demo.demo0617.common.dto.AddressDto;
 import com.demo.demo0617.common.dto.MemberDto;
 import com.demo.demo0617.common.dto.OrdersDto;
@@ -12,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @AllArgsConstructor
 @Service
@@ -115,10 +115,6 @@ public class OrderService {
 
 
 
-
-
-
-
     @Transactional
     public List<Orders> findAll(){
         return orderRepository.findAll();
@@ -130,12 +126,9 @@ public class OrderService {
         return orderList.size();
     }
 
-
     //주문번호 생성
     public int makeRandom(){
         return (int)(Math.random()*1000000000) % 10000;
     }
-
-
 
 }

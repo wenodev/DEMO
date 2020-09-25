@@ -30,13 +30,7 @@ public class Product extends TimeEntity {
     private int quantity;
 
     @Column
-    private String productFileImg;
-
-    @Column
     private String productUrlImg;
-
-    @Column
-    private String imgType;
 
     @Column
     private String productDescription;
@@ -46,16 +40,14 @@ public class Product extends TimeEntity {
     private Category category;
 
     @Builder
-    public Product(Long id, String productCode, String productName, float productPrice, int quantity, String productFileImg,
-                   String productUrlImg, String imgType, String productDescription, Category category){
+    public Product(Long id, String productCode, String productName, float productPrice, int quantity,
+                   String productUrlImg, String productDescription, Category category){
         this.id = id;
         this.productCode = productCode;
         this.productName = productName;
         this.productPrice = productPrice;
         this.quantity = quantity;
-        this.productFileImg = productFileImg;
         this.productUrlImg = productUrlImg;
-        this.imgType = imgType;
         this.productDescription = productDescription;
         this.category = category;
     }

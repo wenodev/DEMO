@@ -72,53 +72,61 @@
 <div th:insert="/admin/nav"></div>
 <div th:insert="/admin/product-nav"></div>
 
-<form th:action="@{/admin/product-register}" method="post" enctype="multipart/form-data">
-    <div id="container">
-        <ul class="tabs">
-            <li class="active"  rel="tab1">
-                <input type="radio" name="imgType" value="file">파일 업로드 등록
-            </li>
-            <li rel="tab2">
-                <input type="radio" name="imgType" value="url"> url 등록
-            </li>
-        </ul>
-        <div class="tab_container">
-            <div id="tab1" class="tab_content">
-                <div>File to upload : <input type="file" name="file"/></div>
-            </div>
-            <div id="tab2" class="tab_content">
-                <input type="text" name="productUrlImg" placeholder="이미지 주소"/>
-            </div>
+
+<div id="container">
+    <div class="tab_container">
+        <div id="tab2" class="tab_content">
+            <input id="productUrlImg" type="text" placeholder="이미지 주소"/>
         </div>
     </div>
+</div>
 
-    <div id="rest" >
-        <select name="categoryId" >
-            <option th:each="category : ${categoryList}" th:value="${category.id}" th:text="${category.categoryName}">
-        </select>
-        <input type="text" name="productCode" placeholder="상품코드">
-        <input type="text" name="productName" placeholder="상품이름">
-        <input type="text" name="productPrice" placeholder="상품가격">
-        <input type="text" name="quantity" placeholder="재고">
-    </div>
-    <button type="submit">상품등록</button>
-</form>
+<div id="rest">
+    <select id="categoryId" name="categoryId">
+        <option th:each="category : ${categoryList}" th:value="${category.id}" th:text="${category.categoryName}">
+    </select>
+    <input type="text" id="productCode" placeholder="상품코드">
+    <input type="text" id="productName" placeholder="상품이름">
+    <input type="text" id="productPrice" placeholder="상품가격">
+    <input type="text" id="quantity" placeholder="재고">
+</div>
+<button id="btn-save" type="submit">상품등록</button>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script>
-    $(function () {
-        $(".tab_content").hide();
-        $(".tab_content:first").show();
 
-        $("ul.tabs li").click(function () {
-            $("ul.tabs li").removeClass("active").css("color", "#333");
-            //$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
-            $(this).addClass("active").css("color", "darkred");
-            $(".tab_content").hide()
-            var activeTab = $(this).attr("rel");
-            $("#" + activeTab).fadeIn()
-        });
-    });
+<script>
+    var index = {
+        init: function () {
+            var _this = this;
+            $('#btn-save').on('click', function () {
+                _this.save();
+            });
+        },
+
+        save: function () {
+            var data = {
+                productUrlImg: $('#productUrlImg').val(),
+                productCode: $('#productCode').val(),
+                productName: $('#productName').val(),
+                productPrice: $('#productPrice').val(),
+                quantity: $('#quantity').val(),
+            };
+            $.ajax({
+                type: 'post',
+                url: '/admin/product-register',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function () {
+                alert('등록완료');
+                window.location.href = '/info';
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            })
+        }
+    };
+    index.init();
 </script>
 
 </body>

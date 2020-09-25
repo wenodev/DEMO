@@ -33,22 +33,9 @@ public class AdminController {
         return "/admin/index";
     }
 
-    // 상품 리스트 페이지
-    @GetMapping("/admin/product-list")
-    public String productList(Model model) {
 
-        List<Product> productList = productService.findAll();
-        model.addAttribute("productList", productList);
-        model.addAttribute("categoryList", categoryService.findAll());
-        return "/admin/product-list";
-    }
 
-    // 상품 등록 페이지
-    @GetMapping("/admin/product-register")
-    public String productRegister(Model model) {
-        model.addAttribute("categoryList", categoryService.findAll());
-        return "/admin/product-register";
-    }
+
 
     //주문 내역 페이지
     @GetMapping("/admin/order-list")

@@ -35,35 +35,31 @@
                 <div class="product__details__pic">
                     <div class="product__details__pic__left product__thumb nice-scroll">
                         <a class="pt active" href="#product-1">
-                            <div th:switch="${product.imgType}">
-                                <div th:case="'url'"><img
-                                        th:src=" @{ ${product.productUrlImg} }"></div>
-                                <div th:case="'file'"><img
-                                        th:src=" @{/upload-dir/} + ${product.productFileImg}"></div>
+                            <div>
+                                <div>
+                                    <img th:src="${product.productUrlImg}">
+                                </div>
                             </div>
                         </a>
                         <a class="pt" href="#product-2">
-                            <div th:switch="${product.imgType}">
-                                <div th:case="'url'"><img
-                                        th:src=" @{ ${product.productUrlImg} }"></div>
-                                <div th:case="'file'"><img
-                                        th:src=" @{/upload-dir/} + ${product.productFileImg}"></div>
+                            <div>
+                                <div>
+                                    <img th:src="${product.productUrlImg}">
+                                </div>
                             </div>
                         </a>
                         <a class="pt" href="#product-3">
-                            <div th:switch="${product.imgType}">
-                                <div th:case="'url'"><img
-                                        th:src=" @{ ${product.productUrlImg} }"></div>
-                                <div th:case="'file'"><img
-                                        th:src=" @{/upload-dir/} + ${product.productFileImg}"></div>
+                            <div>
+                                <div>
+                                    <img th:src="${product.productUrlImg}">
+                                </div>
                             </div>
                         </a>
                         <a class="pt" href="#product-4">
-                            <div th:switch="${product.imgType}">
-                                <div th:case="'url'"><img
-                                        th:src=" @{ ${product.productUrlImg} }"></div>
-                                <div th:case="'file'"><img
-                                        th:src=" @{/upload-dir/} + ${product.productFileImg}"></div>
+                            <div>
+                                <div>
+                                    <img th:src="${product.productUrlImg}">
+                                </div>
                             </div>
                         </a>
                     </div>

@@ -60,9 +60,8 @@
                 <div class="product__item">
                     <!--                    <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">-->
                     <a th:href="@{/product/} + ${product.id}">
-                        <div class="product__item__pic set-bg" th:switch="${product.imgType}">
-                            <div th:case="'url'"><img th:src=" @{ ${product.productUrlImg} }"></div>
-<!--                            <div th:case="'file'"><img th:src=" @{/upload-dir/} + ${product.productFileImg}"></div>-->
+                        <div class="product__item__pic set-bg" >
+                            <div><img th:src=" @{ ${product.productUrlImg} }"></div>
                         </div>
                     </a>
 

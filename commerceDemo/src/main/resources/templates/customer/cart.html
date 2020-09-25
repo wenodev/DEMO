@@ -46,12 +46,9 @@
                             <tr th:each="cart : ${cartList}">
                                 <input type="text" name="id" th:value="${cart.product.id}" hidden>
                                 <td class="cart__product__item">
-                                    <div th:switch="${cart.product.imgType}">
-                                        <div th:case="'url'"><img style="width: 90px; height: 90px;"
-                                                                  th:src=" @{ ${cart.product.productUrlImg} }">
-                                        </div>
-                                        <div th:case="'file'"><img style="width: 90px; height: 90px;"
-                                                                   th:src=" @{/upload-dir/} + ${cart.product.productFileImg}">
+                                    <div>
+                                        <div>
+                                            <img style="width: 90px; height: 90px;" th:src=" ${cart.product.productUrlImg}">
                                         </div>
                                     </div>
                                     <div class="cart__product__item__title">

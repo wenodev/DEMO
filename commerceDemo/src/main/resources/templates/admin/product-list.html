@@ -30,12 +30,11 @@
                 </tr>
                 <tr th:each="product : ${productList}">
                     <td th:text="${product.id}"></td>
-                    <div th:switch="${product.imgType}">
-                        <td th:case="'url'"><img style="width:50px; height:50px;"
-                                                 th:src=" @{ ${product.productUrlImg} }"></td>
-                        <td th:case="'file'"><img style="width:50px; height:50px;"
-                                                  th:src=" @{/upload-dir/} + ${product.productFileImg}"></td>
-                    </div>
+                    <td>
+                        <div>
+                            <img style="width:50px; height:50px;" th:src="${product.productUrlImg}">
+                        </div>
+                    </td>
                     <td th:text="${product.productCode}"></td>
                     <td th:text="${product.productName}"></td>
                     <td th:text="${product.productPrice}"></td>
@@ -45,73 +44,100 @@
         </div>
 
         <div class="tab-pane fade container" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <form th:action="@{/admin/product-register}" method="post" enctype="multipart/form-data">
 
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">카테고리</label>
+                </div>
+                <select class="custom-select" id="categoryId">
+                    <option selected>Choose Category</option>
+                    <option th:each="category : ${categoryList}" th:value="${category.id}"
+                            th:text="${category.categoryName}">
+                </select>
+            </div>
 
+            <div id="container">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <label class="input-group-text">카테고리</label>
+                        <span class="input-group-text">상품코드</span>
                     </div>
-                    <select class="custom-select" name="categoryId">
-                        <option selected>Choose Category</option>
-                        <option th:each="category : ${categoryList}" th:value="${category.id}"
-                                th:text="${category.categoryName}">
-
-                    </select>
+                    <input type="text" id="productCode" class="form-control" aria-label="Sizing example input"
+                           aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">상품이름</span>
+                    </div>
+                    <input type="text" id="productName" class="form-control" aria-label="Sizing example input"
+                           aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">가격</span>
+                    </div>
+                    <input type="text" id="productPrice" class="form-control" aria-label="Sizing example input"
+                           aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">재고</span>
+                    </div>
+                    <input type="text" id="quantity" class="form-control" aria-label="Sizing example input"
+                           aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">이미지</span>
+                    </div>
+                    <input type="text" id="productUrlImg" class="form-control" placeholder="url 입력"
+                           aria-label="Sizing example input"
+                           aria-describedby="inputGroup-sizing-default">
                 </div>
 
-                <div style="display: none">
-                    <input type="radio" name="imgType" value="file">파일 업로드 등록
-                    <input type="file" name="file"/>
-                    <input type="radio" name="imgType" value="url" checked> url 등록
-                </div>
-
-                <div id="container">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">상품코드</span>
-                        </div>
-                        <input type="text" name="productCode" class="form-control" aria-label="Sizing example input"
-                               aria-describedby="inputGroup-sizing-default">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">상품이름</span>
-                        </div>
-                        <input type="text" name="productName" class="form-control" aria-label="Sizing example input"
-                               aria-describedby="inputGroup-sizing-default">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">가격</span>
-                        </div>
-                        <input type="text" name="productPrice" class="form-control" aria-label="Sizing example input"
-                               aria-describedby="inputGroup-sizing-default">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">재고</span>
-                        </div>
-                        <input type="text" name="quantity" class="form-control" aria-label="Sizing example input"
-                               aria-describedby="inputGroup-sizing-default">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">이미지</span>
-                        </div>
-                        <input type="text" name="productUrlImg" class="form-control" placeholder="url 입력"
-                               aria-label="Sizing example input"
-                               aria-describedby="inputGroup-sizing-default">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">등록</button>
-                </div>
-            </form>
+                <button id="btn-save" class="btn btn-primary btn-lg btn-block">등록</button>
+            </div>
         </div>
     </div>
 </div>
 
 <div th:insert="/admin/footer"></div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+
+    $('#btn-save').click(function () {
+
+        var data = {
+            categoryId : $('#categoryId').val(),
+
+            productDto : {
+                productCode: $('#productCode').val(),
+                productName: $('#productName').val(),
+                productPrice: $('#productPrice').val(),
+                quantity: $('#quantity').val(),
+                productUrlImg: $('#productUrlImg').val()
+            }
+
+        };
+
+        $.ajax({
+            type: 'post',
+            url: '/admin/product-list',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function () {
+            alert('등록완료');
+            window.location.href = '/admin/product-list';
+        }).fail(function (error) {
+            console.log(JSON.stringify(error));
+            alert(JSON.stringify(error));
+        });
+    });
+</script>
+
 
 </body>
 </html>
