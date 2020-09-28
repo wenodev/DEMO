@@ -1,7 +1,6 @@
 <div th:insert="/customer/header" xmlns:th="http://www.w3.org/1999/xhtml" th:remove="tag"></div>
 
 <body xmlns:th="http://www.w3.org/1999/xhtml">
-
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
@@ -9,43 +8,39 @@
 
 <div th:insert="/customer/nav"></div>
 
-<!-- Banner Section Begin -->
-<section class="banner set-bg" data-setbg="img/banner/banner-1.jpg">
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-7 col-lg-8 m-auto">
-                <div class="banner__slider owl-carousel">
-                    <div class="banner__item">
-                        <div class="banner__text">
-                            <span>The Chloe Collection</span>
-                            <h1>The Project Jacket</h1>
-                            <a href="/product/1">Shop now</a>
-                        </div>
-                    </div>
-                    <div class="banner__item">
-                        <div class="banner__text">
-                            <span>The Chloe Collection</span>
-                            <h1>The Project Jacket</h1>
-                            <a href="/product/2">Shop now</a>
-                        </div>
-                    </div>
-                    <div class="banner__item">
-                        <div class="banner__text">
-                            <span>The Chloe Collection</span>
-                            <h1>The Project Jacket</h1>
-                            <a href="/product/3">Shop now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Banner Section End -->
+<!--<section class="banner set-bg" data-setbg="img/banner/banner-1.jpg">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-xl-7 col-lg-8 m-auto">-->
+<!--                <div class="banner__slider owl-carousel">-->
+<!--                    <div class="banner__item">-->
+<!--                        <div class="banner__text">-->
+<!--                            <span>The Chloe Collection</span>-->
+<!--                            <h1>The Project Jacket</h1>-->
+<!--                            <a href="/product/1">Shop now</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="banner__item">-->
+<!--                        <div class="banner__text">-->
+<!--                            <span>The Chloe Collection</span>-->
+<!--                            <h1>The Project Jacket</h1>-->
+<!--                            <a href="/product/2">Shop now</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="banner__item">-->
+<!--                        <div class="banner__text">-->
+<!--                            <span>The Chloe Collection</span>-->
+<!--                            <h1>The Project Jacket</h1>-->
+<!--                            <a href="/product/3">Shop now</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
 
-
-<!-- Product Section Begin -->
-<section class="product spad">
+<section class="product ">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-4">
@@ -53,34 +48,27 @@
                     <h4>New product</h4>
                 </div>
             </div>
-
         </div>
         <div class="row property__gallery">
             <div style="margin-bottom: 10px;" class="col-lg-3 col-md-4 col-sm-6 mix" th:each="product : ${productList}">
                 <div class="product__item">
-                    <!--                    <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">-->
                     <a th:href="@{/product/} + ${product.id}">
-                        <div class="product__item__pic set-bg" >
-                            <div><img th:src=" @{ ${product.productUrlImg} }"></div>
+                        <div class="product__item__pic">
+                            <img th:src="${product.productUrlImg}">
                         </div>
                     </a>
-
-
                 </div>
                 <div class="product__item__text">
-                    <h6><a th:href="@{/product/} + ${product.id}" th:text="${product.productName}"></a></h6>
-
-                    <div class="product__price" th:text="${product.productPrice}">$</div>
+                    <h6>
+                        <a th:href="@{/product/} + ${product.id}" th:text="${product.productName}"></a>
+                    </h6>
+                    <div class="product__price" th:text="${product.productPrice}"></div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 </section>
-<!-- Product Section End -->
 
-
-<!-- footer -->
 <div th:insert="/customer/footer"></div>
 
 </body>
