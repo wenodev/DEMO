@@ -1,9 +1,6 @@
 package com.demo.demo0617.config;
 
-import com.demo.demo0617.common.domain.Address;
-import com.demo.demo0617.common.domain.Category;
-import com.demo.demo0617.common.domain.Member;
-import com.demo.demo0617.common.domain.Product;
+import com.demo.demo0617.common.domain.*;
 import com.demo.demo0617.common.dto.AddressDto;
 import com.demo.demo0617.common.dto.CategoryDto;
 import com.demo.demo0617.common.dto.MemberDto;
@@ -27,6 +24,7 @@ public class adminUser implements CommandLineRunner {
     private ProductService productService;
     private CategoryService categoryService;
     private AddressService addressService;
+    private ProductRepository productRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -107,7 +105,7 @@ public class adminUser implements CommandLineRunner {
                     .product(product)
                     .build();
 
-//            productService.saveProduct(productDto.toEntity());
+            productRepository.save(productDto.toEntity());
         }
 
     }

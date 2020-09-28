@@ -53,6 +53,9 @@ public class OrderController {
     @PostMapping("/order/{productId}")
     public String orderById(Principal principal, Model model, @PathVariable Long productId, int productQuantity) {
 
+        System.out.println("OrderController orderById ");
+
+
         OrdersDto ordersDto = orderService.readyForOrder(productId, productQuantity);
         MemberDto memberDto = memberService.findByEmail(principal.getName());
         List<Address> address = addressService.findByMemberId(memberDto.getId());

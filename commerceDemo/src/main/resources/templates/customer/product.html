@@ -35,62 +35,41 @@
                 <div class="product__details__pic">
                     <div class="product__details__pic__left product__thumb nice-scroll">
                         <a class="pt active" href="#product-1">
-                            <div>
-                                <div>
-                                    <img th:src="${product.productUrlImg}">
-                                </div>
-                            </div>
+                            <img th:src="${product.productUrlImg}">
                         </a>
                         <a class="pt" href="#product-2">
-                            <div>
-                                <div>
-                                    <img th:src="${product.productUrlImg}">
-                                </div>
-                            </div>
+                            <img th:src="${product.productUrlImg}">
                         </a>
                         <a class="pt" href="#product-3">
-                            <div>
-                                <div>
-                                    <img th:src="${product.productUrlImg}">
-                                </div>
-                            </div>
+                            <img th:src="${product.productUrlImg}">
                         </a>
                         <a class="pt" href="#product-4">
-                            <div>
-                                <div>
-                                    <img th:src="${product.productUrlImg}">
-                                </div>
-                            </div>
+                            <img th:src="${product.productUrlImg}">
                         </a>
                     </div>
                     <div class="product__details__slider__content">
                         <div class="product__details__pic__slider owl-carousel">
                             <!--                            <img data-hash="product-1" class="product__big__img" src="/img/product/details/product-1.jpg"-->
                             <!--                                 alt="">-->
-                            <div th:switch="${product.imgType}">
-                                <div th:case="'url'"><img
-                                        th:src=" @{ ${product.productUrlImg} }"></div>
-                                <div th:case="'file'"><img
-                                        th:src=" @{/upload-dir/} + ${product.productFileImg}"></div>
+
+                            <div>
+                                <img th:src="${product.productUrlImg}">
                             </div>
-                            <div th:switch="${product.imgType}">
-                                <div th:case="'url'"><img
-                                        th:src=" @{ ${product.productUrlImg} }"></div>
-                                <div th:case="'file'"><img
-                                        th:src=" @{/upload-dir/} + ${product.productFileImg}"></div>
+
+                            <div>
+                                <img th:src="${product.productUrlImg}">
                             </div>
-                            <div th:switch="${product.imgType}">
-                                <div th:case="'url'"><img
-                                        th:src=" @{ ${product.productUrlImg} }"></div>
-                                <div th:case="'file'"><img
-                                        th:src=" @{/upload-dir/} + ${product.productFileImg}"></div>
+
+
+                            <div>
+                                <img th:src="${product.productUrlImg}">
                             </div>
-                            <div th:switch="${product.imgType}">
-                                <div th:case="'url'"><img
-                                        th:src=" @{ ${product.productUrlImg} }"></div>
-                                <div th:case="'file'"><img
-                                        th:src=" @{/upload-dir/} + ${product.productFileImg}"></div>
+
+
+                            <div>
+                                <img th:src="${product.productUrlImg}">
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -204,16 +183,16 @@
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Description</a>
                         </li>
-<!--                        <li class="nav-item">-->
-<!--                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Specification</a>-->
-<!--                        </li>-->
-<!--                        <li class="nav-item">-->
-<!--                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Reviews ( 2 )</a>-->
-<!--                        </li>-->
+                        <!--                        <li class="nav-item">-->
+                        <!--                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Specification</a>-->
+                        <!--                        </li>-->
+                        <!--                        <li class="nav-item">-->
+                        <!--                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Reviews ( 2 )</a>-->
+                        <!--                        </li>-->
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tabs-1" role="tabpanel" th:each="product : ${product}">
-<!--                            <h6>Description</h6>-->
+                            <!--                            <h6>Description</h6>-->
                             <p th:text="${product.productDescription}"></p>
                             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
                                 dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
@@ -221,33 +200,33 @@
                                 quis, sem.</p>
                         </div>
 
-<!--                        <div class="tab-pane" id="tabs-2" role="tabpanel">-->
-<!--                            <h6>Specification</h6>-->
-<!--                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed-->
-<!--                                quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.-->
-<!--                                Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam-->
-<!--                                voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu-->
-<!--                                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla-->
-<!--                                consequat massa quis enim.</p>-->
-<!--                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget-->
-<!--                                dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,-->
-<!--                                nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium-->
-<!--                                quis, sem.</p>-->
-<!--                        </div>-->
+                        <!--                        <div class="tab-pane" id="tabs-2" role="tabpanel">-->
+                        <!--                            <h6>Specification</h6>-->
+                        <!--                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed-->
+                        <!--                                quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.-->
+                        <!--                                Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam-->
+                        <!--                                voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu-->
+                        <!--                                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla-->
+                        <!--                                consequat massa quis enim.</p>-->
+                        <!--                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget-->
+                        <!--                                dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,-->
+                        <!--                                nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium-->
+                        <!--                                quis, sem.</p>-->
+                        <!--                        </div>-->
 
-<!--                        <div class="tab-pane" id="tabs-2" role="tabpanel">-->
-<!--                            <h6>Reviews ( 2 )</h6>-->
-<!--                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed-->
-<!--                                quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.-->
-<!--                                Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam-->
-<!--                                voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu-->
-<!--                                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla-->
-<!--                                consequat massa quis enim.</p>-->
-<!--                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget-->
-<!--                                dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,-->
-<!--                                nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium-->
-<!--                                quis, sem.</p>-->
-<!--                        </div>-->
+                        <!--                        <div class="tab-pane" id="tabs-2" role="tabpanel">-->
+                        <!--                            <h6>Reviews ( 2 )</h6>-->
+                        <!--                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed-->
+                        <!--                                quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.-->
+                        <!--                                Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam-->
+                        <!--                                voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu-->
+                        <!--                                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla-->
+                        <!--                                consequat massa quis enim.</p>-->
+                        <!--                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget-->
+                        <!--                                dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,-->
+                        <!--                                nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium-->
+                        <!--                                quis, sem.</p>-->
+                        <!--                        </div>-->
 
                     </div>
                 </div>

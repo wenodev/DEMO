@@ -1,5 +1,6 @@
 package com.demo.demo0617.shopadmin.service;
 
+import com.demo.demo0617.common.domain.Category;
 import com.demo.demo0617.common.domain.Product;
 import com.demo.demo0617.common.domain.ProductRepository;
 import com.demo.demo0617.common.dto.ProductDto;
@@ -7,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -18,26 +20,29 @@ public class ProductService {
     private ProductRepository productRepository;
     private CategoryService categoryService;
 
+
     @Transactional
-    public void saveProduct(Map<String, Object> productDtoIntegerMap){
+    public void saveProduct(Map<String, Object> productResource) {
+        Long categoryId = Long.valueOf((String) productResource.get("categoryId"));
+        Category category = categoryService.findById(categoryId);
 
+        LinkedHashMap linkedHashMap = (LinkedHashMap) productResource.get("productDto");
+        Product product = Product.builder()
+                .productCode((String) linkedHashMap.get("productCode"))
+                .productName((String) linkedHashMap.get("productName"))
+                .productPrice(Float.valueOf((String)linkedHashMap.get("productPrice")))
+                .quantity(Integer.valueOf((String)linkedHashMap.get("quantity")))
+                .productUrlImg((String) linkedHashMap.get("productUrlImg"))
+                .category(category)
+                .build();
 
-        for (Map.Entry<String, Object> entry : productDtoIntegerMap.entrySet()){
-            System.out.println("KEY : " + entry.getKey());
-            System.out.println("VALUE : " + entry.getValue());
-        }
+        ProductDto productDto = ProductDto.builder()
+                .product(product)
+                .build();
 
-        Long categoryId = Long.valueOf((String) productDtoIntegerMap.get("categoryId"));
-        System.out.println(categoryId);
-
-
-        Object productDtoTemp = productDtoIntegerMap.get("productDto");
-        ProductDto productDto = (ProductDto) productDtoTemp;
-
-        System.out.println(productDto);
-
-
+        productRepository.save(productDto.toEntity());
     }
+
 
     @Transactional
     public List<Product> findAll(){

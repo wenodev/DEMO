@@ -51,8 +51,7 @@
                 </div>
                 <select class="custom-select" id="categoryId">
                     <option selected>Choose Category</option>
-                    <option th:each="category : ${categoryList}" th:value="${category.id}"
-                            th:text="${category.categoryName}">
+                    <option th:each="category : ${categoryList}" th:value="${category.id}" th:text="${category.categoryName}">
                 </select>
             </div>
 
@@ -111,7 +110,6 @@
 
         var data = {
             categoryId : $('#categoryId').val(),
-
             productDto : {
                 productCode: $('#productCode').val(),
                 productName: $('#productName').val(),
@@ -119,7 +117,6 @@
                 quantity: $('#quantity').val(),
                 productUrlImg: $('#productUrlImg').val()
             }
-
         };
 
         $.ajax({
@@ -136,8 +133,10 @@
             alert(JSON.stringify(error));
         });
     });
-</script>
 
+
+
+</script>
 
 </body>
 </html>
