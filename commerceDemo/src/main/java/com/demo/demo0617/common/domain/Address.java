@@ -3,7 +3,6 @@ package com.demo.demo0617.common.domain;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -31,7 +30,6 @@ public class Address {
     @Column
     private String AddressMemberName;
 
-    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")
     private Member member;

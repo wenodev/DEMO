@@ -7,6 +7,7 @@ import com.demo.demo0617.common.dto.MemberDto;
 import com.demo.demo0617.shopuser.service.AddressService;
 import com.demo.demo0617.shopuser.service.MemberService;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,10 +40,22 @@ public class AddressController {
     }
 
     @PostMapping("/address")
-    public @ResponseBody AddressDto savePost(@RequestBody AddressDto addressDto, Principal principal){
+    public @ResponseBody AddressDto savePost(@RequestBody AddressDto addressResource, Principal principal){
 
         MemberDto memberDto = memberService.findByEmail(principal.getName());
-        addressDto.setMember(memberDto.toEntity());
+
+        Address address = Address.builder()
+                .postalCode(addressResource.getPostalCode())
+                .address(addressResource.getAddress())
+                .addressDetail(addressResource.getAddressDetail())
+                .comment(addressResource.getComment())
+                .addressMemberName(addressResource.getAddressMemberName())
+                .member(memberDto.toEntity())
+                .build();
+
+        AddressDto addressDto = AddressDto.builder()
+                .address(address)
+                .build();
 
         addressService.saveAddress(addressDto);
 

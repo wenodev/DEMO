@@ -70,17 +70,18 @@
                                  style="margin: 10px 10px; border-radius: 10px;">
 
                                 <div style="border-bottom: 1px solid black; height: 50px; padding-top: 10px; font-size: 20px; margin-bottom: 20px; font-weight: bold;">
-                                    <input name=addressId type="radio" th:value="${address.id}">
+                                    <input th:if="${address.id.toString().equals('1')}" name=addressId type="radio" th:value="${address.id}" checked>
+                                    <input th:unless="${address.id.toString().equals('1')}" name=addressId type="radio" th:value="${address.id}">
                                     <span th:text="${address.addressMemberName}"> </span>
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>PostalCode</p>
-                                    <input th:value="${address.postalCode}"/>
+                                    <input th:value="${address.postalCode}" readonly/>
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>Address</p>
-                                    <input th:value="${address.address}"/>
-                                    <input th:value="${address.addressDetail}"/>
+                                    <input th:value="${address.address}" readonly />
+                                    <input th:value="${address.addressDetail}"readonly />
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>comment</p>
@@ -159,14 +160,6 @@
         createOrder: function (data, actions) {
 
             var subTotal = document.getElementById("subTotal").innerText;
-
-            var addressId = $('input[name=addressId]:checked').val();
-
-            if (typeof addressId == "undefined") {
-                alert("배송지를 선택하세요.");
-                return 0;
-            }
-
 
             return actions.order.create({
                 purchase_units: [{

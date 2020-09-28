@@ -1,9 +1,6 @@
 package com.demo.demo0617.shopuser.service;
 
-import com.demo.demo0617.common.domain.Cart;
-import com.demo.demo0617.common.domain.CartRepository;
-import com.demo.demo0617.common.domain.Member;
-import com.demo.demo0617.common.domain.Product;
+import com.demo.demo0617.common.domain.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -74,5 +71,5 @@ public class CartService {
         List<Cart> cartList = cartRepository.findByMember(member);
         return cartList;
     }
-
+    
 }

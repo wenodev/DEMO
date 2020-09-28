@@ -6,7 +6,6 @@ import com.demo.demo0617.common.domain.Member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @NoArgsConstructor
@@ -18,7 +17,6 @@ public class AddressDto {
     private String addressDetail;
     private String addressMemberName;
     private String comment;
-    @Setter
     private Member member;
 
     public Address toEntity(){

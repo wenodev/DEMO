@@ -10,21 +10,19 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
+@Setter
 public class Cart extends TimeEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @Setter
     @Column(length = 100)
     private int cartQuantity;
 
-    @Setter
     @Column(length = 100)
     private float cartPrice;
 
-    @Setter
     @Column(length = 100)
     private String cookieId;
 
@@ -34,7 +32,6 @@ public class Cart extends TimeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")
-    @Setter
     private Member member;
 
     @Builder

@@ -1,8 +1,6 @@
 package com.demo.demo0617.shopuser.controller;
 
 import com.demo.demo0617.common.domain.Cart;
-import com.demo.demo0617.common.domain.Member;
-import com.demo.demo0617.common.domain.Product;
 import com.demo.demo0617.common.dto.MemberDto;
 import com.demo.demo0617.common.dto.ProductDto;
 import com.demo.demo0617.shopadmin.service.ProductService;

@@ -6,7 +6,6 @@ import com.demo.demo0617.common.dto.CategoryDto;
 import com.demo.demo0617.common.dto.MemberDto;
 import com.demo.demo0617.common.dto.ProductDto;
 import com.demo.demo0617.shopadmin.service.CategoryService;
-import com.demo.demo0617.shopadmin.service.ProductService;
 import com.demo.demo0617.shopuser.service.AddressService;
 import com.demo.demo0617.shopuser.service.MemberService;
 import lombok.AllArgsConstructor;
@@ -21,9 +20,9 @@ import java.util.List;
 public class adminUser implements CommandLineRunner {
 
     private MemberService memberService;
-    private ProductService productService;
     private CategoryService categoryService;
     private AddressService addressService;
+
     private ProductRepository productRepository;
 
     @Override
@@ -90,6 +89,7 @@ public class adminUser implements CommandLineRunner {
 
         //상품등록
         Category category = categoryService.findById(1L);
+        List<Product> productList = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
             Product product = Product.builder()
                     .productCode("Product-code" + i)
@@ -98,15 +98,16 @@ public class adminUser implements CommandLineRunner {
                     .quantity(100 + i)
                     .category(category)
                     .productDescription("Product-Description" + i)
-                    .productUrlImg("https://i.imgur.com/Vpj0PxO.png")
+                    .productUrlImg("https://wenodev.github.io/DEMO/img/product1.jpg")
                     .build();
 
             ProductDto productDto = ProductDto.builder()
                     .product(product)
                     .build();
 
-            productRepository.save(productDto.toEntity());
+            productList.add(productDto.toEntity());
         }
+        productRepository.saveAll(productList);
 
     }
 }

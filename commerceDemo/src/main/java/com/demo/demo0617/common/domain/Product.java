@@ -3,11 +3,9 @@ package com.demo.demo0617.common.domain;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
-@Setter
 @Getter
 @NoArgsConstructor
 @Entity

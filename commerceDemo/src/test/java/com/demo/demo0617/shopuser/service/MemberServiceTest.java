@@ -50,7 +50,6 @@ public class MemberServiceTest {
                 .build();
 
 
-
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         mockMemberDto.setPassword(passwordEncoder.encode(mockMemberDto.getPassword()));;
 

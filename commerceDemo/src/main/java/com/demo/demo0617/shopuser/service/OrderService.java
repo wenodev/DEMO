@@ -1,7 +1,8 @@
 package com.demo.demo0617.shopuser.service;
 
-import com.demo.demo0617.common.domain.OrderRepository;
+import com.demo.demo0617.common.domain.OrdersRepository;
 import com.demo.demo0617.common.domain.Orders;
+import com.demo.demo0617.common.domain.Product;
 import com.demo.demo0617.common.dto.AddressDto;
 import com.demo.demo0617.common.dto.MemberDto;
 import com.demo.demo0617.common.dto.OrdersDto;
@@ -18,7 +19,7 @@ import java.util.List;
 @Service
 public class OrderService {
 
-    private OrderRepository orderRepository;
+    private OrdersRepository ordersRepository;
     private ProductService productService;
     private MemberService memberService;
     private AddressService addressService;
@@ -71,7 +72,8 @@ public class OrderService {
 
             ordersList.add(ordersDto.toEntity());
         }
-        orderRepository.saveAll(ordersList);
+
+        ordersRepository.saveAll(ordersList);
     }
 
 
@@ -113,16 +115,14 @@ public class OrderService {
         return quantity.stream().mapToInt(n -> n).sum();
     }
 
-
-
     @Transactional
     public List<Orders> findAll(){
-        return orderRepository.findAll();
+        return ordersRepository.findAll();
     }
 
     @Transactional
     public int findTableNumber(){
-        List<Orders> orderList = orderRepository.findAll();
+        List<Orders> orderList = ordersRepository.findAll();
         return orderList.size();
     }
 
