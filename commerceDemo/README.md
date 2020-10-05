@@ -21,7 +21,21 @@
 - Rest 서버로 변경 예정(Front-end는 react.js로 변경 예정)
 
 
-## 데모 서버
+## 데모 사이트
 https://www.teodev.site/
+
+## 데모 계정
+<유저>   
+- ID : user1@example.com
+- PW : 1234
+
+<테스트 카드 결제 정보>
+- Credit Card Number: 4119040964748954
+- Credit Card Type: VISA
+- Expiration Date: 08/2025
+
+<관리자>   
+- ID : admin@example.com
+- PW : 1234
 
 
