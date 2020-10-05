@@ -29,10 +29,9 @@ https://www.teodev.site/
 - ID : user1@example.com
 - PW : 1234
 
-<테스트 카드 결제 정보>
-- Credit Card Number: 4119040964748954
-- Credit Card Type: VISA
-- Expiration Date: 08/2025
+<Paypal 테스트 결제 계정 정보>
+- ID: sb-dwrpg2517374@personal.example.com
+- PW : test1234
 
 <관리자>   
 - ID : admin@example.com
