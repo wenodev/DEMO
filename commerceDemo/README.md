@@ -15,10 +15,10 @@
 - Maven   
 
 ## Architecture   
-<img src="https://raw.githubusercontent.com/wenodev/DEMO/master/img/teoshoparchitecture.PNG" width="600px" height="400px"></img>     
+<img src="https://raw.githubusercontent.com/wenodev/DEMO/master/img/teoshoparchitecture.PNG" width="50%"></img>     
 
 ## ERD
-<img src="https://raw.githubusercontent.com/wenodev/DEMO/master/img/teoshoperd.PNG" width="600px" height="500px"></img>   
+<img src="https://raw.githubusercontent.com/wenodev/DEMO/master/img/teoshoperd.PNG" width="50%" ></img>   
 
 ## 데모 사이트
 - 사용자 : https://www.teodev.site   
