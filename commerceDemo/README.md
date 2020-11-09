@@ -22,7 +22,8 @@
 
 
 ## 데모 사이트
-https://www.teodev.site/
+- 사용자 : https://www.teodev.site   
+- 관리자 : https://www.teodev.site/admin
 
 ## 데모 계정
 <유저>   
