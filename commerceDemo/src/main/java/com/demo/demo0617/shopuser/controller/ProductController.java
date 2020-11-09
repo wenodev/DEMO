@@ -17,7 +17,7 @@ public class ProductController {
 
     private ProductService productService;
 
-    @GetMapping("/")
+    @GetMapping(value = {"/", "/index"})
     public String index(Model model) {
         List<Product> productList = productService.findAll();
         model.addAttribute("productList", productList);
