@@ -12,7 +12,10 @@
 - Spring data jpa
 - Thymeleaf
 - H2(Database)
-- Maven
+- Maven   
+
+## ERD
+<img src="https://raw.githubusercontent.com/wenodev/DEMO/master/img/teoshoperd.PNG" width="500px" height="500px"></img>   
 
 ## 진행상황
 - 엔티티에 Valudation 설정 예정
