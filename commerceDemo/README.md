@@ -14,15 +14,11 @@
 - H2(Database)
 - Maven   
 
+## Architecture   
+<img src="https://raw.githubusercontent.com/wenodev/DEMO/master/img/teoshoparchitecture.PNG" width="600px" height="400px"></img>     
+
 ## ERD
-<img src="https://raw.githubusercontent.com/wenodev/DEMO/master/img/teoshoperd.PNG" width="500px" height="500px"></img>   
-
-## 진행상황
-- 엔티티에 Valudation 설정 예정
-- Exception 적용 예정
-- 기능 개발이 완료 된 후 CI/CD를 적용하며 배포 예정
-- Rest 서버로 변경 예정(Front-end는 react.js로 변경 예정)
-
+<img src="https://raw.githubusercontent.com/wenodev/DEMO/master/img/teoshoperd.PNG" width="600px" height="500px"></img>   
 
 ## 데모 사이트
 - 사용자 : https://www.teodev.site   
