@@ -21,6 +21,7 @@
 <img src="https://raw.githubusercontent.com/wenodev/DEMO/master/img/teoshoperd.PNG" width="50%" ></img>   
 
 ## 데모 사이트
+- 서버 비용 관계로 접속이 불가합니다.
 - 사용자 : https://www.teodev.site   
 - 관리자 : https://www.teodev.site/admin
 
